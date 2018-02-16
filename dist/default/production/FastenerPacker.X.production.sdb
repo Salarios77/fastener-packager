@@ -1,0 +1,689 @@
+[p LITE_MODE AUTOSTATIC LFSROK EMI_WORD ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 18F4620 ]
+[d frameptr 4065 ]
+"28 C:\Users\salar\Dropbox\Salarios\EngSci Year 2\Semester 2\Engineering Design (AER201)\MPLABXProjects\FastenerPacker.X\standbyInterface.c
+[e E3086 . `uc
+false 0
+true 1
+]
+"464 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\doprnt.c
+[v _printf printf `(i  1 e 2 0 ]
+"62 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\float.c
+[v ___ftpack __ftpack `(f  1 e 3 0 ]
+"86 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftadd.c
+[v ___ftadd __ftadd `(f  1 e 3 0 ]
+"54 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftdiv.c
+[v ___ftdiv __ftdiv `(f  1 e 3 0 ]
+"4 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftge.c
+[v ___ftge __ftge `(b  1 e 0 0 ]
+"62 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftmul.c
+[v ___ftmul __ftmul `(f  1 e 3 0 ]
+"20 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftsub.c
+[v ___ftsub __ftsub `(f  1 e 3 0 ]
+"8 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\isdigit.c
+[v _isdigit isdigit `(b  1 e 0 0 ]
+"8 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\lldiv.c
+[v ___lldiv __lldiv `(ul  1 e 4 0 ]
+"8 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+"8 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\lwmod.c
+[v ___lwmod __lwmod `(ui  1 e 2 0 ]
+"28 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\lwtoft.c
+[v ___lwtoft __lwtoft `(f  1 e 3 0 ]
+"10 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 3 0 ]
+"245
+[v ___flsub __flsub `(d  1 e 3 0 ]
+"11 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 3 0 ]
+"8 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\sprcmul.c
+[v ___flmul __flmul `(d  1 e 3 0 ]
+"33 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\strcmp.c
+[v _strcmp strcmp `(i  1 e 2 0 ]
+"15 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+"15 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\Umul32.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+"14 C:\Users\salar\Dropbox\Salarios\EngSci Year 2\Semester 2\Engineering Design (AER201)\MPLABXProjects\FastenerPacker.X\I2C.c
+[v _I2C_Master_Init I2C_Master_Init `(v  1 e 1 0 ]
+"51
+[v _I2C_Master_Wait I2C_Master_Wait `(v  1 s 1 I2C_Master_Wait ]
+"69
+[v _I2C_Master_Start I2C_Master_Start `(v  1 e 1 0 ]
+"95
+[v _I2C_Master_Stop I2C_Master_Stop `(v  1 e 1 0 ]
+"108
+[v _I2C_Master_Write I2C_Master_Write `(v  1 e 1 0 ]
+"120
+[v _I2C_Master_Read I2C_Master_Read `(uc  1 e 1 0 ]
+"14 C:\Users\salar\Dropbox\Salarios\EngSci Year 2\Semester 2\Engineering Design (AER201)\MPLABXProjects\FastenerPacker.X\lcd.c
+[v _lcdInst lcdInst `(v  1 e 1 0 ]
+"27
+[v _putch putch `(v  1 e 1 0 ]
+"40
+[v _lcdNibble lcdNibble `(v  1 e 1 0 ]
+"63
+[v _initLCD initLCD `(v  1 e 1 0 ]
+"83
+[v _lcd_set_cursor lcd_set_cursor `(v  1 e 1 0 ]
+"100
+[v _lcd_shift_cursor lcd_shift_cursor `(v  1 e 1 0 ]
+"34 C:\Users\salar\Dropbox\Salarios\EngSci Year 2\Semester 2\Engineering Design (AER201)\MPLABXProjects\FastenerPacker.X\logMemory.c
+[v _retrieveResults retrieveResults `(v  1 e 1 0 ]
+"22 C:\Users\salar\Dropbox\Salarios\EngSci Year 2\Semester 2\Engineering Design (AER201)\MPLABXProjects\FastenerPacker.X\main.c
+[v _initOperation initOperation `(v  1 e 1 0 ]
+"27
+[v _main main `(v  1 e 1 0 ]
+"93
+[v _interruptHandler interruptHandler `II(v  1 e 1 0 ]
+"20 C:\Users\salar\Dropbox\Salarios\EngSci Year 2\Semester 2\Engineering Design (AER201)\MPLABXProjects\FastenerPacker.X\RTC.c
+[v _initRTC initRTC `(v  1 e 1 0 ]
+"53
+[v _getDateTime getDateTime `(v  1 e 1 0 ]
+"16 C:\Users\salar\Dropbox\Salarios\EngSci Year 2\Semester 2\Engineering Design (AER201)\MPLABXProjects\FastenerPacker.X\standbyInterface.c
+[v _calcOperationTime calcOperationTime `(us  1 e 2 0 ]
+"28
+[v _getKeyPressed getKeyPressed `(uc  1 e 1 0 ]
+"77
+[v _dispRealTime dispRealTime `(v  1 e 1 0 ]
+"87
+[v _errScreen errScreen `(v  1 e 1 0 ]
+"112
+[v _checkValid checkValid `(E3086  1 e 1 0 ]
+"183
+[v _getInputs getInputs `(v  1 e 1 0 ]
+"244
+[v _initStandby initStandby `(v  1 e 1 0 ]
+"309
+[v _showResults showResults `(v  1 e 1 0 ]
+"339
+[v _showLogs showLogs `(v  1 e 1 0 ]
+"187 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f4620.h
+[v _PORTB PORTB `VEuc  1 e 1 @3969 ]
+[s S295 . 1 `uc 1 RB0 1 0 :1:0 
+`uc 1 RB1 1 0 :1:1 
+`uc 1 RB2 1 0 :1:2 
+`uc 1 RB3 1 0 :1:3 
+`uc 1 RB4 1 0 :1:4 
+`uc 1 RB5 1 0 :1:5 
+`uc 1 RB6 1 0 :1:6 
+`uc 1 RB7 1 0 :1:7 
+]
+"228
+[s S304 . 1 `uc 1 INT0 1 0 :1:0 
+`uc 1 INT1 1 0 :1:1 
+`uc 1 INT2 1 0 :1:2 
+`uc 1 CCP2 1 0 :1:3 
+`uc 1 KBI0 1 0 :1:4 
+`uc 1 KBI1 1 0 :1:5 
+`uc 1 KBI2 1 0 :1:6 
+`uc 1 KBI3 1 0 :1:7 
+]
+[s S313 . 1 `uc 1 AN12 1 0 :1:0 
+`uc 1 AN10 1 0 :1:1 
+`uc 1 AN8 1 0 :1:2 
+`uc 1 AN9 1 0 :1:3 
+`uc 1 AN11 1 0 :1:4 
+`uc 1 PGM 1 0 :1:5 
+`uc 1 PGC 1 0 :1:6 
+`uc 1 PGD 1 0 :1:7 
+]
+[s S322 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 CCP2_PA2 1 0 :1:3 
+]
+[u S325 . 1 `S295 1 . 1 0 `S304 1 . 1 0 `S313 1 . 1 0 `S322 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES325  1 e 1 @3969 ]
+"878
+[v _LATA LATA `VEuc  1 e 1 @3977 ]
+[s S64 . 1 `uc 1 LATA0 1 0 :1:0 
+`uc 1 LATA1 1 0 :1:1 
+`uc 1 LATA2 1 0 :1:2 
+`uc 1 LATA3 1 0 :1:3 
+`uc 1 LATA4 1 0 :1:4 
+`uc 1 LATA5 1 0 :1:5 
+`uc 1 LATA6 1 0 :1:6 
+`uc 1 LATA7 1 0 :1:7 
+]
+"905
+[s S73 . 1 `uc 1 LA0 1 0 :1:0 
+`uc 1 LA1 1 0 :1:1 
+`uc 1 LA2 1 0 :1:2 
+`uc 1 LA3 1 0 :1:3 
+`uc 1 LA4 1 0 :1:4 
+`uc 1 LA5 1 0 :1:5 
+`uc 1 LA6 1 0 :1:6 
+`uc 1 LA7 1 0 :1:7 
+]
+[u S82 . 1 `S64 1 . 1 0 `S73 1 . 1 0 ]
+[v _LATAbits LATAbits `VES82  1 e 1 @3977 ]
+"990
+[v _LATB LATB `VEuc  1 e 1 @3978 ]
+"1102
+[v _LATC LATC `VEuc  1 e 1 @3979 ]
+"1214
+[v _LATD LATD `VEuc  1 e 1 @3980 ]
+[s S139 . 1 `uc 1 LATD0 1 0 :1:0 
+`uc 1 LATD1 1 0 :1:1 
+`uc 1 LATD2 1 0 :1:2 
+`uc 1 LATD3 1 0 :1:3 
+`uc 1 LATD4 1 0 :1:4 
+`uc 1 LATD5 1 0 :1:5 
+`uc 1 LATD6 1 0 :1:6 
+`uc 1 LATD7 1 0 :1:7 
+]
+"1241
+[s S148 . 1 `uc 1 LD0 1 0 :1:0 
+`uc 1 LD1 1 0 :1:1 
+`uc 1 LD2 1 0 :1:2 
+`uc 1 LD3 1 0 :1:3 
+`uc 1 LD4 1 0 :1:4 
+`uc 1 LD5 1 0 :1:5 
+`uc 1 LD6 1 0 :1:6 
+`uc 1 LD7 1 0 :1:7 
+]
+[u S157 . 1 `S139 1 . 1 0 `S148 1 . 1 0 ]
+[v _LATDbits LATDbits `VES157  1 e 1 @3980 ]
+"1326
+[v _LATE LATE `VEuc  1 e 1 @3981 ]
+"1378
+[v _TRISA TRISA `VEuc  1 e 1 @3986 ]
+"1600
+[v _TRISB TRISB `VEuc  1 e 1 @3987 ]
+"1822
+[v _TRISC TRISC `VEuc  1 e 1 @3988 ]
+[s S523 . 1 `uc 1 TRISC0 1 0 :1:0 
+`uc 1 TRISC1 1 0 :1:1 
+`uc 1 TRISC2 1 0 :1:2 
+`uc 1 TRISC3 1 0 :1:3 
+`uc 1 TRISC4 1 0 :1:4 
+`uc 1 TRISC5 1 0 :1:5 
+`uc 1 TRISC6 1 0 :1:6 
+`uc 1 TRISC7 1 0 :1:7 
+]
+"1854
+[s S532 . 1 `uc 1 RC0 1 0 :1:0 
+`uc 1 RC1 1 0 :1:1 
+`uc 1 RC2 1 0 :1:2 
+`uc 1 RC3 1 0 :1:3 
+`uc 1 RC4 1 0 :1:4 
+`uc 1 RC5 1 0 :1:5 
+`uc 1 RC6 1 0 :1:6 
+`uc 1 RC7 1 0 :1:7 
+]
+[u S541 . 1 `S523 1 . 1 0 `S532 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES541  1 e 1 @3988 ]
+"2044
+[v _TRISD TRISD `VEuc  1 e 1 @3989 ]
+"2266
+[v _TRISE TRISE `VEuc  1 e 1 @3990 ]
+"4442
+[v _ADCON1 ADCON1 `VEuc  1 e 1 @4033 ]
+"4527
+[v _ADCON0 ADCON0 `VEuc  1 e 1 @4034 ]
+"4667
+[v _SSPCON2 SSPCON2 `VEuc  1 e 1 @4037 ]
+[s S567 . 1 `uc 1 SEN 1 0 :1:0 
+`uc 1 RSEN 1 0 :1:1 
+`uc 1 PEN 1 0 :1:2 
+`uc 1 RCEN 1 0 :1:3 
+`uc 1 ACKEN 1 0 :1:4 
+`uc 1 ACKDT 1 0 :1:5 
+`uc 1 ACKSTAT 1 0 :1:6 
+`uc 1 GCEN 1 0 :1:7 
+]
+"4684
+[u S576 . 1 `S567 1 . 1 0 ]
+[v _SSPCON2bits SSPCON2bits `VES576  1 e 1 @4037 ]
+"4729
+[v _SSPCON1 SSPCON1 `VEuc  1 e 1 @4038 ]
+[s S497 . 1 `uc 1 SSPM 1 0 :4:0 
+`uc 1 CKP 1 0 :1:4 
+`uc 1 SSPEN 1 0 :1:5 
+`uc 1 SSPOV 1 0 :1:6 
+`uc 1 WCOL 1 0 :1:7 
+]
+"4749
+[s S503 . 1 `uc 1 SSPM0 1 0 :1:0 
+`uc 1 SSPM1 1 0 :1:1 
+`uc 1 SSPM2 1 0 :1:2 
+`uc 1 SSPM3 1 0 :1:3 
+]
+[u S508 . 1 `S497 1 . 1 0 `S503 1 . 1 0 ]
+[v _SSPCON1bits SSPCON1bits `VES508  1 e 1 @4038 ]
+"4799
+[v _SSPSTAT SSPSTAT `VEuc  1 e 1 @4039 ]
+"5020
+[v _SSPADD SSPADD `VEuc  1 e 1 @4040 ]
+"5027
+[v _SSPBUF SSPBUF `VEuc  1 e 1 @4041 ]
+[s S187 . 1 `uc 1 RBIF 1 0 :1:0 
+`uc 1 INT0IF 1 0 :1:1 
+`uc 1 TMR0IF 1 0 :1:2 
+`uc 1 RBIE 1 0 :1:3 
+`uc 1 INT0IE 1 0 :1:4 
+`uc 1 TMR0IE 1 0 :1:5 
+`uc 1 PEIE_GIEL 1 0 :1:6 
+`uc 1 GIE_GIEH 1 0 :1:7 
+]
+"6404
+[s S196 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 INT0F 1 0 :1:1 
+`uc 1 T0IF 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 INT0E 1 0 :1:4 
+`uc 1 T0IE 1 0 :1:5 
+`uc 1 PEIE 1 0 :1:6 
+`uc 1 GIE 1 0 :1:7 
+]
+[s S205 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 GIEL 1 0 :1:6 
+`uc 1 GIEH 1 0 :1:7 
+]
+[u S209 . 1 `S187 1 . 1 0 `S196 1 . 1 0 `S205 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES209  1 e 1 @4082 ]
+"7019
+[v _INT1IE INT1IE `VEb  1 e 0 @32643 ]
+"7021
+[v _INT1IF INT1IF `VEb  1 e 0 @32640 ]
+"354 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\doprnt.c
+[v _dpowers dpowers `C[5]ui  1 s 10 dpowers ]
+"362
+[v _hexpowers hexpowers `C[4]ui  1 s 8 hexpowers ]
+"12 C:\Users\salar\Dropbox\Salarios\EngSci Year 2\Semester 2\Engineering Design (AER201)\MPLABXProjects\FastenerPacker.X\lcd.c
+[v _LCDinterruptState LCDinterruptState `uc  1 s 1 LCDinterruptState ]
+"11 C:\Users\salar\Dropbox\Salarios\EngSci Year 2\Semester 2\Engineering Design (AER201)\MPLABXProjects\FastenerPacker.X\RTC.c
+[v _firstTimeSet firstTimeSet `C[7]uc  1 e 7 0 ]
+"12 C:\Users\salar\Dropbox\Salarios\EngSci Year 2\Semester 2\Engineering Design (AER201)\MPLABXProjects\FastenerPacker.X\standbyInterface.c
+[v _keys keys `C[17]uc  1 e 17 0 ]
+"13
+[v _setKeys setKeys `C[5]uc  1 e 5 0 ]
+"27 C:\Users\salar\Dropbox\Salarios\EngSci Year 2\Semester 2\Engineering Design (AER201)\MPLABXProjects\FastenerPacker.X\main.c
+[v _main main `(v  1 e 1 0 ]
+{
+"30
+[v main@numRemaining numRemaining `[4]us  1 a 8 15 ]
+"28
+[v main@timeEnd timeEnd `[7]uc  1 a 7 30 ]
+[v main@timeStart timeStart `[7]uc  1 a 7 23 ]
+"29
+[v main@inputs inputs `[6]uc  1 a 6 39 ]
+"31
+[v main@operationTime operationTime `us  1 a 2 37 ]
+"28
+[v main@F3120 F3120 `[6]uc  1 s 6 F3120 ]
+"29
+[v main@F3122 F3122 `[4]us  1 s 8 F3122 ]
+"90
+} 0
+"244 C:\Users\salar\Dropbox\Salarios\EngSci Year 2\Semester 2\Engineering Design (AER201)\MPLABXProjects\FastenerPacker.X\standbyInterface.c
+[v _initStandby initStandby `(v  1 e 1 0 ]
+{
+"246
+[v initStandby@opNotStarted opNotStarted `E3086  1 a 1 14 ]
+[v initStandby@onOptionScreen onOptionScreen `E3086  1 a 1 13 ]
+"245
+[v initStandby@keyPressed keyPressed `uc  1 a 1 12 ]
+"244
+[v initStandby@inputs inputs `*.39uc  1 p 2 10 ]
+"302
+} 0
+"339
+[v _showLogs showLogs `(v  1 e 1 0 ]
+{
+"345
+[v showLogs@numRemaining numRemaining `[4]us  1 a 8 21 ]
+"343
+[v showLogs@timeEnd timeEnd `[7]uc  1 a 7 8 ]
+"344
+[v showLogs@inputs inputs `[6]uc  1 a 6 15 ]
+"346
+[v showLogs@operationTime operationTime `us  1 a 2 30 ]
+"341
+[v showLogs@keyPressed keyPressed `uc  1 a 1 32 ]
+"340
+[v showLogs@onOptionScreen onOptionScreen `E3086  1 a 1 29 ]
+"343
+[v showLogs@F3187 F3187 `[6]uc  1 s 6 F3187 ]
+"344
+[v showLogs@F3189 F3189 `[4]us  1 s 8 F3189 ]
+"366
+} 0
+"309
+[v _showResults showResults `(v  1 e 1 0 ]
+{
+"310
+[v showResults@i i `i  1 a 2 6 ]
+"309
+[v showResults@inputs inputs `*.39uc  1 p 2 0 ]
+[v showResults@numRemaining numRemaining `*.39us  1 p 2 2 ]
+[v showResults@operationTime operationTime `us  1 p 2 4 ]
+"337
+} 0
+"34 C:\Users\salar\Dropbox\Salarios\EngSci Year 2\Semester 2\Engineering Design (AER201)\MPLABXProjects\FastenerPacker.X\logMemory.c
+[v _retrieveResults retrieveResults `(v  1 e 1 0 ]
+{
+[v retrieveResults@inputs inputs `*.39uc  1 p 2 20 ]
+[v retrieveResults@numRemaining numRemaining `*.39us  1 p 2 22 ]
+[v retrieveResults@operationTime operationTime `*.39us  1 p 2 24 ]
+[v retrieveResults@timeEnd timeEnd `*.39uc  1 p 2 26 ]
+[v retrieveResults@logOption logOption `uc  1 p 1 28 ]
+"37
+} 0
+"20 C:\Users\salar\Dropbox\Salarios\EngSci Year 2\Semester 2\Engineering Design (AER201)\MPLABXProjects\FastenerPacker.X\RTC.c
+[v _initRTC initRTC `(v  1 e 1 0 ]
+{
+"28
+} 0
+"14 C:\Users\salar\Dropbox\Salarios\EngSci Year 2\Semester 2\Engineering Design (AER201)\MPLABXProjects\FastenerPacker.X\I2C.c
+[v _I2C_Master_Init I2C_Master_Init `(v  1 e 1 0 ]
+{
+[v I2C_Master_Init@clockFreq clockFreq `Cul  1 p 4 33 ]
+"49
+} 0
+"8 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\lldiv.c
+[v ___lldiv __lldiv `(ul  1 e 4 0 ]
+{
+"11
+[v ___lldiv@quotient quotient `ul  1 a 4 28 ]
+"12
+[v ___lldiv@counter counter `uc  1 a 1 32 ]
+"8
+[v ___lldiv@dividend dividend `ul  1 p 4 20 ]
+[v ___lldiv@divisor divisor `ul  1 p 4 24 ]
+"31
+} 0
+"63 C:\Users\salar\Dropbox\Salarios\EngSci Year 2\Semester 2\Engineering Design (AER201)\MPLABXProjects\FastenerPacker.X\lcd.c
+[v _initLCD initLCD `(v  1 e 1 0 ]
+{
+"81
+} 0
+"183 C:\Users\salar\Dropbox\Salarios\EngSci Year 2\Semester 2\Engineering Design (AER201)\MPLABXProjects\FastenerPacker.X\standbyInterface.c
+[v _getInputs getInputs `(v  1 e 1 0 ]
+{
+"185
+[v getInputs@screenPos screenPos `us  1 a 2 7 ]
+[v getInputs@keyCount keyCount `us  1 a 2 5 ]
+"184
+[v getInputs@keyPressed keyPressed `uc  1 a 1 9 ]
+"186
+[v getInputs@userTyping userTyping `E3086  1 a 1 4 ]
+"183
+[v getInputs@inputs inputs `*.39uc  1 p 2 125 ]
+"239
+} 0
+"87
+[v _errScreen errScreen `(v  1 e 1 0 ]
+{
+"96
+} 0
+"28
+[v _getKeyPressed getKeyPressed `(uc  1 e 1 0 ]
+{
+[v getKeyPressed@shouldDispTime shouldDispTime `E3086  1 a 1 wreg ]
+"32
+[v getKeyPressed@currTimeTemp currTimeTemp `[7]uc  1 a 7 78 ]
+[v getKeyPressed@lastTimeRefresh lastTimeRefresh `[7]uc  1 a 7 71 ]
+"33
+[v getKeyPressed@i i `i  1 a 2 87 ]
+"56
+[v getKeyPressed@keypress keypress `uc  1 a 1 85 ]
+"28
+[v getKeyPressed@shouldDispTime shouldDispTime `E3086  1 a 1 wreg ]
+"35
+[v getKeyPressed@shouldDispTime shouldDispTime `E3086  1 a 1 86 ]
+"75
+} 0
+"83 C:\Users\salar\Dropbox\Salarios\EngSci Year 2\Semester 2\Engineering Design (AER201)\MPLABXProjects\FastenerPacker.X\lcd.c
+[v _lcd_set_cursor lcd_set_cursor `(v  1 e 1 0 ]
+{
+[v lcd_set_cursor@x x `uc  1 a 1 wreg ]
+"94
+[v lcd_set_cursor@i i `uc  1 a 1 28 ]
+"83
+[v lcd_set_cursor@x x `uc  1 a 1 wreg ]
+[v lcd_set_cursor@y y `uc  1 p 1 26 ]
+"93
+[v lcd_set_cursor@x x `uc  1 a 1 29 ]
+"98
+} 0
+"100
+[v _lcd_shift_cursor lcd_shift_cursor `(v  1 e 1 0 ]
+{
+[v lcd_shift_cursor@numChars numChars `uc  1 a 1 wreg ]
+"112
+[v lcd_shift_cursor@n n `uc  1 a 1 25 ]
+"100
+[v lcd_shift_cursor@numChars numChars `uc  1 a 1 wreg ]
+[v lcd_shift_cursor@direction direction `uc  1 p 1 23 ]
+"112
+[v lcd_shift_cursor@numChars numChars `uc  1 a 1 24 ]
+"115
+} 0
+"77 C:\Users\salar\Dropbox\Salarios\EngSci Year 2\Semester 2\Engineering Design (AER201)\MPLABXProjects\FastenerPacker.X\standbyInterface.c
+[v _dispRealTime dispRealTime `(v  1 e 1 0 ]
+{
+"78
+[v dispRealTime@time time `[7]uc  1 a 7 64 ]
+"85
+} 0
+"464 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\doprnt.c
+[v _printf printf `(i  1 e 2 0 ]
+{
+"1500
+[v printf@idx idx `uc  1 a 1 48 ]
+"501
+[v printf@width width `i  1 a 2 59 ]
+"528
+[v printf@val val `ui  1 a 2 56 ]
+"466
+[v printf@ap ap `[1]*.39v  1 a 2 54 ]
+"529
+[v printf@len len `ui  1 a 2 51 ]
+"530
+[v printf@cp cp `*.39Cuc  1 a 2 49 ]
+"499
+[v printf@c c `c  1 a 1 61 ]
+"508
+[v printf@flag flag `uc  1 a 1 58 ]
+"506
+[v printf@prec prec `c  1 a 1 53 ]
+"464
+[v printf@f f `*.25Cuc  1 p 2 32 ]
+"1541
+} 0
+"27 C:\Users\salar\Dropbox\Salarios\EngSci Year 2\Semester 2\Engineering Design (AER201)\MPLABXProjects\FastenerPacker.X\lcd.c
+[v _putch putch `(v  1 e 1 0 ]
+{
+[v putch@data data `uc  1 a 1 wreg ]
+[v putch@data data `uc  1 a 1 wreg ]
+"35
+[v putch@data data `uc  1 a 1 22 ]
+"38
+} 0
+"8 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\isdigit.c
+[v _isdigit isdigit `(b  1 e 0 0 ]
+{
+[v isdigit@c c `uc  1 a 1 wreg ]
+[v isdigit@c c `uc  1 a 1 wreg ]
+"14
+[v isdigit@c c `uc  1 a 1 22 ]
+"15
+} 0
+"8 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\lwmod.c
+[v ___lwmod __lwmod `(ui  1 e 2 0 ]
+{
+"11
+[v ___lwmod@counter counter `uc  1 a 1 31 ]
+"8
+[v ___lwmod@dividend dividend `ui  1 p 2 27 ]
+[v ___lwmod@divisor divisor `ui  1 p 2 29 ]
+"26
+} 0
+"8 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+{
+"11
+[v ___lwdiv@quotient quotient `ui  1 a 2 25 ]
+"12
+[v ___lwdiv@counter counter `uc  1 a 1 24 ]
+"8
+[v ___lwdiv@dividend dividend `ui  1 p 2 20 ]
+[v ___lwdiv@divisor divisor `ui  1 p 2 22 ]
+"31
+} 0
+"14 C:\Users\salar\Dropbox\Salarios\EngSci Year 2\Semester 2\Engineering Design (AER201)\MPLABXProjects\FastenerPacker.X\lcd.c
+[v _lcdInst lcdInst `(v  1 e 1 0 ]
+{
+[v lcdInst@data data `uc  1 a 1 wreg ]
+[v lcdInst@data data `uc  1 a 1 wreg ]
+"22
+[v lcdInst@data data `uc  1 a 1 22 ]
+"25
+} 0
+"40
+[v _lcdNibble lcdNibble `(v  1 e 1 0 ]
+{
+[v lcdNibble@data data `uc  1 a 1 wreg ]
+"48
+[v lcdNibble@temp temp `uc  1 a 1 20 ]
+"40
+[v lcdNibble@data data `uc  1 a 1 wreg ]
+"48
+[v lcdNibble@data data `uc  1 a 1 21 ]
+"61
+} 0
+"53 C:\Users\salar\Dropbox\Salarios\EngSci Year 2\Semester 2\Engineering Design (AER201)\MPLABXProjects\FastenerPacker.X\RTC.c
+[v _getDateTime getDateTime `(v  1 e 1 0 ]
+{
+"54
+[v getDateTime@i i `uc  1 a 1 25 ]
+"53
+[v getDateTime@time time `*.39uc  1 p 2 23 ]
+"70
+} 0
+"108 C:\Users\salar\Dropbox\Salarios\EngSci Year 2\Semester 2\Engineering Design (AER201)\MPLABXProjects\FastenerPacker.X\I2C.c
+[v _I2C_Master_Write I2C_Master_Write `(v  1 e 1 0 ]
+{
+[v I2C_Master_Write@byteToWrite byteToWrite `ui  1 p 2 21 ]
+"118
+} 0
+"95
+[v _I2C_Master_Stop I2C_Master_Stop `(v  1 e 1 0 ]
+{
+"106
+} 0
+"69
+[v _I2C_Master_Start I2C_Master_Start `(v  1 e 1 0 ]
+{
+"80
+} 0
+"120
+[v _I2C_Master_Read I2C_Master_Read `(uc  1 e 1 0 ]
+{
+[v I2C_Master_Read@ackBit ackBit `uc  1 a 1 wreg ]
+"130
+[v I2C_Master_Read@receivedByte receivedByte `uc  1 a 1 22 ]
+"120
+[v I2C_Master_Read@ackBit ackBit `uc  1 a 1 wreg ]
+"132
+[v I2C_Master_Read@ackBit ackBit `uc  1 a 1 21 ]
+"143
+} 0
+"51
+[v _I2C_Master_Wait I2C_Master_Wait `(v  1 s 1 I2C_Master_Wait ]
+{
+"67
+} 0
+"16 C:\Users\salar\Dropbox\Salarios\EngSci Year 2\Semester 2\Engineering Design (AER201)\MPLABXProjects\FastenerPacker.X\standbyInterface.c
+[v _calcOperationTime calcOperationTime `(us  1 e 2 0 ]
+{
+"17
+[v calcOperationTime@secEnd secEnd `us  1 a 2 44 ]
+[v calcOperationTime@minEnd minEnd `us  1 a 2 42 ]
+[v calcOperationTime@hourEnd hourEnd `us  1 a 2 40 ]
+[v calcOperationTime@secStart secStart `us  1 a 2 38 ]
+[v calcOperationTime@minStart minStart `us  1 a 2 36 ]
+[v calcOperationTime@hourStart hourStart `us  1 a 2 34 ]
+"16
+[v calcOperationTime@timeStart timeStart `*.39uc  1 p 2 26 ]
+[v calcOperationTime@timeEnd timeEnd `*.39uc  1 p 2 28 ]
+"26
+} 0
+"28 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\lwtoft.c
+[v ___lwtoft __lwtoft `(f  1 e 3 0 ]
+{
+[v ___lwtoft@c c `ui  1 p 2 46 ]
+"31
+} 0
+"62 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\float.c
+[v ___ftpack __ftpack `(f  1 e 3 0 ]
+{
+[v ___ftpack@arg arg `um  1 p 3 20 ]
+[v ___ftpack@exp exp `uc  1 p 1 23 ]
+[v ___ftpack@sign sign `uc  1 p 1 24 ]
+"86
+} 0
+"4 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\ftge.c
+[v ___ftge __ftge `(b  1 e 0 0 ]
+{
+[v ___ftge@ff1 ff1 `f  1 p 3 49 ]
+[v ___ftge@ff2 ff2 `f  1 p 3 52 ]
+"13
+} 0
+"112 C:\Users\salar\Dropbox\Salarios\EngSci Year 2\Semester 2\Engineering Design (AER201)\MPLABXProjects\FastenerPacker.X\standbyInterface.c
+[v _checkValid checkValid `(E3086  1 e 1 0 ]
+{
+"114
+[v checkValid@validFastenerSets validFastenerSets `[20][5]uc  1 a 100 0 ]
+"120
+[v checkValid@numFasteners numFasteners `[4]us  1 a 8 113 ]
+"121
+[v checkValid@MAX_FASTENERS MAX_FASTENERS `C[4]ui  1 a 8 105 ]
+"118
+[v checkValid@fastenerSet fastenerSet `[5]uc  1 a 5 100 ]
+"119
+[v checkValid@i i `us  1 a 2 123 ]
+[v checkValid@numSetsPerStep numSetsPerStep `us  1 a 2 121 ]
+"112
+[v checkValid@inputScreenPos inputScreenPos `us  1 p 2 32 ]
+[v checkValid@inputs inputs `*.39uc  1 p 2 34 ]
+[v checkValid@F3153 F3153 `[20][5]uc  1 s 100 F3153 ]
+"119
+[v checkValid@F3158 F3158 `[4]us  1 s 8 F3158 ]
+"120
+[v checkValid@F3160 F3160 `C[4]ui  1 s 8 F3160 ]
+"178
+} 0
+"33 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\strcmp.c
+[v _strcmp strcmp `(i  1 e 2 0 ]
+{
+"35
+[v strcmp@r r `c  1 a 1 31 ]
+"33
+[v strcmp@s1 s1 `*.39Cuc  1 p 2 26 ]
+[v strcmp@s2 s2 `*.39Cuc  1 p 2 28 ]
+"42
+} 0
+"15 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+{
+"17
+[v ___wmul@product product `ui  1 a 2 24 ]
+"15
+[v ___wmul@multiplier multiplier `ui  1 p 2 20 ]
+[v ___wmul@multiplicand multiplicand `ui  1 p 2 22 ]
+"53
+} 0
+"22 C:\Users\salar\Dropbox\Salarios\EngSci Year 2\Semester 2\Engineering Design (AER201)\MPLABXProjects\FastenerPacker.X\main.c
+[v _initOperation initOperation `(v  1 e 1 0 ]
+{
+[v initOperation@inputs inputs `*.39uc  1 p 2 20 ]
+"25
+} 0
+"93
+[v _interruptHandler interruptHandler `II(v  1 e 1 0 ]
+{
+"105
+} 0
