@@ -28,18 +28,40 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _ADCON0 `Vuc ~T0 @X0 0 e@4034 ]
 "4442
 [v _ADCON1 `Vuc ~T0 @X0 0 e@4033 ]
-"24 standbyInterface.h
-[v _initStandby `(v ~T0 @X0 0 ef1`*uc ]
-"22 RTC.h
-[v _getDateTime `(v ~T0 @X0 0 ef1`*uc ]
-"23 standbyInterface.h
-[v _calcOperationTime `(us ~T0 @X0 0 ef2`*uc`*uc ]
-"31
-[v _showResults `(v ~T0 @X0 0 ef3`*uc`*us`us ]
-"7019 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f4620.h
+"70 main.c
+[c E3086 0 1 .. ]
+[n E3086 . false true  ]
+"6216 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f4620.h
+[s S251 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S251 . INT1IF INT2IF . INT1IE INT2IE . INT1IP INT2IP ]
+"6226
+[s S252 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S252 . INT1F INT2F . INT1E INT2E . INT1P INT2P ]
+"6215
+[u S250 `S251 1 `S252 1 ]
+[n S250 . . . ]
+"6237
+[v _INTCON3bits `VS250 ~T0 @X0 0 e@4080 ]
+"6378
+[s S258 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S258 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE PEIE_GIEL GIE_GIEH ]
+"6388
+[s S259 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S259 . . INT0F T0IF . INT0E T0IE PEIE GIE ]
+"6398
+[s S260 :6 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S260 . . GIEL GIEH ]
+"6377
+[u S257 `S258 1 `S259 1 `S260 1 ]
+[n S257 . . . . ]
+"6404
+[v _INTCONbits `VS257 ~T0 @X0 0 e@4082 ]
+"7019
 [v _INT1IE `Vb ~T0 @X0 0 e@32643 ]
 "7021
 [v _INT1IF `Vb ~T0 @X0 0 e@32640 ]
+"187
+[v _PORTB `Vuc ~T0 @X0 0 e@3969 ]
 "884
 [s S38 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S38 . LATA0 LATA1 LATA2 LATA3 LATA4 LATA5 LATA6 LATA7 ]
@@ -2920,34 +2942,58 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;standbyInterface.h: 29: void getInputs (char * inputs);
 [; ;standbyInterface.h: 30: void dispRealTime (void);
 [; ;standbyInterface.h: 31: void showResults(unsigned char inputs [6], unsigned short int numRemaining [4], unsigned short int operationTime);
-"22 main.c
+"16 main.c
+[v _keys `Cuc ~T0 @X0 -> 0 `x e ]
+[i _keys
+:U ..
+-> 49 `c
+-> 50 `c
+-> 51 `c
+-> 65 `c
+-> 52 `c
+-> 53 `c
+-> 54 `c
+-> 66 `c
+-> 55 `c
+-> 56 `c
+-> 57 `c
+-> 67 `c
+-> 42 `c
+-> 48 `c
+-> 35 `c
+-> 68 `c
+-> 0 `c
+..
+]
+[; ;main.c: 16: const unsigned char keys[] = "123A456B789C*0#D";
+"24
 [v _initOperation `(v ~T0 @X0 1 ef1`*uc ]
 {
-[; ;main.c: 22: void initOperation(unsigned char * inputs){
+[; ;main.c: 24: void initOperation(unsigned char * inputs){
 [e :U _initOperation ]
 [v _inputs `*uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;main.c: 24: _delay((unsigned long)((3000)*(40000000/4000.0)));
-"24
+[; ;main.c: 26: _delay((unsigned long)((3000)*(40000000/4000.0)));
+"26
 [e ( __delay (1 -> * -> -> 3000 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-[; ;main.c: 25: }
-"25
+[; ;main.c: 27: }
+"27
 [e :UE 266 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
-"27
+"29
 [v _main `(v ~T0 @X0 1 ef ]
 {
-[; ;main.c: 27: void main(void) {
+[; ;main.c: 29: void main(void) {
 [e :U _main ]
 [f ]
-"28
+"30
 [v _timeStart `uc ~T0 @X0 -> 7 `i a ]
 [v _timeEnd `uc ~T0 @X0 -> 7 `i a ]
-[v F3120 `uc ~T0 @X0 -> 6 `i s ]
-[i F3120
+[v F3121 `uc ~T0 @X0 -> 6 `i s ]
+[i F3121
 :U ..
-"29
+"31
 -> -> 48 `ui `uc
 -> -> 48 `ui `uc
 -> -> 48 `ui `uc
@@ -2957,13 +3003,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 ..
 ]
 [v _inputs `uc ~T0 @X0 -> 6 `i a ]
-[; ;main.c: 28: unsigned char timeStart [7], timeEnd [7];
-[; ;main.c: 29: unsigned char inputs [6] = {'0','0','0','0','0','0'};
-[e = _inputs F3120 ]
-[v F3122 `us ~T0 @X0 -> 4 `i s ]
-[i F3122
+[; ;main.c: 30: unsigned char timeStart [7], timeEnd [7];
+[; ;main.c: 31: unsigned char inputs [6] = {'0','0','0','0','0','0'};
+[e = _inputs F3121 ]
+[v F3123 `us ~T0 @X0 -> 4 `i s ]
+[i F3123
 :U ..
-"30
+"32
 -> -> 0 `i `us
 -> -> 0 `i `us
 -> -> 0 `i `us
@@ -2971,109 +3017,216 @@ Version 3.2 HI-TECH Software Intermediate Code
 ..
 ]
 [v _numRemaining `us ~T0 @X0 -> 4 `i a ]
-[; ;main.c: 30: unsigned short int numRemaining [4] = {0,0,0,0};
-[e = _numRemaining F3122 ]
-"31
+[; ;main.c: 32: unsigned short int numRemaining [4] = {0,0,0,0};
+[e = _numRemaining F3123 ]
+"33
 [v _operationTime `us ~T0 @X0 1 a ]
-[; ;main.c: 31: unsigned short int operationTime;
-[; ;main.c: 36: LATA = 0x00;
-"36
-[e = _LATA -> -> 0 `i `uc ]
-[; ;main.c: 37: LATB = 0x00;
-"37
-[e = _LATB -> -> 0 `i `uc ]
-[; ;main.c: 38: LATC = 0x00;
+[; ;main.c: 33: unsigned short int operationTime;
+[; ;main.c: 38: LATA = 0x00;
 "38
-[e = _LATC -> -> 0 `i `uc ]
-[; ;main.c: 39: LATD = 0x00;
+[e = _LATA -> -> 0 `i `uc ]
+[; ;main.c: 39: LATB = 0x00;
 "39
-[e = _LATD -> -> 0 `i `uc ]
-[; ;main.c: 40: LATE = 0x00;
+[e = _LATB -> -> 0 `i `uc ]
+[; ;main.c: 40: LATC = 0x00;
 "40
+[e = _LATC -> -> 0 `i `uc ]
+[; ;main.c: 41: LATD = 0x00;
+"41
+[e = _LATD -> -> 0 `i `uc ]
+[; ;main.c: 42: LATE = 0x00;
+"42
 [e = _LATE -> -> 0 `i `uc ]
-[; ;main.c: 44: TRISA = 0x00;
-"44
-[e = _TRISA -> -> 0 `i `uc ]
-[; ;main.c: 45: TRISB = 0xFF;
-"45
-[e = _TRISB -> -> 255 `i `uc ]
-[; ;main.c: 46: TRISC = 0xE0;
+[; ;main.c: 46: TRISA = 0x00;
 "46
-[e = _TRISC -> -> 224 `i `uc ]
-[; ;main.c: 47: TRISD = 0x00;
+[e = _TRISA -> -> 0 `i `uc ]
+[; ;main.c: 47: TRISB = 0xFF;
 "47
-[e = _TRISD -> -> 0 `i `uc ]
-[; ;main.c: 48: TRISE = 0x00;
+[e = _TRISB -> -> 255 `i `uc ]
+[; ;main.c: 48: TRISC = 0xE0;
 "48
+[e = _TRISC -> -> 224 `i `uc ]
+[; ;main.c: 49: TRISD = 0x00;
+"49
+[e = _TRISD -> -> 0 `i `uc ]
+[; ;main.c: 50: TRISE = 0x00;
+"50
 [e = _TRISE -> -> 0 `i `uc ]
-[; ;main.c: 51: ADCON0 = 0x00;
-"51
+[; ;main.c: 53: ADCON0 = 0x00;
+"53
 [e = _ADCON0 -> -> 0 `i `uc ]
-[; ;main.c: 52: ADCON1 = 0b00001111;
-"52
+[; ;main.c: 54: ADCON1 = 0b00001111;
+"54
 [e = _ADCON1 -> -> 15 `i `uc ]
-[; ;main.c: 56: while(1){
-"56
-[e :U 269 ]
-{
-[; ;main.c: 57: initStandby(inputs);
-"57
-[e ( _initStandby (1 &U _inputs ]
-[; ;main.c: 58: getDateTime(timeStart);
-"58
-[e ( _getDateTime (1 &U _timeStart ]
-[; ;main.c: 59: initOperation(inputs);
-"59
-[e ( _initOperation (1 &U _inputs ]
-[; ;main.c: 60: getDateTime(timeEnd);
-"60
-[e ( _getDateTime (1 &U _timeEnd ]
-[; ;main.c: 61: operationTime = calcOperationTime (timeStart, timeEnd);
-"61
-[e = _operationTime ( _calcOperationTime (2 , &U _timeStart &U _timeEnd ]
-[; ;main.c: 62: showResults(inputs, numRemaining, operationTime);
-"62
-[e ( _showResults (3 , , &U _inputs &U _numRemaining _operationTime ]
-"64
-}
-[e :U 268 ]
-"56
-[e $U 269  ]
-[e :U 270 ]
-[; ;main.c: 64: }
-[; ;main.c: 90: }
-"90
+"70
+[v _pressed `E3086 ~T0 @X0 1 a ]
+[; ;main.c: 70: boolean pressed = false;
+[e = _pressed . `E3086 0 ]
+"71
+[v _counter `i ~T0 @X0 1 a ]
+[; ;main.c: 71: int counter = 0;
+[e = _counter -> 0 `i ]
+[; ;main.c: 75: INTCON3bits.INT1IE = 1;
+"75
+[e = . . _INTCON3bits 0 3 -> -> 1 `i `uc ]
+[; ;main.c: 76: (INTCONbits.GIE = 1);
+"76
+[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
+[; ;main.c: 93: }
+"93
 [e :UE 267 ]
 }
 [v $root$_interruptHandler `(v ~T0 @X0 0 e ]
-[v F3126 `(v ~T0 @X0 1 tf ]
-"93
-[v _interruptHandler `IF3126 ~T0 @X0 1 e ]
+[v F3129 `(v ~T0 @X0 1 tf ]
+"96
+[v _interruptHandler `IF3129 ~T0 @X0 1 e ]
 {
-[; ;main.c: 93: void interrupt interruptHandler(void) {
+[; ;main.c: 96: void interrupt interruptHandler(void) {
 [e :U _interruptHandler ]
 [f ]
-[; ;main.c: 95: if (INT1IE && INT1IF){
-"95
-[e $ ! && _INT1IE _INT1IF 272  ]
-{
-[; ;main.c: 96: LATAbits.LA0 = ~LATAbits.LA0;
-"96
-[e = . . _LATAbits 1 0 -> ~ -> . . _LATAbits 1 0 `i `uc ]
-[; ;main.c: 97: _delay((unsigned long)((150)*(40000000/4000.0)));
-"97
-[e ( __delay (1 -> * -> -> 150 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-[; ;main.c: 98: LATAbits.LA0 = ~LATAbits.LA0;
+[; ;main.c: 98: if (INT1IE && INT1IF){
 "98
-[e = . . _LATAbits 1 0 -> ~ -> . . _LATAbits 1 0 `i `uc ]
-[; ;main.c: 99: INT1IF = 0;
+[e $ ! && _INT1IE _INT1IF 269  ]
+{
 "99
-[e = _INT1IF -> -> 0 `i `b ]
+[v _keypress `uc ~T0 @X0 1 a ]
+[; ;main.c: 99: unsigned char keypress = (PORTB & 0xF0) >> 4;
+[e = _keypress -> >> & -> _PORTB `i -> 240 `i -> 4 `i `uc ]
+[; ;main.c: 100: switch (keys[keypress]){
 "100
-}
+[e $U 271  ]
+{
+[; ;main.c: 101: case '1':
+"101
 [e :U 272 ]
-[; ;main.c: 100: }
-[; ;main.c: 105: }
+[; ;main.c: 102: LATAbits.LA0 = ~LATAbits.LA0;
+"102
+[e = . . _LATAbits 1 0 -> ~ -> . . _LATAbits 1 0 `i `uc ]
+[; ;main.c: 103: break;
+"103
+[e $U 270  ]
+[; ;main.c: 104: case '2':
+"104
+[e :U 273 ]
+[; ;main.c: 105: LATAbits.LA1 = ~LATAbits.LA1;
 "105
-[e :UE 271 ]
+[e = . . _LATAbits 1 1 -> ~ -> . . _LATAbits 1 1 `i `uc ]
+[; ;main.c: 106: break;
+"106
+[e $U 270  ]
+[; ;main.c: 107: case '3':
+"107
+[e :U 274 ]
+[; ;main.c: 108: LATAbits.LA2 = ~LATAbits.LA2;
+"108
+[e = . . _LATAbits 1 2 -> ~ -> . . _LATAbits 1 2 `i `uc ]
+[; ;main.c: 109: break;
+"109
+[e $U 270  ]
+[; ;main.c: 110: case '4':
+"110
+[e :U 275 ]
+[; ;main.c: 111: LATAbits.LA3 = ~LATAbits.LA3;
+"111
+[e = . . _LATAbits 1 3 -> ~ -> . . _LATAbits 1 3 `i `uc ]
+[; ;main.c: 112: break;
+"112
+[e $U 270  ]
+[; ;main.c: 113: default:
+"113
+[e :U 276 ]
+[; ;main.c: 114: LATAbits.LA0 = ~LATAbits.LA0;
+"114
+[e = . . _LATAbits 1 0 -> ~ -> . . _LATAbits 1 0 `i `uc ]
+[; ;main.c: 115: break;
+"115
+[e $U 270  ]
+"116
+}
+[; ;main.c: 116: }
+[e $U 270  ]
+"100
+[e :U 271 ]
+[e [\ *U + &U _keys * -> _keypress `ux -> -> # *U &U _keys `ui `ux , $ -> -> 49 `ui `uc 272
+ , $ -> -> 50 `ui `uc 273
+ , $ -> -> 51 `ui `uc 274
+ , $ -> -> 52 `ui `uc 275
+ 276 ]
+"116
+[e :U 270 ]
+[; ;main.c: 117: _delay((unsigned long)((150)*(40000000/4000.0)));
+"117
+[e ( __delay (1 -> * -> -> 150 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
+[; ;main.c: 118: switch (keys[keypress]){
+"118
+[e $U 278  ]
+{
+[; ;main.c: 119: case '1':
+"119
+[e :U 279 ]
+[; ;main.c: 120: LATAbits.LA0 = ~LATAbits.LA0;
+"120
+[e = . . _LATAbits 1 0 -> ~ -> . . _LATAbits 1 0 `i `uc ]
+[; ;main.c: 121: break;
+"121
+[e $U 277  ]
+[; ;main.c: 122: case '2':
+"122
+[e :U 280 ]
+[; ;main.c: 123: LATAbits.LA1 = ~LATAbits.LA1;
+"123
+[e = . . _LATAbits 1 1 -> ~ -> . . _LATAbits 1 1 `i `uc ]
+[; ;main.c: 124: break;
+"124
+[e $U 277  ]
+[; ;main.c: 125: case '3':
+"125
+[e :U 281 ]
+[; ;main.c: 126: LATAbits.LA2 = ~LATAbits.LA2;
+"126
+[e = . . _LATAbits 1 2 -> ~ -> . . _LATAbits 1 2 `i `uc ]
+[; ;main.c: 127: break;
+"127
+[e $U 277  ]
+[; ;main.c: 128: case '4':
+"128
+[e :U 282 ]
+[; ;main.c: 129: LATAbits.LA3 = ~LATAbits.LA3;
+"129
+[e = . . _LATAbits 1 3 -> ~ -> . . _LATAbits 1 3 `i `uc ]
+[; ;main.c: 130: break;
+"130
+[e $U 277  ]
+[; ;main.c: 131: default:
+"131
+[e :U 283 ]
+[; ;main.c: 132: LATAbits.LA0 = ~LATAbits.LA0;
+"132
+[e = . . _LATAbits 1 0 -> ~ -> . . _LATAbits 1 0 `i `uc ]
+[; ;main.c: 133: break;
+"133
+[e $U 277  ]
+"134
+}
+[; ;main.c: 134: }
+[e $U 277  ]
+"118
+[e :U 278 ]
+[e [\ *U + &U _keys * -> _keypress `ux -> -> # *U &U _keys `ui `ux , $ -> -> 49 `ui `uc 279
+ , $ -> -> 50 `ui `uc 280
+ , $ -> -> 51 `ui `uc 281
+ , $ -> -> 52 `ui `uc 282
+ 283 ]
+"134
+[e :U 277 ]
+[; ;main.c: 136: INT1IF = 0;
+"136
+[e = _INT1IF -> -> 0 `i `b ]
+"137
+}
+[e :U 269 ]
+[; ;main.c: 137: }
+[; ;main.c: 142: }
+"142
+[e :UE 268 ]
 }

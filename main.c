@@ -12,6 +12,9 @@
 #include "logMemory.h"
 #include "lcd.h"
 
+//REMOVE LATER
+const unsigned char keys[] = "123A456B789C*0#D";
+
 /*
  * For a 4-step assembly, every other compartment must be filled in, starting from C1.
  * For a 5-step assembly, compartments 1, 2, 4, 5, and 7 must be filled in.
@@ -51,7 +54,7 @@ void main(void) {
     ADCON1 = 0b00001111; // Set all A/D ports to digital (pg. 222)
     // </editor-fold>
     
-    
+    /*
     while(1){
         initStandby(inputs); //Initiate Standby Mode & get inputs
         getDateTime(timeStart);
@@ -61,17 +64,18 @@ void main(void) {
         showResults(inputs, numRemaining, operationTime);
         //saveResults(inputs, numRemaining, operationTime, timeEnd);
     }
-    
+    */
 
-    /*
+    
     boolean pressed = false;
     int counter = 0;
-    initLCD();
+    //initLCD();
     
     //Enable Interrupts
     INTCON3bits.INT1IE = 1; //enable INT1 external interrupt //enable INT1 external interrupt
     ei(); //global interrupt enable - INTCONbits.GIE = 1;
     
+    /*
     //Microswitch
     while(1){
         if (!pressed && PORTCbits.RC5 == 0){
@@ -92,9 +96,43 @@ void main(void) {
 void interrupt interruptHandler(void) {
     //check both the interrupt enable and interrupt flag for INT1 interrupt
     if (INT1IE && INT1IF){ 
-        LATAbits.LA0 = ~LATAbits.LA0; //toggle led
+        unsigned char keypress = (PORTB & 0xF0) >> 4;
+        switch (keys[keypress]){
+            case '1':
+                LATAbits.LA0 = ~LATAbits.LA0; 
+                break;
+            case '2':
+                LATAbits.LA1 = ~LATAbits.LA1; 
+                break;
+            case '3':
+                LATAbits.LA2 = ~LATAbits.LA2; 
+                break;
+            case '4':
+                LATAbits.LA3 = ~LATAbits.LA3; 
+                break;
+            default:
+                LATAbits.LA0 = ~LATAbits.LA0; 
+                break;
+        }
         __delay_ms(150);
-        LATAbits.LA0 = ~LATAbits.LA0; //toggle led
+        switch (keys[keypress]){
+            case '1':
+                LATAbits.LA0 = ~LATAbits.LA0; 
+                break;
+            case '2':
+                LATAbits.LA1 = ~LATAbits.LA1; 
+                break;
+            case '3':
+                LATAbits.LA2 = ~LATAbits.LA2; 
+                break;
+            case '4':
+                LATAbits.LA3 = ~LATAbits.LA3; 
+                break;
+            default:
+                LATAbits.LA0 = ~LATAbits.LA0; 
+                break;
+        }
+        
         INT1IF = 0; //clear flag
     }
     

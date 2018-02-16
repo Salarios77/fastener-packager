@@ -3906,7 +3906,10 @@ void getInputs (char * inputs);
 void dispRealTime (void);
 void showResults(unsigned char inputs [6], unsigned short int numRemaining [4], unsigned short int operationTime);
 
-# 22 "main.c"
+# 16 "main.c"
+const unsigned char keys[] = "123A456B789C*0#D";
+
+# 24
 void initOperation(unsigned char * inputs){
 
 _delay((unsigned long)((3000)*(40000000/4000.0)));
@@ -3927,7 +3930,7 @@ LATC = 0x00;
 LATD = 0x00;
 LATE = 0x00;
 
-# 44
+# 46
 TRISA = 0x00;
 TRISB = 0xFF;
 TRISC = 0xE0;
@@ -3938,28 +3941,59 @@ TRISE = 0x00;
 ADCON0 = 0x00;
 ADCON1 = 0b00001111;
 
+# 70
+boolean pressed = false;
+int counter = 0;
 
 
-while(1){
-initStandby(inputs);
-getDateTime(timeStart);
-initOperation(inputs);
-getDateTime(timeEnd);
-operationTime = calcOperationTime (timeStart, timeEnd);
-showResults(inputs, numRemaining, operationTime);
 
-}
+INTCON3bits.INT1IE = 1;
+(INTCONbits.GIE = 1);
 
-# 90
+# 93
 }
 
 
 void interrupt interruptHandler(void) {
 
 if (INT1IE && INT1IF){
+unsigned char keypress = (PORTB & 0xF0) >> 4;
+switch (keys[keypress]){
+case '1':
 LATAbits.LA0 = ~LATAbits.LA0;
+break;
+case '2':
+LATAbits.LA1 = ~LATAbits.LA1;
+break;
+case '3':
+LATAbits.LA2 = ~LATAbits.LA2;
+break;
+case '4':
+LATAbits.LA3 = ~LATAbits.LA3;
+break;
+default:
+LATAbits.LA0 = ~LATAbits.LA0;
+break;
+}
 _delay((unsigned long)((150)*(40000000/4000.0)));
+switch (keys[keypress]){
+case '1':
 LATAbits.LA0 = ~LATAbits.LA0;
+break;
+case '2':
+LATAbits.LA1 = ~LATAbits.LA1;
+break;
+case '3':
+LATAbits.LA2 = ~LATAbits.LA2;
+break;
+case '4':
+LATAbits.LA3 = ~LATAbits.LA3;
+break;
+default:
+LATAbits.LA0 = ~LATAbits.LA0;
+break;
+}
+
 INT1IF = 0;
 }
 
