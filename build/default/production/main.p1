@@ -60,8 +60,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _INT1IE `Vb ~T0 @X0 0 e@32643 ]
 "7021
 [v _INT1IF `Vb ~T0 @X0 0 e@32640 ]
-"187
-[v _PORTB `Vuc ~T0 @X0 0 e@3969 ]
 "884
 [s S38 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S38 . LATA0 LATA1 LATA2 LATA3 LATA4 LATA5 LATA6 LATA7 ]
@@ -3088,145 +3086,20 @@ Version 3.2 HI-TECH Software Intermediate Code
 "98
 [e $ ! && _INT1IE _INT1IF 269  ]
 {
-"99
-[v _keypress `uc ~T0 @X0 1 a ]
-[; ;main.c: 99: unsigned char keypress = (PORTB & 0xF0) >> 4;
-[e = _keypress -> >> & -> _PORTB `i -> 240 `i -> 4 `i `uc ]
-[; ;main.c: 100: switch (keys[keypress]){
+[; ;main.c: 100: LATAbits.LA3 = ~LATAbits.LA3;
 "100
-[e $U 271  ]
-{
-[; ;main.c: 101: case '1':
+[e = . . _LATAbits 1 3 -> ~ -> . . _LATAbits 1 3 `i `uc ]
+[; ;main.c: 101: _delay((unsigned long)((150)*(40000000/4000.0)));
 "101
-[e :U 272 ]
-[; ;main.c: 102: LATAbits.LA0 = ~LATAbits.LA0;
-"102
-[e = . . _LATAbits 1 0 -> ~ -> . . _LATAbits 1 0 `i `uc ]
-[; ;main.c: 103: break;
-"103
-[e $U 270  ]
-[; ;main.c: 104: case '2':
-"104
-[e :U 273 ]
-[; ;main.c: 105: LATAbits.LA1 = ~LATAbits.LA1;
-"105
-[e = . . _LATAbits 1 1 -> ~ -> . . _LATAbits 1 1 `i `uc ]
-[; ;main.c: 106: break;
-"106
-[e $U 270  ]
-[; ;main.c: 107: case '3':
-"107
-[e :U 274 ]
-[; ;main.c: 108: LATAbits.LA2 = ~LATAbits.LA2;
-"108
-[e = . . _LATAbits 1 2 -> ~ -> . . _LATAbits 1 2 `i `uc ]
-[; ;main.c: 109: break;
-"109
-[e $U 270  ]
-[; ;main.c: 110: case '4':
-"110
-[e :U 275 ]
-[; ;main.c: 111: LATAbits.LA3 = ~LATAbits.LA3;
-"111
-[e = . . _LATAbits 1 3 -> ~ -> . . _LATAbits 1 3 `i `uc ]
-[; ;main.c: 112: break;
-"112
-[e $U 270  ]
-[; ;main.c: 113: default:
-"113
-[e :U 276 ]
-[; ;main.c: 114: LATAbits.LA0 = ~LATAbits.LA0;
-"114
-[e = . . _LATAbits 1 0 -> ~ -> . . _LATAbits 1 0 `i `uc ]
-[; ;main.c: 115: break;
-"115
-[e $U 270  ]
-"116
-}
-[; ;main.c: 116: }
-[e $U 270  ]
-"100
-[e :U 271 ]
-[e [\ *U + &U _keys * -> _keypress `ux -> -> # *U &U _keys `ui `ux , $ -> -> 49 `ui `uc 272
- , $ -> -> 50 `ui `uc 273
- , $ -> -> 51 `ui `uc 274
- , $ -> -> 52 `ui `uc 275
- 276 ]
-"116
-[e :U 270 ]
-[; ;main.c: 117: _delay((unsigned long)((150)*(40000000/4000.0)));
-"117
 [e ( __delay (1 -> * -> -> 150 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-[; ;main.c: 118: switch (keys[keypress]){
-"118
-[e $U 278  ]
-{
-[; ;main.c: 119: case '1':
-"119
-[e :U 279 ]
-[; ;main.c: 120: LATAbits.LA0 = ~LATAbits.LA0;
-"120
-[e = . . _LATAbits 1 0 -> ~ -> . . _LATAbits 1 0 `i `uc ]
-[; ;main.c: 121: break;
-"121
-[e $U 277  ]
-[; ;main.c: 122: case '2':
-"122
-[e :U 280 ]
-[; ;main.c: 123: LATAbits.LA1 = ~LATAbits.LA1;
-"123
-[e = . . _LATAbits 1 1 -> ~ -> . . _LATAbits 1 1 `i `uc ]
-[; ;main.c: 124: break;
-"124
-[e $U 277  ]
-[; ;main.c: 125: case '3':
-"125
-[e :U 281 ]
-[; ;main.c: 126: LATAbits.LA2 = ~LATAbits.LA2;
-"126
-[e = . . _LATAbits 1 2 -> ~ -> . . _LATAbits 1 2 `i `uc ]
-[; ;main.c: 127: break;
-"127
-[e $U 277  ]
-[; ;main.c: 128: case '4':
-"128
-[e :U 282 ]
-[; ;main.c: 129: LATAbits.LA3 = ~LATAbits.LA3;
-"129
-[e = . . _LATAbits 1 3 -> ~ -> . . _LATAbits 1 3 `i `uc ]
-[; ;main.c: 130: break;
-"130
-[e $U 277  ]
-[; ;main.c: 131: default:
-"131
-[e :U 283 ]
-[; ;main.c: 132: LATAbits.LA0 = ~LATAbits.LA0;
-"132
-[e = . . _LATAbits 1 0 -> ~ -> . . _LATAbits 1 0 `i `uc ]
-[; ;main.c: 133: break;
-"133
-[e $U 277  ]
-"134
-}
-[; ;main.c: 134: }
-[e $U 277  ]
-"118
-[e :U 278 ]
-[e [\ *U + &U _keys * -> _keypress `ux -> -> # *U &U _keys `ui `ux , $ -> -> 49 `ui `uc 279
- , $ -> -> 50 `ui `uc 280
- , $ -> -> 51 `ui `uc 281
- , $ -> -> 52 `ui `uc 282
- 283 ]
-"134
-[e :U 277 ]
-[; ;main.c: 136: INT1IF = 0;
-"136
+[; ;main.c: 139: INT1IF = 0;
+"139
 [e = _INT1IF -> -> 0 `i `b ]
-"137
+"140
 }
 [e :U 269 ]
-[; ;main.c: 137: }
-[; ;main.c: 142: }
-"142
+[; ;main.c: 140: }
+[; ;main.c: 145: }
+"145
 [e :UE 268 ]
 }

@@ -90,12 +90,30 @@ void main(void) {
         }
     }
     */
+    
+    while(1){
+        if (!pressed && PORTCbits.RC5 == 0){
+            pressed = true;
+            LATAbits.LA1 = ~LATAbits.LA1;
+            counter ++;
+            __lcd_clear();
+            printf ("counter: %d", counter);
+        }
+        else if (PORTCbits.RC5 == 1){
+            pressed = false;
+        }
+        
+    }
 }
 
 //GLOBAL VARIABLES MODIFIED IN ANY ISR should be declared volatile 
 void interrupt interruptHandler(void) {
     //check both the interrupt enable and interrupt flag for INT1 interrupt
     if (INT1IE && INT1IF){ 
+        
+        LATAbits.LA3 = ~LATAbits.LA3; 
+        __delay_ms (150);
+        /*
         unsigned char keypress = (PORTB & 0xF0) >> 4;
         switch (keys[keypress]){
             case '1':
@@ -111,7 +129,6 @@ void interrupt interruptHandler(void) {
                 LATAbits.LA3 = ~LATAbits.LA3; 
                 break;
             default:
-                LATAbits.LA0 = ~LATAbits.LA0; 
                 break;
         }
         __delay_ms(150);
@@ -129,9 +146,9 @@ void interrupt interruptHandler(void) {
                 LATAbits.LA3 = ~LATAbits.LA3; 
                 break;
             default:
-                LATAbits.LA0 = ~LATAbits.LA0; 
                 break;
         }
+        */
         
         INT1IF = 0; //clear flag
     }

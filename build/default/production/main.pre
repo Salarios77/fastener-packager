@@ -3957,43 +3957,11 @@ INTCON3bits.INT1IE = 1;
 void interrupt interruptHandler(void) {
 
 if (INT1IE && INT1IF){
-unsigned char keypress = (PORTB & 0xF0) >> 4;
-switch (keys[keypress]){
-case '1':
-LATAbits.LA0 = ~LATAbits.LA0;
-break;
-case '2':
-LATAbits.LA1 = ~LATAbits.LA1;
-break;
-case '3':
-LATAbits.LA2 = ~LATAbits.LA2;
-break;
-case '4':
-LATAbits.LA3 = ~LATAbits.LA3;
-break;
-default:
-LATAbits.LA0 = ~LATAbits.LA0;
-break;
-}
-_delay((unsigned long)((150)*(40000000/4000.0)));
-switch (keys[keypress]){
-case '1':
-LATAbits.LA0 = ~LATAbits.LA0;
-break;
-case '2':
-LATAbits.LA1 = ~LATAbits.LA1;
-break;
-case '3':
-LATAbits.LA2 = ~LATAbits.LA2;
-break;
-case '4':
-LATAbits.LA3 = ~LATAbits.LA3;
-break;
-default:
-LATAbits.LA0 = ~LATAbits.LA0;
-break;
-}
 
+LATAbits.LA3 = ~LATAbits.LA3;
+_delay((unsigned long)((150)*(40000000/4000.0)));
+
+# 139
 INT1IF = 0;
 }
 

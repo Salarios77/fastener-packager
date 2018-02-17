@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC18 LITE Macro Assembler V1.45 build -152302408 
-                                                                                               Fri Feb 16 16:18:34 2018
+                                                                                               Fri Feb 16 17:14:00 2018
 
 Microchip Technology Omniscient Code Generator v1.45 (Free mode) build 201711160504
      1                           	processor	18F4620
@@ -67,130 +67,130 @@ Microchip Technology Omniscient Code Generator v1.45 (Free mode) build 201711160
     53                           ; SFR Addresses
     54  0000                     
     55                           	psect	idataCOMRAM
-    56  00032A                     __pidataCOMRAM:
+    56  000208                     __pidataCOMRAM:
     57                           	opt stack 0
     58                           
     59                           ;initializer for showLogs@F3187
-    60  00032A  30                 	db	48
-    61  00032B  30                 	db	48
-    62  00032C  30                 	db	48
-    63  00032D  30                 	db	48
-    64  00032E  30                 	db	48
-    65  00032F  30                 	db	48
+    60  000208  30                 	db	48
+    61  000209  30                 	db	48
+    62  00020A  30                 	db	48
+    63  00020B  30                 	db	48
+    64  00020C  30                 	db	48
+    65  00020D  30                 	db	48
     66                           
     67                           ;initializer for main@F3121
-    68  000330  30                 	db	48
-    69  000331  30                 	db	48
-    70  000332  30                 	db	48
-    71  000333  30                 	db	48
-    72  000334  30                 	db	48
-    73  000335  30                 	db	48
+    68  00020E  30                 	db	48
+    69  00020F  30                 	db	48
+    70  000210  30                 	db	48
+    71  000211  30                 	db	48
+    72  000212  30                 	db	48
+    73  000213  30                 	db	48
     74                           
     75                           	psect	idataBANK0
-    76  00026C                     __pidataBANK0:
+    76  00014A                     __pidataBANK0:
     77                           	opt stack 0
     78                           
     79                           ;initializer for checkValid@F3153
-    80  00026C  42                 	db	66
-    81  00026D  30                 	db	48
-    82  00026E  30                 	db	48
-    83  00026F  30                 	db	48
-    84  000270  00                 	db	0
-    85  000271  4E                 	db	78
-    86  000272  30                 	db	48
-    87  000273  30                 	db	48
-    88  000274  30                 	db	48
-    89  000275  00                 	db	0
-    90  000276  53                 	db	83
-    91  000277  30                 	db	48
-    92  000278  30                 	db	48
-    93  000279  30                 	db	48
-    94  00027A  00                 	db	0
-    95  00027B  57                 	db	87
-    96  00027C  30                 	db	48
-    97  00027D  30                 	db	48
-    98  00027E  30                 	db	48
-    99  00027F  00                 	db	0
-   100  000280  42                 	db	66
-   101  000281  4E                 	db	78
-   102  000282  30                 	db	48
-   103  000283  30                 	db	48
-   104  000284  00                 	db	0
-   105  000285  42                 	db	66
-   106  000286  53                 	db	83
-   107  000287  30                 	db	48
-   108  000288  30                 	db	48
-   109  000289  00                 	db	0
-   110  00028A  42                 	db	66
-   111  00028B  57                 	db	87
-   112  00028C  30                 	db	48
-   113  00028D  30                 	db	48
-   114  00028E  00                 	db	0
-   115  00028F  42                 	db	66
-   116  000290  42                 	db	66
-   117  000291  4E                 	db	78
-   118  000292  30                 	db	48
-   119  000293  00                 	db	0
-   120  000294  42                 	db	66
-   121  000295  42                 	db	66
-   122  000296  53                 	db	83
-   123  000297  30                 	db	48
-   124  000298  00                 	db	0
-   125  000299  42                 	db	66
-   126  00029A  42                 	db	66
-   127  00029B  57                 	db	87
-   128  00029C  30                 	db	48
-   129  00029D  00                 	db	0
-   130  00029E  42                 	db	66
-   131  00029F  4E                 	db	78
-   132  0002A0  57                 	db	87
-   133  0002A1  30                 	db	48
-   134  0002A2  00                 	db	0
-   135  0002A3  42                 	db	66
-   136  0002A4  53                 	db	83
-   137  0002A5  57                 	db	87
-   138  0002A6  30                 	db	48
-   139  0002A7  00                 	db	0
-   140  0002A8  42                 	db	66
-   141  0002A9  57                 	db	87
-   142  0002AA  57                 	db	87
-   143  0002AB  30                 	db	48
-   144  0002AC  00                 	db	0
-   145  0002AD  42                 	db	66
-   146  0002AE  4E                 	db	78
-   147  0002AF  57                 	db	87
-   148  0002B0  57                 	db	87
-   149  0002B1  00                 	db	0
-   150  0002B2  42                 	db	66
-   151  0002B3  53                 	db	83
-   152  0002B4  57                 	db	87
-   153  0002B5  57                 	db	87
-   154  0002B6  00                 	db	0
-   155  0002B7  42                 	db	66
-   156  0002B8  42                 	db	66
-   157  0002B9  53                 	db	83
-   158  0002BA  57                 	db	87
-   159  0002BB  00                 	db	0
-   160  0002BC  42                 	db	66
-   161  0002BD  42                 	db	66
-   162  0002BE  4E                 	db	78
-   163  0002BF  57                 	db	87
-   164  0002C0  00                 	db	0
-   165  0002C1  42                 	db	66
-   166  0002C2  4E                 	db	78
-   167  0002C3  4E                 	db	78
-   168  0002C4  57                 	db	87
-   169  0002C5  00                 	db	0
-   170  0002C6  42                 	db	66
-   171  0002C7  4E                 	db	78
-   172  0002C8  4E                 	db	78
-   173  0002C9  4E                 	db	78
-   174  0002CA  00                 	db	0
-   175  0002CB  42                 	db	66
-   176  0002CC  57                 	db	87
-   177  0002CD  57                 	db	87
-   178  0002CE  57                 	db	87
-   179  0002CF  00                 	db	0
+    80  00014A  42                 	db	66
+    81  00014B  30                 	db	48
+    82  00014C  30                 	db	48
+    83  00014D  30                 	db	48
+    84  00014E  00                 	db	0
+    85  00014F  4E                 	db	78
+    86  000150  30                 	db	48
+    87  000151  30                 	db	48
+    88  000152  30                 	db	48
+    89  000153  00                 	db	0
+    90  000154  53                 	db	83
+    91  000155  30                 	db	48
+    92  000156  30                 	db	48
+    93  000157  30                 	db	48
+    94  000158  00                 	db	0
+    95  000159  57                 	db	87
+    96  00015A  30                 	db	48
+    97  00015B  30                 	db	48
+    98  00015C  30                 	db	48
+    99  00015D  00                 	db	0
+   100  00015E  42                 	db	66
+   101  00015F  4E                 	db	78
+   102  000160  30                 	db	48
+   103  000161  30                 	db	48
+   104  000162  00                 	db	0
+   105  000163  42                 	db	66
+   106  000164  53                 	db	83
+   107  000165  30                 	db	48
+   108  000166  30                 	db	48
+   109  000167  00                 	db	0
+   110  000168  42                 	db	66
+   111  000169  57                 	db	87
+   112  00016A  30                 	db	48
+   113  00016B  30                 	db	48
+   114  00016C  00                 	db	0
+   115  00016D  42                 	db	66
+   116  00016E  42                 	db	66
+   117  00016F  4E                 	db	78
+   118  000170  30                 	db	48
+   119  000171  00                 	db	0
+   120  000172  42                 	db	66
+   121  000173  42                 	db	66
+   122  000174  53                 	db	83
+   123  000175  30                 	db	48
+   124  000176  00                 	db	0
+   125  000177  42                 	db	66
+   126  000178  42                 	db	66
+   127  000179  57                 	db	87
+   128  00017A  30                 	db	48
+   129  00017B  00                 	db	0
+   130  00017C  42                 	db	66
+   131  00017D  4E                 	db	78
+   132  00017E  57                 	db	87
+   133  00017F  30                 	db	48
+   134  000180  00                 	db	0
+   135  000181  42                 	db	66
+   136  000182  53                 	db	83
+   137  000183  57                 	db	87
+   138  000184  30                 	db	48
+   139  000185  00                 	db	0
+   140  000186  42                 	db	66
+   141  000187  57                 	db	87
+   142  000188  57                 	db	87
+   143  000189  30                 	db	48
+   144  00018A  00                 	db	0
+   145  00018B  42                 	db	66
+   146  00018C  4E                 	db	78
+   147  00018D  57                 	db	87
+   148  00018E  57                 	db	87
+   149  00018F  00                 	db	0
+   150  000190  42                 	db	66
+   151  000191  53                 	db	83
+   152  000192  57                 	db	87
+   153  000193  57                 	db	87
+   154  000194  00                 	db	0
+   155  000195  42                 	db	66
+   156  000196  42                 	db	66
+   157  000197  53                 	db	83
+   158  000198  57                 	db	87
+   159  000199  00                 	db	0
+   160  00019A  42                 	db	66
+   161  00019B  42                 	db	66
+   162  00019C  4E                 	db	78
+   163  00019D  57                 	db	87
+   164  00019E  00                 	db	0
+   165  00019F  42                 	db	66
+   166  0001A0  4E                 	db	78
+   167  0001A1  4E                 	db	78
+   168  0001A2  57                 	db	87
+   169  0001A3  00                 	db	0
+   170  0001A4  42                 	db	66
+   171  0001A5  4E                 	db	78
+   172  0001A6  4E                 	db	78
+   173  0001A7  4E                 	db	78
+   174  0001A8  00                 	db	0
+   175  0001A9  42                 	db	66
+   176  0001AA  57                 	db	87
+   177  0001AB  57                 	db	87
+   178  0001AC  57                 	db	87
+   179  0001AD  00                 	db	0
    180                           
    181                           	psect	mediumconst
    182  00FEBA                     __pmediumconst:
@@ -296,10 +296,10 @@ Microchip Technology Omniscient Code Generator v1.45 (Free mode) build 201711160
    282  0000                     _SSPSTAT	set	4039
    283  0000                     _TRISCbits	set	3988
    284  0000                     _SSPCON1bits	set	4038
-   285  0000                     _PORTBbits	set	3969
-   286  0000                     _LATDbits	set	3980
-   287  0000                     _LATAbits	set	3977
-   288  0000                     _PORTB	set	3969
+   285  0000                     _PORTB	set	3969
+   286  0000                     _PORTBbits	set	3969
+   287  0000                     _LATDbits	set	3980
+   288  0000                     _LATAbits	set	3977
    289  0000                     _INTCONbits	set	4082
    290  0000                     _INTCON3bits	set	4080
    291  0000                     _ADCON1	set	4033
@@ -584,64 +584,64 @@ Microchip Technology Omniscient Code Generator v1.45 (Free mode) build 201711160
    570  00FFFE  00                 	db	0	; dummy byte at the end
    571  0000                     
    572                           	psect	cinit
-   573  0002D0                     __pcinit:
+   573  0001AE                     __pcinit:
    574                           	opt stack 0
-   575  0002D0                     start_initialization:
+   575  0001AE                     start_initialization:
    576                           	opt stack 0
-   577  0002D0                     __initialization:
+   577  0001AE                     __initialization:
    578                           	opt stack 0
    579                           
    580                           ; Initialize objects allocated to BANK0 (100 bytes)
    581                           ; load TBLPTR registers with __pidataBANK0
-   582  0002D0  0E6C               	movlw	low __pidataBANK0
-   583  0002D2  6EF6               	movwf	tblptrl,c
-   584  0002D4  0E02               	movlw	high __pidataBANK0
-   585  0002D6  6EF7               	movwf	tblptrh,c
-   586  0002D8  0E00               	movlw	low (__pidataBANK0 shr (0+16))
-   587  0002DA  6EF8               	movwf	tblptru,c
-   588  0002DC  EE00  F080         	lfsr	0,__pdataBANK0
-   589  0002E0  EE10 F064          	lfsr	1,100
-   590  0002E4                     copy_data0:
-   591  0002E4  0009               	tblrd		*+
-   592  0002E6  CFF5 FFEE          	movff	tablat,postinc0
-   593  0002EA  50E5               	movf	postdec1,w,c
-   594  0002EC  50E1               	movf	fsr1l,w,c
-   595  0002EE  E1FA               	bnz	copy_data0
+   582  0001AE  0E4A               	movlw	low __pidataBANK0
+   583  0001B0  6EF6               	movwf	tblptrl,c
+   584  0001B2  0E01               	movlw	high __pidataBANK0
+   585  0001B4  6EF7               	movwf	tblptrh,c
+   586  0001B6  0E00               	movlw	low (__pidataBANK0 shr (0+16))
+   587  0001B8  6EF8               	movwf	tblptru,c
+   588  0001BA  EE00  F080         	lfsr	0,__pdataBANK0
+   589  0001BE  EE10 F064          	lfsr	1,100
+   590  0001C2                     copy_data0:
+   591  0001C2  0009               	tblrd		*+
+   592  0001C4  CFF5 FFEE          	movff	tablat,postinc0
+   593  0001C8  50E5               	movf	postdec1,w,c
+   594  0001CA  50E1               	movf	fsr1l,w,c
+   595  0001CC  E1FA               	bnz	copy_data0
    596                           
    597                           ; Initialize objects allocated to COMRAM (12 bytes)
    598                           ; load TBLPTR registers with __pidataCOMRAM
-   599  0002F0  0E2A               	movlw	low __pidataCOMRAM
-   600  0002F2  6EF6               	movwf	tblptrl,c
-   601  0002F4  0E03               	movlw	high __pidataCOMRAM
-   602  0002F6  6EF7               	movwf	tblptrh,c
-   603  0002F8  0E00               	movlw	low (__pidataCOMRAM shr (0+16))
-   604  0002FA  6EF8               	movwf	tblptru,c
-   605  0002FC  EE00  F040         	lfsr	0,__pdataCOMRAM
-   606  000300  EE10 F00C          	lfsr	1,12
-   607  000304                     copy_data1:
-   608  000304  0009               	tblrd		*+
-   609  000306  CFF5 FFEE          	movff	tablat,postinc0
-   610  00030A  50E5               	movf	postdec1,w,c
-   611  00030C  50E1               	movf	fsr1l,w,c
-   612  00030E  E1FA               	bnz	copy_data1
+   599  0001CE  0E08               	movlw	low __pidataCOMRAM
+   600  0001D0  6EF6               	movwf	tblptrl,c
+   601  0001D2  0E02               	movlw	high __pidataCOMRAM
+   602  0001D4  6EF7               	movwf	tblptrh,c
+   603  0001D6  0E00               	movlw	low (__pidataCOMRAM shr (0+16))
+   604  0001D8  6EF8               	movwf	tblptru,c
+   605  0001DA  EE00  F03F         	lfsr	0,__pdataCOMRAM
+   606  0001DE  EE10 F00C          	lfsr	1,12
+   607  0001E2                     copy_data1:
+   608  0001E2  0009               	tblrd		*+
+   609  0001E4  CFF5 FFEE          	movff	tablat,postinc0
+   610  0001E8  50E5               	movf	postdec1,w,c
+   611  0001EA  50E1               	movf	fsr1l,w,c
+   612  0001EC  E1FA               	bnz	copy_data1
    613                           
    614                           ; Clear objects allocated to COMRAM (25 bytes)
-   615  000310  EE00  F027         	lfsr	0,__pbssCOMRAM
-   616  000314  0E19               	movlw	25
-   617  000316                     clear_0:
-   618  000316  6AEE               	clrf	postinc0,c
-   619  000318  06E8               	decf	wreg,f,c
-   620  00031A  E1FD               	bnz	clear_0
-   621  00031C                     end_of_initialization:
+   615  0001EE  EE00  F026         	lfsr	0,__pbssCOMRAM
+   616  0001F2  0E19               	movlw	25
+   617  0001F4                     clear_0:
+   618  0001F4  6AEE               	clrf	postinc0,c
+   619  0001F6  06E8               	decf	wreg,f,c
+   620  0001F8  E1FD               	bnz	clear_0
+   621  0001FA                     end_of_initialization:
    622                           	opt stack 0
-   623  00031C                     __end_of__initialization:
+   623  0001FA                     __end_of__initialization:
    624                           	opt stack 0
-   625  00031C  904C               	bcf	int$flags,0,c	;clear compiler interrupt flag (level 1)
-   626  00031E  924C               	bcf	int$flags,1,c	;clear compiler interrupt flag (level 2)
-   627  000320  0E00               	movlw	low (__Lmediumconst shr (0+16))
-   628  000322  6EF8               	movwf	tblptru,c
-   629  000324  0100               	movlb	0
-   630  000326  EF03  F001         	goto	_main	;jump to C main() function
+   625  0001FA  904B               	bcf	int$flags,0,c	;clear compiler interrupt flag (level 1)
+   626  0001FC  924B               	bcf	int$flags,1,c	;clear compiler interrupt flag (level 2)
+   627  0001FE  0E00               	movlw	low (__Lmediumconst shr (0+16))
+   628  000200  6EF8               	movwf	tblptru,c
+   629  000202  0100               	movlb	0
+   630  000204  EF72  F000         	goto	_main	;jump to C main() function
    631                           tblptru	equ	0xFF8
    632                           tblptrh	equ	0xFF7
    633                           tblptrl	equ	0xFF6
@@ -652,20 +652,20 @@ Microchip Technology Omniscient Code Generator v1.45 (Free mode) build 201711160
    638                           fsr1l	equ	0xFE1
    639                           
    640                           	psect	bssCOMRAM
-   641  000027                     __pbssCOMRAM:
+   641  000026                     __pbssCOMRAM:
    642                           	opt stack 0
-   643  000027                     showLogs@F3189:
+   643  000026                     showLogs@F3189:
    644                           	opt stack 0
-   645  000027                     	ds	8
-   646  00002F                     checkValid@F3158:
+   645  000026                     	ds	8
+   646  00002E                     checkValid@F3158:
    647                           	opt stack 0
-   648  00002F                     	ds	8
-   649  000037                     main@F3123:
+   648  00002E                     	ds	8
+   649  000036                     main@F3123:
    650                           	opt stack 0
-   651  000037                     	ds	8
-   652  00003F                     _LCDinterruptState:
+   651  000036                     	ds	8
+   652  00003E                     _LCDinterruptState:
    653                           	opt stack 0
-   654  00003F                     	ds	1
+   654  00003E                     	ds	1
    655                           tblptru	equ	0xFF8
    656                           tblptrh	equ	0xFF7
    657                           tblptrl	equ	0xFF6
@@ -676,14 +676,14 @@ Microchip Technology Omniscient Code Generator v1.45 (Free mode) build 201711160
    662                           fsr1l	equ	0xFE1
    663                           
    664                           	psect	dataCOMRAM
-   665  000040                     __pdataCOMRAM:
+   665  00003F                     __pdataCOMRAM:
    666                           	opt stack 0
-   667  000040                     showLogs@F3187:
+   667  00003F                     showLogs@F3187:
    668                           	opt stack 0
-   669  000040                     	ds	6
-   670  000046                     main@F3121:
+   669  00003F                     	ds	6
+   670  000045                     main@F3121:
    671                           	opt stack 0
-   672  000046                     	ds	6
+   672  000045                     	ds	6
    673                           tblptru	equ	0xFF8
    674                           tblptrh	equ	0xFF7
    675                           tblptrl	equ	0xFF6
@@ -715,647 +715,421 @@ Microchip Technology Omniscient Code Generator v1.45 (Free mode) build 201711160
    701                           
    702                           ; 1 bytes @ 0x0
    703  000001                     	ds	20
-   704  000015                     interruptHandler@keypress:
+   704  000015                     main@numRemaining:
    705                           	opt stack 0
    706                           
-   707                           ; 1 bytes @ 0x14
-   708  000015                     	ds	1
-   709  000016                     main@numRemaining:
+   707                           ; 8 bytes @ 0x14
+   708  000015                     	ds	8
+   709  00001D                     main@inputs:
    710                           	opt stack 0
    711                           
-   712                           ; 8 bytes @ 0x15
-   713  000016                     	ds	8
-   714  00001E                     main@inputs:
+   712                           ; 6 bytes @ 0x1C
+   713  00001D                     	ds	6
+   714  000023                     main@counter:
    715                           	opt stack 0
    716                           
-   717                           ; 6 bytes @ 0x1D
-   718  00001E                     	ds	6
-   719  000024                     main@counter:
+   717                           ; 2 bytes @ 0x22
+   718  000023                     	ds	2
+   719  000025                     main@pressed:
    720                           	opt stack 0
    721                           
-   722                           ; 2 bytes @ 0x23
-   723  000024                     	ds	2
-   724  000026                     main@pressed:
-   725                           	opt stack 0
-   726                           
-   727                           ; 1 bytes @ 0x25
-   728  000026                     	ds	1
-   729                           tblptru	equ	0xFF8
-   730                           tblptrh	equ	0xFF7
-   731                           tblptrl	equ	0xFF6
-   732                           tablat	equ	0xFF5
-   733                           postinc0	equ	0xFEE
-   734                           wreg	equ	0xFE8
-   735                           postdec1	equ	0xFE5
-   736                           fsr1l	equ	0xFE1
-   737                           
-   738 ;;
-   739 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
-   740 ;;
-   741 ;; *************** function _main *****************
-   742 ;; Defined at:
-   743 ;;		line 29 in file "main.c"
-   744 ;; Parameters:    Size  Location     Type
-   745 ;;		None
-   746 ;; Auto vars:     Size  Location     Type
-   747 ;;  numRemaining    8   21[COMRAM] unsigned short [4]
-   748 ;;  timeEnd         7    0        unsigned char [7]
-   749 ;;  timeStart       7    0        unsigned char [7]
-   750 ;;  inputs          6   29[COMRAM] unsigned char [6]
-   751 ;;  counter         2   35[COMRAM] int 
-   752 ;;  operationTim    2    0        unsigned short 
-   753 ;;  pressed         1   37[COMRAM] enum E3086
-   754 ;; Return value:  Size  Location     Type
-   755 ;;                  1    wreg      void 
-   756 ;; Registers used:
-   757 ;;		wreg, fsr1l, fsr1h, fsr2l, fsr2h, status,2, status,0
-   758 ;; Tracked objects:
-   759 ;;		On entry : 0/0
-   760 ;;		On exit  : 0/0
-   761 ;;		Unchanged: 0/0
-   762 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   722                           ; 1 bytes @ 0x24
+   723  000025                     	ds	1
+   724                           tblptru	equ	0xFF8
+   725                           tblptrh	equ	0xFF7
+   726                           tblptrl	equ	0xFF6
+   727                           tablat	equ	0xFF5
+   728                           postinc0	equ	0xFEE
+   729                           wreg	equ	0xFE8
+   730                           postdec1	equ	0xFE5
+   731                           fsr1l	equ	0xFE1
+   732                           
+   733 ;;
+   734 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   735 ;;
+   736 ;; *************** function _main *****************
+   737 ;; Defined at:
+   738 ;;		line 29 in file "main.c"
+   739 ;; Parameters:    Size  Location     Type
+   740 ;;		None
+   741 ;; Auto vars:     Size  Location     Type
+   742 ;;  numRemaining    8   20[COMRAM] unsigned short [4]
+   743 ;;  timeEnd         7    0        unsigned char [7]
+   744 ;;  timeStart       7    0        unsigned char [7]
+   745 ;;  inputs          6   28[COMRAM] unsigned char [6]
+   746 ;;  counter         2   34[COMRAM] int 
+   747 ;;  operationTim    2    0        unsigned short 
+   748 ;;  pressed         1   36[COMRAM] enum E3086
+   749 ;; Return value:  Size  Location     Type
+   750 ;;                  1    wreg      void 
+   751 ;; Registers used:
+   752 ;;		wreg, fsr1l, fsr1h, fsr2l, fsr2h, status,2, status,0
+   753 ;; Tracked objects:
+   754 ;;		On entry : 0/0
+   755 ;;		On exit  : 0/0
+   756 ;;		Unchanged: 0/0
+   757 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   763 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   758 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   764 ;;      Locals:        17       0       0       0       0       0       0       0       0       0       0       0       
+   759 ;;      Locals:        17       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   765 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
+   760 ;;      Temps:          0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   766 ;;      Totals:        17       0       0       0       0       0       0       0       0       0       0       0       
+   761 ;;      Totals:        17       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   767 ;;Total ram usage:       17 bytes
-   768 ;; Hardware stack levels required when called:    1
-   769 ;; This function calls:
-   770 ;;		Nothing
-   771 ;; This function is called by:
-   772 ;;		Startup code after reset
-   773 ;; This function uses a non-reentrant model
-   774 ;;
-   775                           
-   776                           	psect	text0
-   777  000206                     __ptext0:
-   778                           	opt stack 0
-   779  000206                     _main:
-   780                           	opt stack 30
-   781                           
-   782                           ;main.c: 30: unsigned char timeStart [7], timeEnd [7];
-   783                           ;main.c: 31: unsigned char inputs [6] = {'0','0','0','0','0','0'};
-   784                           
-   785                           ;incstack = 0
-   786  000206  EE20  F046         	lfsr	2,main@F3121
-   787  00020A  EE10  F01E         	lfsr	1,main@inputs
-   788  00020E  0E05               	movlw	5
-   789  000210                     u561:
-   790  000210  CFDB FFE3          	movff	plusw2,plusw1
-   791  000214  06E8               	decf	wreg,f,c
-   792  000216  E2FC               	bc	u561
-   793                           
-   794                           ;main.c: 32: unsigned short int numRemaining [4] = {0,0,0,0};
-   795  000218  EE20  F037         	lfsr	2,main@F3123
-   796  00021C  EE10  F016         	lfsr	1,main@numRemaining
-   797  000220  0E07               	movlw	7
-   798  000222                     u571:
-   799  000222  CFDB FFE3          	movff	plusw2,plusw1
-   800  000226  06E8               	decf	wreg,f,c
-   801  000228  E2FC               	bc	u571
+   762 ;;Total ram usage:       17 bytes
+   763 ;; Hardware stack levels required when called:    1
+   764 ;; This function calls:
+   765 ;;		Nothing
+   766 ;; This function is called by:
+   767 ;;		Startup code after reset
+   768 ;; This function uses a non-reentrant model
+   769 ;;
+   770                           
+   771                           	psect	text0
+   772  0000E4                     __ptext0:
+   773                           	opt stack 0
+   774  0000E4                     _main:
+   775                           	opt stack 30
+   776                           
+   777                           ;main.c: 30: unsigned char timeStart [7], timeEnd [7];
+   778                           ;main.c: 31: unsigned char inputs [6] = {'0','0','0','0','0','0'};
+   779                           
+   780                           ;incstack = 0
+   781  0000E4  EE20  F045         	lfsr	2,main@F3121
+   782  0000E8  EE10  F01D         	lfsr	1,main@inputs
+   783  0000EC  0E05               	movlw	5
+   784  0000EE                     u561:
+   785  0000EE  CFDB FFE3          	movff	plusw2,plusw1
+   786  0000F2  06E8               	decf	wreg,f,c
+   787  0000F4  E2FC               	bc	u561
+   788                           
+   789                           ;main.c: 32: unsigned short int numRemaining [4] = {0,0,0,0};
+   790  0000F6  EE20  F036         	lfsr	2,main@F3123
+   791  0000FA  EE10  F015         	lfsr	1,main@numRemaining
+   792  0000FE  0E07               	movlw	7
+   793  000100                     u571:
+   794  000100  CFDB FFE3          	movff	plusw2,plusw1
+   795  000104  06E8               	decf	wreg,f,c
+   796  000106  E2FC               	bc	u571
+   797                           
+   798                           ;main.c: 33: unsigned short int operationTime;
+   799                           ;main.c: 38: LATA = 0x00;
+   800  000108  0E00               	movlw	0
+   801  00010A  6E89               	movwf	3977,c	;volatile
    802                           
-   803                           ;main.c: 33: unsigned short int operationTime;
-   804                           ;main.c: 38: LATA = 0x00;
-   805  00022A  0E00               	movlw	0
-   806  00022C  6E89               	movwf	3977,c	;volatile
-   807                           
-   808                           ;main.c: 39: LATB = 0x00;
-   809  00022E  0E00               	movlw	0
-   810  000230  6E8A               	movwf	3978,c	;volatile
-   811                           
-   812                           ;main.c: 40: LATC = 0x00;
-   813  000232  0E00               	movlw	0
-   814  000234  6E8B               	movwf	3979,c	;volatile
-   815                           
-   816                           ;main.c: 41: LATD = 0x00;
-   817  000236  0E00               	movlw	0
-   818  000238  6E8C               	movwf	3980,c	;volatile
-   819                           
-   820                           ;main.c: 42: LATE = 0x00;
-   821  00023A  0E00               	movlw	0
-   822  00023C  6E8D               	movwf	3981,c	;volatile
-   823                           
-   824                           ;main.c: 46: TRISA = 0x00;
-   825  00023E  0E00               	movlw	0
-   826  000240  6E92               	movwf	3986,c	;volatile
-   827                           
-   828                           ;main.c: 47: TRISB = 0xFF;
-   829  000242  6893               	setf	3987,c	;volatile
-   830                           
-   831                           ;main.c: 48: TRISC = 0xE0;
-   832  000244  0EE0               	movlw	224
-   833  000246  6E94               	movwf	3988,c	;volatile
-   834                           
-   835                           ;main.c: 49: TRISD = 0x00;
-   836  000248  0E00               	movlw	0
-   837  00024A  6E95               	movwf	3989,c	;volatile
-   838                           
-   839                           ;main.c: 50: TRISE = 0x00;
-   840  00024C  0E00               	movlw	0
-   841  00024E  6E96               	movwf	3990,c	;volatile
-   842                           
-   843                           ;main.c: 53: ADCON0 = 0x00;
-   844  000250  0E00               	movlw	0
-   845  000252  6EC2               	movwf	4034,c	;volatile
-   846                           
-   847                           ;main.c: 54: ADCON1 = 0b00001111;
-   848  000254  0E0F               	movlw	15
-   849  000256  6EC1               	movwf	4033,c	;volatile
-   850                           
-   851                           ;main.c: 70: boolean pressed = false;
-   852  000258  0E00               	movlw	0
-   853  00025A  6E26               	movwf	main@pressed,c
-   854                           
-   855                           ;main.c: 71: int counter = 0;
-   856  00025C  0E00               	movlw	0
-   857  00025E  6E25               	movwf	main@counter+1,c
-   858  000260  0E00               	movlw	0
-   859  000262  6E24               	movwf	main@counter,c
-   860                           
-   861                           ;main.c: 75: INTCON3bits.INT1IE = 1;
-   862  000264  86F0               	bsf	intcon3,3,c	;volatile
-   863                           
-   864                           ;main.c: 76: (INTCONbits.GIE = 1);
-   865  000266  8EF2               	bsf	intcon,7,c	;volatile
-   866  000268  EF07  F000         	goto	start
-   867  00026C                     __end_of_main:
-   868                           	opt stack 0
-   869                           tblptru	equ	0xFF8
-   870                           tblptrh	equ	0xFF7
-   871                           tblptrl	equ	0xFF6
-   872                           tablat	equ	0xFF5
-   873                           intcon	equ	0xFF2
-   874                           intcon3	equ	0xFF0
-   875                           postinc0	equ	0xFEE
-   876                           wreg	equ	0xFE8
-   877                           postdec1	equ	0xFE5
-   878                           plusw1	equ	0xFE3
-   879                           fsr1l	equ	0xFE1
-   880                           plusw2	equ	0xFDB
-   881                           
-   882 ;; *************** function _interruptHandler *****************
-   883 ;; Defined at:
-   884 ;;		line 96 in file "main.c"
-   885 ;; Parameters:    Size  Location     Type
-   886 ;;		None
-   887 ;; Auto vars:     Size  Location     Type
-   888 ;;  keypress        1   20[COMRAM] unsigned char 
-   889 ;; Return value:  Size  Location     Type
-   890 ;;                  1    wreg      void 
-   891 ;; Registers used:
-   892 ;;		wreg, status,2, status,0, tblptrl, tblptrh, tblptru, prodl, prodh
-   893 ;; Tracked objects:
-   894 ;;		On entry : 0/0
-   895 ;;		On exit  : 0/0
-   896 ;;		Unchanged: 0/0
-   897 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
+   803                           ;main.c: 39: LATB = 0x00;
+   804  00010C  0E00               	movlw	0
+   805  00010E  6E8A               	movwf	3978,c	;volatile
+   806                           
+   807                           ;main.c: 40: LATC = 0x00;
+   808  000110  0E00               	movlw	0
+   809  000112  6E8B               	movwf	3979,c	;volatile
+   810                           
+   811                           ;main.c: 41: LATD = 0x00;
+   812  000114  0E00               	movlw	0
+   813  000116  6E8C               	movwf	3980,c	;volatile
+   814                           
+   815                           ;main.c: 42: LATE = 0x00;
+   816  000118  0E00               	movlw	0
+   817  00011A  6E8D               	movwf	3981,c	;volatile
+   818                           
+   819                           ;main.c: 46: TRISA = 0x00;
+   820  00011C  0E00               	movlw	0
+   821  00011E  6E92               	movwf	3986,c	;volatile
+   822                           
+   823                           ;main.c: 47: TRISB = 0xFF;
+   824  000120  6893               	setf	3987,c	;volatile
+   825                           
+   826                           ;main.c: 48: TRISC = 0xE0;
+   827  000122  0EE0               	movlw	224
+   828  000124  6E94               	movwf	3988,c	;volatile
+   829                           
+   830                           ;main.c: 49: TRISD = 0x00;
+   831  000126  0E00               	movlw	0
+   832  000128  6E95               	movwf	3989,c	;volatile
+   833                           
+   834                           ;main.c: 50: TRISE = 0x00;
+   835  00012A  0E00               	movlw	0
+   836  00012C  6E96               	movwf	3990,c	;volatile
+   837                           
+   838                           ;main.c: 53: ADCON0 = 0x00;
+   839  00012E  0E00               	movlw	0
+   840  000130  6EC2               	movwf	4034,c	;volatile
+   841                           
+   842                           ;main.c: 54: ADCON1 = 0b00001111;
+   843  000132  0E0F               	movlw	15
+   844  000134  6EC1               	movwf	4033,c	;volatile
+   845                           
+   846                           ;main.c: 70: boolean pressed = false;
+   847  000136  0E00               	movlw	0
+   848  000138  6E25               	movwf	main@pressed,c
+   849                           
+   850                           ;main.c: 71: int counter = 0;
+   851  00013A  0E00               	movlw	0
+   852  00013C  6E24               	movwf	main@counter+1,c
+   853  00013E  0E00               	movlw	0
+   854  000140  6E23               	movwf	main@counter,c
+   855                           
+   856                           ;main.c: 75: INTCON3bits.INT1IE = 1;
+   857  000142  86F0               	bsf	intcon3,3,c	;volatile
+   858                           
+   859                           ;main.c: 76: (INTCONbits.GIE = 1);
+   860  000144  8EF2               	bsf	intcon,7,c	;volatile
+   861  000146  EF07  F000         	goto	start
+   862  00014A                     __end_of_main:
+   863                           	opt stack 0
+   864                           tblptru	equ	0xFF8
+   865                           tblptrh	equ	0xFF7
+   866                           tblptrl	equ	0xFF6
+   867                           tablat	equ	0xFF5
+   868                           intcon	equ	0xFF2
+   869                           intcon3	equ	0xFF0
+   870                           postinc0	equ	0xFEE
+   871                           wreg	equ	0xFE8
+   872                           postdec1	equ	0xFE5
+   873                           plusw1	equ	0xFE3
+   874                           fsr1l	equ	0xFE1
+   875                           plusw2	equ	0xFDB
+   876                           
+   877 ;; *************** function _interruptHandler *****************
+   878 ;; Defined at:
+   879 ;;		line 96 in file "main.c"
+   880 ;; Parameters:    Size  Location     Type
+   881 ;;		None
+   882 ;; Auto vars:     Size  Location     Type
+   883 ;;		None
+   884 ;; Return value:  Size  Location     Type
+   885 ;;                  1    wreg      void 
+   886 ;; Registers used:
+   887 ;;		wreg, status,2, status,0
+   888 ;; Tracked objects:
+   889 ;;		On entry : 0/0
+   890 ;;		On exit  : 0/0
+   891 ;;		Unchanged: 0/0
+   892 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7   BANK8   BANK9  BANK10  BANK1
       +1  BANK12  BANK13  BANK14  BANK15
-   898 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
+   893 ;;      Params:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   899 ;;      Locals:         1       0       0       0       0       0       0       0       0       0       0       0       
+   894 ;;      Locals:         0       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   900 ;;      Temps:         20       0       0       0       0       0       0       0       0       0       0       0       
+   895 ;;      Temps:         20       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   901 ;;      Totals:        21       0       0       0       0       0       0       0       0       0       0       0       
+   896 ;;      Totals:        20       0       0       0       0       0       0       0       0       0       0       0       
       +0       0       0       0       0
-   902 ;;Total ram usage:       21 bytes
-   903 ;; Hardware stack levels used:    1
-   904 ;; This function calls:
-   905 ;;		Nothing
-   906 ;; This function is called by:
-   907 ;;		Interrupt level 2
-   908 ;; This function uses a non-reentrant model
-   909 ;;
-   910                           
-   911                           	psect	intcode
-   912  000008                     __pintcode:
-   913                           	opt stack 0
-   914  000008                     _interruptHandler:
-   915                           	opt stack 30
-   916                           
-   917                           ;incstack = 0
-   918  000008  824C               	bsf	btemp,1,c	;set compiler interrupt flag (level 2)
-   919  00000A  ED09  F000         	call	int_func,f	;refresh shadow registers
-   920                           tblptru	equ	0xFF8
-   921                           tblptrh	equ	0xFF7
-   922                           tblptrl	equ	0xFF6
-   923                           tablat	equ	0xFF5
-   924                           intcon	equ	0xFF2
-   925                           intcon3	equ	0xFF0
-   926                           postinc0	equ	0xFEE
-   927                           wreg	equ	0xFE8
-   928                           postdec1	equ	0xFE5
-   929                           plusw1	equ	0xFE3
-   930                           fsr1l	equ	0xFE1
-   931                           plusw2	equ	0xFDB
-   932                           
-   933                           	psect	intcode_body
-   934  000012                     __pintcode_body:
-   935                           	opt stack 30
-   936  000012                     int_func:
-   937                           	opt stack 30
-   938  000012  0006               	pop		; remove dummy address from shadow register refresh
-   939  000014  CFFA F003          	movff	pclath,??_interruptHandler+2
-   940  000018  CFFB F004          	movff	pclatu,??_interruptHandler+3
-   941  00001C  CFE9 F005          	movff	fsr0l,??_interruptHandler+4
-   942  000020  CFEA F006          	movff	fsr0h,??_interruptHandler+5
-   943  000024  CFE1 F007          	movff	fsr1l,??_interruptHandler+6
-   944  000028  CFE2 F008          	movff	fsr1h,??_interruptHandler+7
-   945  00002C  CFD9 F009          	movff	fsr2l,??_interruptHandler+8
-   946  000030  CFDA F00A          	movff	fsr2h,??_interruptHandler+9
-   947  000034  CFF3 F00B          	movff	prodl,??_interruptHandler+10
-   948  000038  CFF4 F00C          	movff	prodh,??_interruptHandler+11
-   949  00003C  CFF6 F00D          	movff	tblptrl,??_interruptHandler+12
-   950  000040  CFF7 F00E          	movff	tblptrh,??_interruptHandler+13
-   951  000044  CFF8 F00F          	movff	tblptru,??_interruptHandler+14
-   952  000048  CFF5 F010          	movff	tablat,??_interruptHandler+15
-   953  00004C  C04C  F011         	movff	btemp,??_interruptHandler+16
-   954  000050  C04D  F012         	movff	btemp+1,??_interruptHandler+17
-   955  000054  C04E  F013         	movff	btemp+2,??_interruptHandler+18
-   956  000058  C04F  F014         	movff	btemp+3,??_interruptHandler+19
+   897 ;;Total ram usage:       20 bytes
+   898 ;; Hardware stack levels used:    1
+   899 ;; This function calls:
+   900 ;;		Nothing
+   901 ;; This function is called by:
+   902 ;;		Interrupt level 2
+   903 ;; This function uses a non-reentrant model
+   904 ;;
+   905                           
+   906                           	psect	intcode
+   907  000008                     __pintcode:
+   908                           	opt stack 0
+   909  000008                     _interruptHandler:
+   910                           	opt stack 30
+   911                           
+   912                           ;incstack = 0
+   913  000008  824B               	bsf	btemp,1,c	;set compiler interrupt flag (level 2)
+   914  00000A  ED09  F000         	call	int_func,f	;refresh shadow registers
+   915                           tblptru	equ	0xFF8
+   916                           tblptrh	equ	0xFF7
+   917                           tblptrl	equ	0xFF6
+   918                           tablat	equ	0xFF5
+   919                           intcon	equ	0xFF2
+   920                           intcon3	equ	0xFF0
+   921                           postinc0	equ	0xFEE
+   922                           wreg	equ	0xFE8
+   923                           postdec1	equ	0xFE5
+   924                           plusw1	equ	0xFE3
+   925                           fsr1l	equ	0xFE1
+   926                           plusw2	equ	0xFDB
+   927                           
+   928                           	psect	intcode_body
+   929  000012                     __pintcode_body:
+   930                           	opt stack 30
+   931  000012                     int_func:
+   932                           	opt stack 30
+   933  000012  0006               	pop		; remove dummy address from shadow register refresh
+   934  000014  CFFA F003          	movff	pclath,??_interruptHandler+2
+   935  000018  CFFB F004          	movff	pclatu,??_interruptHandler+3
+   936  00001C  CFE9 F005          	movff	fsr0l,??_interruptHandler+4
+   937  000020  CFEA F006          	movff	fsr0h,??_interruptHandler+5
+   938  000024  CFE1 F007          	movff	fsr1l,??_interruptHandler+6
+   939  000028  CFE2 F008          	movff	fsr1h,??_interruptHandler+7
+   940  00002C  CFD9 F009          	movff	fsr2l,??_interruptHandler+8
+   941  000030  CFDA F00A          	movff	fsr2h,??_interruptHandler+9
+   942  000034  CFF3 F00B          	movff	prodl,??_interruptHandler+10
+   943  000038  CFF4 F00C          	movff	prodh,??_interruptHandler+11
+   944  00003C  CFF6 F00D          	movff	tblptrl,??_interruptHandler+12
+   945  000040  CFF7 F00E          	movff	tblptrh,??_interruptHandler+13
+   946  000044  CFF8 F00F          	movff	tblptru,??_interruptHandler+14
+   947  000048  CFF5 F010          	movff	tablat,??_interruptHandler+15
+   948  00004C  C04B  F011         	movff	btemp,??_interruptHandler+16
+   949  000050  C04C  F012         	movff	btemp+1,??_interruptHandler+17
+   950  000054  C04D  F013         	movff	btemp+2,??_interruptHandler+18
+   951  000058  C04E  F014         	movff	btemp+3,??_interruptHandler+19
+   952                           
+   953                           ;main.c: 98: if (INT1IE && INT1IF){
+   954  00005C  B6F0               	btfsc	intcon3,3,c	;volatile
+   955  00005E  A0F0               	btfss	intcon3,0,c	;volatile
+   956  000060  D01B               	goto	i2l67
    957                           
-   958                           ;main.c: 98: if (INT1IE && INT1IF){
-   959  00005C  B6F0               	btfsc	intcon3,3,c	;volatile
-   960  00005E  A0F0               	btfss	intcon3,0,c	;volatile
-   961  000060  D0AC               	goto	i2l69
-   962                           
-   963                           ;main.c: 99: unsigned char keypress = (PORTB & 0xF0) >> 4;
-   964  000062  3881               	swapf	3969,w,c	;volatile
-   965  000064  0B0F               	andlw	15
-   966  000066  0B0F               	andlw	15
-   967  000068  6E15               	movwf	interruptHandler@keypress,c
-   968                           
-   969                           ;main.c: 100: switch (keys[keypress]){
-   970  00006A  D036               	goto	i2l70
-   971  00006C                     
-   972                           ;main.c: 102: LATAbits.LA0 = ~LATAbits.LA0;
-   973  00006C  A089               	btfss	3977,0,c	;volatile
-   974  00006E  D02B               	goto	L9
-   975  000070                     i2u60_41:
-   976  000070  0E01               	movlw	1
-   977  000072  D02A               	goto	i2u64_46
-   978  000074                     
-   979                           ;main.c: 105: LATAbits.LA1 = ~LATAbits.LA1;
-   980  000074  A289               	btfss	3977,1,c	;volatile
-   981  000076  D002               	goto	i2u61_40
-   982  000078  0E01               	movlw	1
-   983  00007A  D001               	goto	i2u61_46
-   984  00007C                     i2u61_40:
-   985  00007C  0E00               	movlw	0
-   986  00007E                     i2u61_46:
-   987  00007E  0AFF               	xorlw	255
-   988  000080  6E01               	movwf	??_interruptHandler& (0+255),c
-   989  000082  4601               	rlncf	??_interruptHandler,f,c
-   990  000084  5089               	movf	3977,w,c	;volatile
-   991  000086  1801               	xorwf	??_interruptHandler,w,c
-   992  000088  0BFD               	andlw	-3
-   993  00008A  D023               	goto	L8
-   994  00008C                     
-   995                           ;main.c: 108: LATAbits.LA2 = ~LATAbits.LA2;
-   996  00008C  A489               	btfss	3977,2,c	;volatile
-   997  00008E  D002               	goto	i2u62_40
-   998  000090  0E01               	movlw	1
-   999  000092  D001               	goto	i2u62_46
-  1000  000094                     i2u62_40:
-  1001  000094  0E00               	movlw	0
-  1002  000096                     i2u62_46:
-  1003  000096  0AFF               	xorlw	255
-  1004  000098  6E01               	movwf	??_interruptHandler& (0+255),c
-  1005  00009A  4601               	rlncf	??_interruptHandler,f,c
-  1006  00009C  4601               	rlncf	??_interruptHandler,f,c
-  1007  00009E  5089               	movf	3977,w,c	;volatile
-  1008  0000A0  1801               	xorwf	??_interruptHandler,w,c
-  1009  0000A2  0BFB               	andlw	-5
-  1010  0000A4  D016               	goto	L8
-  1011  0000A6                     
-  1012                           ;main.c: 111: LATAbits.LA3 = ~LATAbits.LA3;
-  1013  0000A6  A689               	btfss	3977,3,c	;volatile
-  1014  0000A8  D002               	goto	i2u63_40
-  1015  0000AA  0E01               	movlw	1
-  1016  0000AC  D001               	goto	i2u63_46
-  1017  0000AE                     i2u63_40:
-  1018  0000AE  0E00               	movlw	0
-  1019  0000B0                     i2u63_46:
-  1020  0000B0  0AFF               	xorlw	255
-  1021  0000B2  6E01               	movwf	??_interruptHandler& (0+255),c
-  1022  0000B4  4601               	rlncf	??_interruptHandler,f,c
-  1023  0000B6  4601               	rlncf	??_interruptHandler,f,c
-  1024  0000B8  4601               	rlncf	??_interruptHandler,f,c
-  1025  0000BA  5089               	movf	3977,w,c	;volatile
-  1026  0000BC  1801               	xorwf	??_interruptHandler,w,c
-  1027  0000BE  0BF7               	andlw	-9
-  1028  0000C0  D008               	goto	L8
-  1029  0000C2                     
-  1030                           ;main.c: 114: LATAbits.LA0 = ~LATAbits.LA0;
-  1031  0000C2  B089               	btfsc	3977,0,c	;volatile
-  1032  0000C4  D7D5               	goto	i2u60_41
-  1033  0000C6                     L9:
-  1034  0000C6  0E00               	movlw	0
-  1035  0000C8                     i2u64_46:
-  1036  0000C8  0AFF               	xorlw	255
-  1037  0000CA  6E01               	movwf	??_interruptHandler& (0+255),c
-  1038  0000CC  5089               	movf	3977,w,c	;volatile
-  1039  0000CE  1801               	xorwf	??_interruptHandler,w,c
-  1040  0000D0  0BFE               	andlw	-2
-  1041  0000D2                     L8:
-  1042  0000D2  1801               	xorwf	??_interruptHandler,w,c
-  1043  0000D4  6E89               	movwf	3977,c	;volatile
-  1044                           
-  1045                           ;main.c: 116: }
-  1046                           
-  1047                           ;main.c: 115: break;
-  1048  0000D6  D017               	goto	i2l72
-  1049  0000D8                     i2l70:
-  1050  0000D8  5015               	movf	interruptHandler@keypress,w,c
-  1051  0000DA  0D01               	mullw	1
-  1052  0000DC  0EBB               	movlw	low _keys
-  1053  0000DE  24F3               	addwf	prodl,w,c
-  1054  0000E0  6EF6               	movwf	tblptrl,c
-  1055  0000E2  0EFE               	movlw	high _keys
-  1056  0000E4  20F4               	addwfc	prodh,w,c
-  1057  0000E6  6EF7               	movwf	tblptrh,c
-  1058  0000E8                     	if	0	;There are less than 3 active tblptr bytes
-  1059  0000E8                     	endif
-  1060  0000E8  0008               	tblrd		*
-  1061  0000EA  50F5               	movf	tablat,w,c
-  1062                           
-  1063                           ; Switch size 1, requested type "space"
-  1064                           ; Number of cases is 4, Range of values is 49 to 52
-  1065                           ; switch strategies available:
-  1066                           ; Name         Instructions Cycles
-  1067                           ; simple_byte           13     7 (average)
-  1068                           ;	Chosen strategy is simple_byte
-  1069  0000EC  0A31               	xorlw	49	; case 49
-  1070  0000EE  B4D8               	btfsc	status,2,c
-  1071  0000F0  D7BD               	goto	i2l71
-  1072  0000F2  0A03               	xorlw	3	; case 50
-  1073  0000F4  B4D8               	btfsc	status,2,c
-  1074  0000F6  D7BE               	goto	i2l73
-  1075  0000F8  0A01               	xorlw	1	; case 51
-  1076  0000FA  B4D8               	btfsc	status,2,c
-  1077  0000FC  D7C7               	goto	i2l74
-  1078  0000FE  0A07               	xorlw	7	; case 52
-  1079  000100  B4D8               	btfsc	status,2,c
-  1080  000102  D7D1               	goto	i2l75
-  1081  000104  D7DE               	goto	i2l76
-  1082  000106                     i2l72:
-  1083                           
-  1084                           ;main.c: 117: _delay((unsigned long)((150)*(40000000/4000.0)));
-  1085  000106  0E08               	movlw	8
-  1086  000108  6E02               	movwf	(??_interruptHandler+1)& (0+255),c
-  1087  00010A  0E9D               	movlw	157
-  1088  00010C  6E01               	movwf	??_interruptHandler& (0+255),c
-  1089  00010E  0E06               	movlw	6
-  1090  000110                     i2u137_47:
-  1091  000110  2EE8               	decfsz	wreg,f,c
-  1092  000112  D7FE               	bra	i2u137_47
-  1093  000114  2E01               	decfsz	??_interruptHandler& (0+255),f,c
-  1094  000116  D7FC               	bra	i2u137_47
-  1095  000118  2E02               	decfsz	(??_interruptHandler+1)& (0+255),f,c
-  1096  00011A  D7FA               	bra	i2u137_47
-  1097                           
-  1098                           ;main.c: 118: switch (keys[keypress]){
-  1099  00011C  D036               	goto	i2l77
-  1100  00011E                     
-  1101                           ;main.c: 120: LATAbits.LA0 = ~LATAbits.LA0;
-  1102  00011E  A089               	btfss	3977,0,c	;volatile
-  1103  000120  D02B               	goto	L10
-  1104  000122                     i2u65_41:
-  1105  000122  0E01               	movlw	1
-  1106  000124  D02A               	goto	i2u69_46
-  1107  000126                     
-  1108                           ;main.c: 123: LATAbits.LA1 = ~LATAbits.LA1;
-  1109  000126  A289               	btfss	3977,1,c	;volatile
-  1110  000128  D002               	goto	i2u66_40
-  1111  00012A  0E01               	movlw	1
-  1112  00012C  D001               	goto	i2u66_46
-  1113  00012E                     i2u66_40:
-  1114  00012E  0E00               	movlw	0
-  1115  000130                     i2u66_46:
-  1116  000130  0AFF               	xorlw	255
-  1117  000132  6E01               	movwf	??_interruptHandler& (0+255),c
-  1118  000134  4601               	rlncf	??_interruptHandler,f,c
-  1119  000136  5089               	movf	3977,w,c	;volatile
-  1120  000138  1801               	xorwf	??_interruptHandler,w,c
-  1121  00013A  0BFD               	andlw	-3
-  1122  00013C  D023               	goto	L4
-  1123  00013E                     
-  1124                           ;main.c: 126: LATAbits.LA2 = ~LATAbits.LA2;
-  1125  00013E  A489               	btfss	3977,2,c	;volatile
-  1126  000140  D002               	goto	i2u67_40
-  1127  000142  0E01               	movlw	1
-  1128  000144  D001               	goto	i2u67_46
-  1129  000146                     i2u67_40:
-  1130  000146  0E00               	movlw	0
-  1131  000148                     i2u67_46:
-  1132  000148  0AFF               	xorlw	255
-  1133  00014A  6E01               	movwf	??_interruptHandler& (0+255),c
-  1134  00014C  4601               	rlncf	??_interruptHandler,f,c
-  1135  00014E  4601               	rlncf	??_interruptHandler,f,c
-  1136  000150  5089               	movf	3977,w,c	;volatile
-  1137  000152  1801               	xorwf	??_interruptHandler,w,c
-  1138  000154  0BFB               	andlw	-5
-  1139  000156  D016               	goto	L4
-  1140  000158                     
-  1141                           ;main.c: 129: LATAbits.LA3 = ~LATAbits.LA3;
-  1142  000158  A689               	btfss	3977,3,c	;volatile
-  1143  00015A  D002               	goto	i2u68_40
-  1144  00015C  0E01               	movlw	1
-  1145  00015E  D001               	goto	i2u68_46
-  1146  000160                     i2u68_40:
-  1147  000160  0E00               	movlw	0
-  1148  000162                     i2u68_46:
-  1149  000162  0AFF               	xorlw	255
-  1150  000164  6E01               	movwf	??_interruptHandler& (0+255),c
-  1151  000166  4601               	rlncf	??_interruptHandler,f,c
-  1152  000168  4601               	rlncf	??_interruptHandler,f,c
-  1153  00016A  4601               	rlncf	??_interruptHandler,f,c
-  1154  00016C  5089               	movf	3977,w,c	;volatile
-  1155  00016E  1801               	xorwf	??_interruptHandler,w,c
-  1156  000170  0BF7               	andlw	-9
-  1157  000172  D008               	goto	L4
-  1158  000174                     
-  1159                           ;main.c: 132: LATAbits.LA0 = ~LATAbits.LA0;
-  1160  000174  B089               	btfsc	3977,0,c	;volatile
-  1161  000176  D7D5               	goto	i2u65_41
-  1162  000178                     L10:
-  1163  000178  0E00               	movlw	0
-  1164  00017A                     i2u69_46:
-  1165  00017A  0AFF               	xorlw	255
-  1166  00017C  6E01               	movwf	??_interruptHandler& (0+255),c
-  1167  00017E  5089               	movf	3977,w,c	;volatile
-  1168  000180  1801               	xorwf	??_interruptHandler,w,c
-  1169  000182  0BFE               	andlw	-2
-  1170  000184                     L4:
-  1171  000184  1801               	xorwf	??_interruptHandler,w,c
-  1172  000186  6E89               	movwf	3977,c	;volatile
-  1173                           
-  1174                           ;main.c: 134: }
-  1175                           
-  1176                           ;main.c: 133: break;
-  1177  000188  D017               	goto	i2l79
-  1178  00018A                     i2l77:
-  1179  00018A  5015               	movf	interruptHandler@keypress,w,c
-  1180  00018C  0D01               	mullw	1
-  1181  00018E  0EBB               	movlw	low _keys
-  1182  000190  24F3               	addwf	prodl,w,c
-  1183  000192  6EF6               	movwf	tblptrl,c
-  1184  000194  0EFE               	movlw	high _keys
-  1185  000196  20F4               	addwfc	prodh,w,c
-  1186  000198  6EF7               	movwf	tblptrh,c
-  1187  00019A                     	if	0	;There are less than 3 active tblptr bytes
-  1188  00019A                     	endif
-  1189  00019A  0008               	tblrd		*
-  1190  00019C  50F5               	movf	tablat,w,c
-  1191                           
-  1192                           ; Switch size 1, requested type "space"
-  1193                           ; Number of cases is 4, Range of values is 49 to 52
-  1194                           ; switch strategies available:
-  1195                           ; Name         Instructions Cycles
-  1196                           ; simple_byte           13     7 (average)
-  1197                           ;	Chosen strategy is simple_byte
-  1198  00019E  0A31               	xorlw	49	; case 49
-  1199  0001A0  B4D8               	btfsc	status,2,c
-  1200  0001A2  D7BD               	goto	i2l78
-  1201  0001A4  0A03               	xorlw	3	; case 50
-  1202  0001A6  B4D8               	btfsc	status,2,c
-  1203  0001A8  D7BE               	goto	i2l80
-  1204  0001AA  0A01               	xorlw	1	; case 51
-  1205  0001AC  B4D8               	btfsc	status,2,c
-  1206  0001AE  D7C7               	goto	i2l81
-  1207  0001B0  0A07               	xorlw	7	; case 52
-  1208  0001B2  B4D8               	btfsc	status,2,c
-  1209  0001B4  D7D1               	goto	i2l82
-  1210  0001B6  D7DE               	goto	i2l83
-  1211  0001B8                     i2l79:
-  1212                           
-  1213                           ;main.c: 136: INT1IF = 0;
-  1214  0001B8  90F0               	bcf	intcon3,0,c	;volatile
-  1215  0001BA                     i2l69:
-  1216  0001BA  C014  F04F         	movff	??_interruptHandler+19,btemp+3
-  1217  0001BE  C013  F04E         	movff	??_interruptHandler+18,btemp+2
-  1218  0001C2  C012  F04D         	movff	??_interruptHandler+17,btemp+1
-  1219  0001C6  C011  F04C         	movff	??_interruptHandler+16,btemp
-  1220  0001CA  C010  FFF5         	movff	??_interruptHandler+15,tablat
-  1221  0001CE  C00F  FFF8         	movff	??_interruptHandler+14,tblptru
-  1222  0001D2  C00E  FFF7         	movff	??_interruptHandler+13,tblptrh
-  1223  0001D6  C00D  FFF6         	movff	??_interruptHandler+12,tblptrl
-  1224  0001DA  C00C  FFF4         	movff	??_interruptHandler+11,prodh
-  1225  0001DE  C00B  FFF3         	movff	??_interruptHandler+10,prodl
-  1226  0001E2  C00A  FFDA         	movff	??_interruptHandler+9,fsr2h
-  1227  0001E6  C009  FFD9         	movff	??_interruptHandler+8,fsr2l
-  1228  0001EA  C008  FFE2         	movff	??_interruptHandler+7,fsr1h
-  1229  0001EE  C007  FFE1         	movff	??_interruptHandler+6,fsr1l
-  1230  0001F2  C006  FFEA         	movff	??_interruptHandler+5,fsr0h
-  1231  0001F6  C005  FFE9         	movff	??_interruptHandler+4,fsr0l
-  1232  0001FA  C004  FFFB         	movff	??_interruptHandler+3,pclatu
-  1233  0001FE  C003  FFFA         	movff	??_interruptHandler+2,pclath
-  1234  000202  924C               	bcf	btemp,1,c	;clear compiler interrupt flag (level 2)
-  1235  000204  0011               	retfie		f
-  1236  000206                     __end_of_interruptHandler:
-  1237                           	opt stack 0
-  1238                           pclatu	equ	0xFFB
-  1239                           pclath	equ	0xFFA
-  1240                           tblptru	equ	0xFF8
-  1241                           tblptrh	equ	0xFF7
-  1242                           tblptrl	equ	0xFF6
-  1243                           tablat	equ	0xFF5
-  1244                           prodh	equ	0xFF4
-  1245                           prodl	equ	0xFF3
-  1246                           intcon	equ	0xFF2
-  1247                           intcon3	equ	0xFF0
-  1248                           postinc0	equ	0xFEE
-  1249                           fsr0h	equ	0xFEA
-  1250                           fsr0l	equ	0xFE9
-  1251                           wreg	equ	0xFE8
-  1252                           postdec1	equ	0xFE5
-  1253                           plusw1	equ	0xFE3
-  1254                           fsr1h	equ	0xFE2
-  1255                           fsr1l	equ	0xFE1
-  1256                           plusw2	equ	0xFDB
-  1257                           fsr2h	equ	0xFDA
-  1258                           fsr2l	equ	0xFD9
-  1259                           status	equ	0xFD8
-  1260                           pclatu	equ	0xFFB
-  1261                           pclath	equ	0xFFA
-  1262                           tblptru	equ	0xFF8
-  1263                           tblptrh	equ	0xFF7
-  1264                           tblptrl	equ	0xFF6
-  1265                           tablat	equ	0xFF5
-  1266                           prodh	equ	0xFF4
-  1267                           prodl	equ	0xFF3
-  1268                           intcon	equ	0xFF2
-  1269                           intcon3	equ	0xFF0
-  1270                           postinc0	equ	0xFEE
-  1271                           fsr0h	equ	0xFEA
-  1272                           fsr0l	equ	0xFE9
-  1273                           wreg	equ	0xFE8
-  1274                           postdec1	equ	0xFE5
-  1275                           plusw1	equ	0xFE3
-  1276                           fsr1h	equ	0xFE2
-  1277                           fsr1l	equ	0xFE1
-  1278                           plusw2	equ	0xFDB
-  1279                           fsr2h	equ	0xFDA
-  1280                           fsr2l	equ	0xFD9
-  1281                           status	equ	0xFD8
-  1282                           
-  1283                           	psect	rparam
-  1284  0000                     pclatu	equ	0xFFB
-  1285                           pclath	equ	0xFFA
-  1286                           tblptru	equ	0xFF8
-  1287                           tblptrh	equ	0xFF7
-  1288                           tblptrl	equ	0xFF6
-  1289                           tablat	equ	0xFF5
-  1290                           prodh	equ	0xFF4
-  1291                           prodl	equ	0xFF3
-  1292                           intcon	equ	0xFF2
-  1293                           intcon3	equ	0xFF0
-  1294                           postinc0	equ	0xFEE
-  1295                           fsr0h	equ	0xFEA
-  1296                           fsr0l	equ	0xFE9
-  1297                           wreg	equ	0xFE8
-  1298                           postdec1	equ	0xFE5
-  1299                           plusw1	equ	0xFE3
-  1300                           fsr1h	equ	0xFE2
-  1301                           fsr1l	equ	0xFE1
-  1302                           plusw2	equ	0xFDB
-  1303                           fsr2h	equ	0xFDA
-  1304                           fsr2l	equ	0xFD9
-  1305                           status	equ	0xFD8
-  1306                           
-  1307                           	psect	temp
-  1308  00004C                     btemp:
-  1309                           	opt stack 0
-  1310  00004C                     	ds	1
-  1311  0000                     int$flags	set	btemp
-  1312  0000                     wtemp6	set	btemp+1
-  1313                           pclatu	equ	0xFFB
-  1314                           pclath	equ	0xFFA
-  1315                           tblptru	equ	0xFF8
-  1316                           tblptrh	equ	0xFF7
-  1317                           tblptrl	equ	0xFF6
-  1318                           tablat	equ	0xFF5
-  1319                           prodh	equ	0xFF4
-  1320                           prodl	equ	0xFF3
-  1321                           intcon	equ	0xFF2
-  1322                           intcon3	equ	0xFF0
-  1323                           postinc0	equ	0xFEE
-  1324                           fsr0h	equ	0xFEA
-  1325                           fsr0l	equ	0xFE9
-  1326                           wreg	equ	0xFE8
-  1327                           postdec1	equ	0xFE5
-  1328                           plusw1	equ	0xFE3
-  1329                           fsr1h	equ	0xFE2
-  1330                           fsr1l	equ	0xFE1
-  1331                           plusw2	equ	0xFDB
-  1332                           fsr2h	equ	0xFDA
-  1333                           fsr2l	equ	0xFD9
-  1334                           status	equ	0xFD8
+   958                           ;main.c: 100: LATAbits.LA3 = ~LATAbits.LA3;
+   959  000062  A689               	btfss	3977,3,c	;volatile
+   960  000064  D002               	goto	i2u60_40
+   961  000066  0E01               	movlw	1
+   962  000068  D001               	goto	i2u60_46
+   963  00006A                     i2u60_40:
+   964  00006A  0E00               	movlw	0
+   965  00006C                     i2u60_46:
+   966  00006C  0AFF               	xorlw	255
+   967  00006E  6E01               	movwf	??_interruptHandler& (0+255),c
+   968  000070  4601               	rlncf	??_interruptHandler,f,c
+   969  000072  4601               	rlncf	??_interruptHandler,f,c
+   970  000074  4601               	rlncf	??_interruptHandler,f,c
+   971  000076  5089               	movf	3977,w,c	;volatile
+   972  000078  1801               	xorwf	??_interruptHandler,w,c
+   973  00007A  0BF7               	andlw	-9
+   974  00007C  1801               	xorwf	??_interruptHandler,w,c
+   975  00007E  6E89               	movwf	3977,c	;volatile
+   976                           
+   977                           ;main.c: 101: _delay((unsigned long)((150)*(40000000/4000.0)));
+   978  000080  0E08               	movlw	8
+   979  000082  6E02               	movwf	(??_interruptHandler+1)& (0+255),c
+   980  000084  0E9D               	movlw	157
+   981  000086  6E01               	movwf	??_interruptHandler& (0+255),c
+   982  000088  0E06               	movlw	6
+   983  00008A                     i2u128_47:
+   984  00008A  2EE8               	decfsz	wreg,f,c
+   985  00008C  D7FE               	bra	i2u128_47
+   986  00008E  2E01               	decfsz	??_interruptHandler& (0+255),f,c
+   987  000090  D7FC               	bra	i2u128_47
+   988  000092  2E02               	decfsz	(??_interruptHandler+1)& (0+255),f,c
+   989  000094  D7FA               	bra	i2u128_47
+   990                           
+   991                           ;main.c: 139: INT1IF = 0;
+   992  000096  90F0               	bcf	intcon3,0,c	;volatile
+   993  000098                     i2l67:
+   994  000098  C014  F04E         	movff	??_interruptHandler+19,btemp+3
+   995  00009C  C013  F04D         	movff	??_interruptHandler+18,btemp+2
+   996  0000A0  C012  F04C         	movff	??_interruptHandler+17,btemp+1
+   997  0000A4  C011  F04B         	movff	??_interruptHandler+16,btemp
+   998  0000A8  C010  FFF5         	movff	??_interruptHandler+15,tablat
+   999  0000AC  C00F  FFF8         	movff	??_interruptHandler+14,tblptru
+  1000  0000B0  C00E  FFF7         	movff	??_interruptHandler+13,tblptrh
+  1001  0000B4  C00D  FFF6         	movff	??_interruptHandler+12,tblptrl
+  1002  0000B8  C00C  FFF4         	movff	??_interruptHandler+11,prodh
+  1003  0000BC  C00B  FFF3         	movff	??_interruptHandler+10,prodl
+  1004  0000C0  C00A  FFDA         	movff	??_interruptHandler+9,fsr2h
+  1005  0000C4  C009  FFD9         	movff	??_interruptHandler+8,fsr2l
+  1006  0000C8  C008  FFE2         	movff	??_interruptHandler+7,fsr1h
+  1007  0000CC  C007  FFE1         	movff	??_interruptHandler+6,fsr1l
+  1008  0000D0  C006  FFEA         	movff	??_interruptHandler+5,fsr0h
+  1009  0000D4  C005  FFE9         	movff	??_interruptHandler+4,fsr0l
+  1010  0000D8  C004  FFFB         	movff	??_interruptHandler+3,pclatu
+  1011  0000DC  C003  FFFA         	movff	??_interruptHandler+2,pclath
+  1012  0000E0  924B               	bcf	btemp,1,c	;clear compiler interrupt flag (level 2)
+  1013  0000E2  0011               	retfie		f
+  1014  0000E4                     __end_of_interruptHandler:
+  1015                           	opt stack 0
+  1016                           pclatu	equ	0xFFB
+  1017                           pclath	equ	0xFFA
+  1018                           tblptru	equ	0xFF8
+  1019                           tblptrh	equ	0xFF7
+  1020                           tblptrl	equ	0xFF6
+  1021                           tablat	equ	0xFF5
+  1022                           prodh	equ	0xFF4
+  1023                           prodl	equ	0xFF3
+  1024                           intcon	equ	0xFF2
+  1025                           intcon3	equ	0xFF0
+  1026                           postinc0	equ	0xFEE
+  1027                           fsr0h	equ	0xFEA
+  1028                           fsr0l	equ	0xFE9
+  1029                           wreg	equ	0xFE8
+  1030                           postdec1	equ	0xFE5
+  1031                           plusw1	equ	0xFE3
+  1032                           fsr1h	equ	0xFE2
+  1033                           fsr1l	equ	0xFE1
+  1034                           plusw2	equ	0xFDB
+  1035                           fsr2h	equ	0xFDA
+  1036                           fsr2l	equ	0xFD9
+  1037                           pclatu	equ	0xFFB
+  1038                           pclath	equ	0xFFA
+  1039                           tblptru	equ	0xFF8
+  1040                           tblptrh	equ	0xFF7
+  1041                           tblptrl	equ	0xFF6
+  1042                           tablat	equ	0xFF5
+  1043                           prodh	equ	0xFF4
+  1044                           prodl	equ	0xFF3
+  1045                           intcon	equ	0xFF2
+  1046                           intcon3	equ	0xFF0
+  1047                           postinc0	equ	0xFEE
+  1048                           fsr0h	equ	0xFEA
+  1049                           fsr0l	equ	0xFE9
+  1050                           wreg	equ	0xFE8
+  1051                           postdec1	equ	0xFE5
+  1052                           plusw1	equ	0xFE3
+  1053                           fsr1h	equ	0xFE2
+  1054                           fsr1l	equ	0xFE1
+  1055                           plusw2	equ	0xFDB
+  1056                           fsr2h	equ	0xFDA
+  1057                           fsr2l	equ	0xFD9
+  1058                           
+  1059                           	psect	rparam
+  1060  0000                     pclatu	equ	0xFFB
+  1061                           pclath	equ	0xFFA
+  1062                           tblptru	equ	0xFF8
+  1063                           tblptrh	equ	0xFF7
+  1064                           tblptrl	equ	0xFF6
+  1065                           tablat	equ	0xFF5
+  1066                           prodh	equ	0xFF4
+  1067                           prodl	equ	0xFF3
+  1068                           intcon	equ	0xFF2
+  1069                           intcon3	equ	0xFF0
+  1070                           postinc0	equ	0xFEE
+  1071                           fsr0h	equ	0xFEA
+  1072                           fsr0l	equ	0xFE9
+  1073                           wreg	equ	0xFE8
+  1074                           postdec1	equ	0xFE5
+  1075                           plusw1	equ	0xFE3
+  1076                           fsr1h	equ	0xFE2
+  1077                           fsr1l	equ	0xFE1
+  1078                           plusw2	equ	0xFDB
+  1079                           fsr2h	equ	0xFDA
+  1080                           fsr2l	equ	0xFD9
+  1081                           
+  1082                           	psect	temp
+  1083  00004B                     btemp:
+  1084                           	opt stack 0
+  1085  00004B                     	ds	1
+  1086  0000                     int$flags	set	btemp
+  1087  0000                     wtemp6	set	btemp+1
+  1088                           pclatu	equ	0xFFB
+  1089                           pclath	equ	0xFFA
+  1090                           tblptru	equ	0xFF8
+  1091                           tblptrh	equ	0xFF7
+  1092                           tblptrl	equ	0xFF6
+  1093                           tablat	equ	0xFF5
+  1094                           prodh	equ	0xFF4
+  1095                           prodl	equ	0xFF3
+  1096                           intcon	equ	0xFF2
+  1097                           intcon3	equ	0xFF0
+  1098                           postinc0	equ	0xFEE
+  1099                           fsr0h	equ	0xFEA
+  1100                           fsr0l	equ	0xFE9
+  1101                           wreg	equ	0xFE8
+  1102                           postdec1	equ	0xFE5
+  1103                           plusw1	equ	0xFE3
+  1104                           fsr1h	equ	0xFE2
+  1105                           fsr1l	equ	0xFE1
+  1106                           plusw2	equ	0xFDB
+  1107                           fsr2h	equ	0xFDA
+  1108                           fsr2l	equ	0xFD9
 
 
 Data Sizes:
@@ -1368,7 +1142,7 @@ Data Sizes:
 
 Auto Spaces:
     Space          Size  Autos    Used
-    COMRAM          126     38      75
+    COMRAM          126     37      74
     BANK0           128      0     100
     BANK1           256      0       0
     BANK2           256      0       0
@@ -1532,14 +1306,14 @@ Call Graph Tables:
  (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
  ---------------------------------------------------------------------------------
  (0) _main                                                33    33      0       0
-                                             21 COMRAM    17    17      0
+                                             20 COMRAM    17    17      0
  ---------------------------------------------------------------------------------
  Estimated maximum stack depth 0
  ---------------------------------------------------------------------------------
  (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
  ---------------------------------------------------------------------------------
- (1) _interruptHandler                                    21    21      0      30
-                                              0 COMRAM    21    21      0
+ (1) _interruptHandler                                    20    20      0       0
+                                              0 COMRAM    20    20      0
  ---------------------------------------------------------------------------------
  Estimated maximum stack depth 1
  ---------------------------------------------------------------------------------
@@ -1587,87 +1361,77 @@ BANK15              80      0       0      36        0.0%
 BITBANK0            80      0       0       4        0.0%
 BANK0               80      0      64       5       78.1%
 BITCOMRAM           7E      0       0       0        0.0%
-COMRAM              7E     26      4B       1       59.5%
+COMRAM              7E     25      4A       1       58.7%
 BITSFR               0      0       0     200        0.0%
 SFR                  0      0       0     200        0.0%
 STACK                0      0       0       2        0.0%
 NULL                 0      0       0       0        0.0%
-ABS                  0      0      AF      34        0.0%
-DATA                 0      0      AF       3        0.0%
+ABS                  0      0      AE      34        0.0%
+DATA                 0      0      AE       3        0.0%
 CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V1.45 build -152302408 
-Symbol Table                                                                                   Fri Feb 16 16:18:34 2018
+Symbol Table                                                                                   Fri Feb 16 17:14:00 2018
 
               __CFG_BORV$3 000000               __CFG_CP0$OFF 000000               __CFG_CP1$OFF 000000  
              __CFG_CP2$OFF 000000               __CFG_CP3$OFF 000000               __CFG_CPB$OFF 000000  
-             __CFG_CPD$OFF 000000                        u561 0210                        u571 0222  
+             __CFG_CPD$OFF 000000                        u561 00EE                        u571 0100  
                       wreg 000FE8               __CFG_LVP$OFF 000000               __CFG_WDT$OFF 000000  
   __end_ofcheckValid@F3160 FEE6                       STR_1 FEF8                       STR_2 FF75  
                      STR_4 FF24                       STR_5 FF93                       STR_6 FFE5  
                      STR_7 FFDA                       STR_8 FF45                       STR_9 FFC0  
                      _LATA 000F89                       _LATB 000F8A                       _LATC 000F8B  
-                     _LATD 000F8C                       _LATE 000F8D                main@counter 0024  
-                     i2l70 00D8                       i2l71 006C                       i2l80 0126  
-                     i2l72 0106                       i2l81 013E                       i2l73 0074  
-                     i2l82 0158                       i2l74 008C                       i2l83 0174  
-                     i2l75 00A6                       i2l76 00C2                       i2l69 01BA  
-                     i2l77 018A                       i2l78 011E                       i2l79 01B8  
-                     _main 0206   __end_of_interruptHandler 0206                       _keys FEBB  
-                     fsr0h 000FEA                       fsr1h 000FE2                       fsr2h 000FDA  
-                     fsr0l 000FE9                       fsr1l 000FE1                       fsr2l 000FD9  
-                     btemp 004C                main@pressed 0026                       prodh 000FF4  
-                     prodl 000FF3                       start 000E              __CFG_IESO$OFF 000000  
-            __CFG_MCLRE$ON 000000               ___param_bank 000000           __end_of_LCD_LEFT FEF3  
-                    ?_main 0001                      STR_10 FF65                      STR_11 FFCD  
-                    STR_12 FFF0                      STR_13 FFF9                      STR_14 FF35  
-                    STR_15 FF84                      STR_16 FFA2                      STR_17 FFB1  
-                    STR_18 FF55                      STR_19 FF13                      _PORTB 000F81  
-                    _TRISA 000F92                      _TRISB 000F93                      _TRISC 000F94  
-                    _TRISD 000F95                      _TRISE 000F96              __CFG_PWRT$OFF 000000  
-            __CFG_WRT0$OFF 000000              __CFG_WRT1$OFF 000000              __CFG_WRT2$OFF 000000  
-            __CFG_WRT3$OFF 000000             __CFG_EBTR0$OFF 000000             __CFG_FCMEN$OFF 000000  
-           __CFG_EBTR1$OFF 000000             __CFG_EBTR2$OFF 000000             __CFG_EBTR3$OFF 000000  
-            __CFG_WRTB$OFF 000000              __CFG_WRTC$OFF 000000              __CFG_WRTD$OFF 000000  
-           __CFG_EBTRB$OFF 000000            __end_of_dpowers FED6            __end_of_setKeys FEF2  
-                    pclath 000FFA                      tablat 000FF5          _LCDinterruptState 003F  
-                    plusw1 000FE3                      plusw2 000FDB                      status 000FD8  
-                    wtemp6 004D            __initialization 02D0               __end_of_main 026C  
+                     _LATD 000F8C                       _LATE 000F8D                main@counter 0023  
+                     i2l67 0098                       _main 00E4   __end_of_interruptHandler 00E4  
+                     _keys FEBB                       fsr0h 000FEA                       fsr1h 000FE2  
+                     fsr2h 000FDA                       fsr0l 000FE9                       fsr1l 000FE1  
+                     fsr2l 000FD9                       btemp 004B                main@pressed 0025  
+                     prodh 000FF4                       prodl 000FF3                       start 000E  
+            __CFG_IESO$OFF 000000              __CFG_MCLRE$ON 000000               ___param_bank 000000  
+         __end_of_LCD_LEFT FEF3                      ?_main 0001                      STR_10 FF65  
+                    STR_11 FFCD                      STR_12 FFF0                      STR_13 FFF9  
+                    STR_14 FF35                      STR_15 FF84                      STR_16 FFA2  
+                    STR_17 FFB1                      STR_18 FF55                      STR_19 FF13  
+                    _PORTB 000F81                      _TRISA 000F92                      _TRISB 000F93  
+                    _TRISC 000F94                      _TRISD 000F95                      _TRISE 000F96  
+            __CFG_PWRT$OFF 000000              __CFG_WRT0$OFF 000000              __CFG_WRT1$OFF 000000  
+            __CFG_WRT2$OFF 000000              __CFG_WRT3$OFF 000000             __CFG_EBTR0$OFF 000000  
+           __CFG_FCMEN$OFF 000000             __CFG_EBTR1$OFF 000000             __CFG_EBTR2$OFF 000000  
+           __CFG_EBTR3$OFF 000000              __CFG_WRTB$OFF 000000              __CFG_WRTC$OFF 000000  
+            __CFG_WRTD$OFF 000000             __CFG_EBTRB$OFF 000000            __end_of_dpowers FED6  
+          __end_of_setKeys FEF2                      pclath 000FFA                      tablat 000FF5  
+        _LCDinterruptState 003E                      plusw1 000FE3                      plusw2 000FDB  
+                    wtemp6 004C            __initialization 01AE               __end_of_main 014A  
              __end_of_keys FECC             __CFG_OSC$HSPLL 000000          __end_of_LCD_RIGHT FEF4  
-                   ??_main 0016              __activetblptr 000002                     _ADCON0 000FC2  
+                   ??_main 0015              __activetblptr 000002                     _ADCON0 000FC2  
                    _ADCON1 000FC1                     _INT1IE 007F83                     _INT1IF 007F80  
                    _SSPADD 000FC8                     _SSPBUF 000FC9             __CFG_XINST$OFF 000000  
-           __CFG_STVREN$ON 000000                     clear_0 0316               __pdataCOMRAM 0040  
+           __CFG_STVREN$ON 000000                     clear_0 01F4               __pdataCOMRAM 003F  
              __mediumconst FEBA                     tblptrh 000FF7                     tblptrl 000FF6  
-                   tblptru 000FF8                 __accesstop 0080    __end_of__initialization 031C  
+                   tblptru 000FF8                 __accesstop 0080    __end_of__initialization 01FA  
           __CFG_PBADEN$OFF 000000              ___rparam_used 000001             __pcstackCOMRAM 0001  
-             __pidataBANK0 026C          ?_interruptHandler 0001       __end_of_firstTimeSet FEED  
-       ??_interruptHandler 0001                    i2u60_41 0070                    i2u61_40 007C  
-                  i2u61_46 007E                    i2u62_40 0094                    i2u62_46 0096  
-                  i2u63_40 00AE                    i2u63_46 00B0                    i2u64_46 00C8  
-                  i2u65_41 0122                    i2u66_40 012E                    i2u66_46 0130  
-                  i2u67_40 0146                    i2u67_46 0148                    i2u68_40 0160  
-                  i2u68_46 0162                    i2u69_46 017A                    _SSPCON1 000FC6  
-                  _SSPCON2 000FC5                    _SSPSTAT 000FC7                    __Hparam 0000  
-                  __Lparam 0000   interruptHandler@keypress 0015                    __pcinit 02D0  
-                  __ramtop 1000                    __ptext0 0206          __end_of_hexpowers FEDE  
+             __pidataBANK0 014A          ?_interruptHandler 0001       __end_of_firstTimeSet FEED  
+       ??_interruptHandler 0001                    i2u60_40 006A                    i2u60_46 006C  
+                  _SSPCON1 000FC6                    _SSPCON2 000FC5                    _SSPSTAT 000FC7  
+                  __Hparam 0000                    __Lparam 0000                    __pcinit 01AE  
+                  __ramtop 1000                    __ptext0 00E4          __end_of_hexpowers FEDE  
                   _dpowers FECC                    _setKeys FEED                  _LCD_RIGHT FEF3  
-           __pintcode_body 0012       end_of_initialization 031C      __end_of_LCD_SIZE_HORZ FEF6  
+           __pintcode_body 0012       end_of_initialization 01FA      __end_of_LCD_SIZE_HORZ FEF6  
     __end_of_LCD_SIZE_VERT FEF5              __Lmediumconst FEBA                    int_func 0012  
                   postdec1 000FE5                    postinc0 000FEE                  _PORTBbits 000F81  
-                _TRISCbits 000F94                 main@inputs 001E              __pidataCOMRAM 032A  
-             _firstTimeSet FEE6        start_initialization 02D0                __pdataBANK0 0080  
-         __CFG_LPT1OSC$OFF 000000  __size_of_interruptHandler 01FE                __pbssCOMRAM 0027  
+                _TRISCbits 000F94                 main@inputs 001D              __pidataCOMRAM 0208  
+             _firstTimeSet FEE6        start_initialization 01AE                __pdataBANK0 0080  
+         __CFG_LPT1OSC$OFF 000000  __size_of_interruptHandler 00DC                __pbssCOMRAM 0026  
         __CFG_CCP2MX$PORTC 000000                  __pintcode 0008              __pmediumconst FEBA  
-                _hexpowers FED6           main@numRemaining 0016                   _LCD_LEFT FEF2  
-                 _LATAbits 000F89                   _LATDbits 000F8C                   i2u137_47 0110  
-         __CFG_WDTPS$32768 000000                  main@F3121 0046                  main@F3123 0037  
-           _LCD_HORZ_LIMIT FEF7                _INTCON3bits 000FF0                  copy_data0 02E4  
-                copy_data1 0304                   __Hrparam 0000                   __Lrparam 0000  
+                _hexpowers FED6           main@numRemaining 0015                   _LCD_LEFT FEF2  
+                 _LATAbits 000F89                   _LATDbits 000F8C                   i2u128_47 008A  
+         __CFG_WDTPS$32768 000000                  main@F3121 0045                  main@F3123 0036  
+           _LCD_HORZ_LIMIT FEF7                _INTCON3bits 000FF0                  copy_data0 01C2  
+                copy_data1 01E2                   __Hrparam 0000                   __Lrparam 0000  
        __CFG_BOREN$SBORDIS 000000           _interruptHandler 0008     __end_of_LCD_HORZ_LIMIT FEF8  
-           _LCD_VERT_LIMIT FEF6              __size_of_main 0066                   int$flags 004C  
-               _INTCONbits 000FF2     __end_of_LCD_VERT_LIMIT FEF7              showLogs@F3187 0040  
-            showLogs@F3189 0027                   intlevel2 0000              _LCD_SIZE_HORZ FEF5  
+           _LCD_VERT_LIMIT FEF6              __size_of_main 0066                   int$flags 004B  
+               _INTCONbits 000FF2     __end_of_LCD_VERT_LIMIT FEF7              showLogs@F3187 003F  
+            showLogs@F3189 0026                   intlevel2 0000              _LCD_SIZE_HORZ FEF5  
             _LCD_SIZE_VERT FEF4            checkValid@F3160 FEDE            checkValid@F3153 0080  
-          checkValid@F3158 002F                _SSPCON1bits 000FC6                _SSPCON2bits 000FC5  
+          checkValid@F3158 002E                _SSPCON1bits 000FC6                _SSPCON2bits 000FC5  

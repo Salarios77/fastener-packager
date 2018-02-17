@@ -3,15 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/salar/Dropbox/Salarios/EngSci%20Year%202/Semester%202/Engineering%20Design%20(AER201)/MPLABXProjects/FastenerPacker.X/main.c</file>
-            <file>file:/C:/Users/salar/Dropbox/Salarios/EngSci%20Year%202/Semester%202/Engineering%20Design%20(AER201)/MPLABXProjects/FastenerPacker.X/standbyInterface.c</file>
+            <file>file:/C:/Users/salar/Dropbox/Salarios/EngSci%20Year%202/Semester%202/Engineering%20Design%20(AER201)/MPLABXProjects/FastenerPacker.X/configBits.h</file>
             <file>file:/C:/Users/salar/Dropbox/Salarios/EngSci%20Year%202/Semester%202/Engineering%20Design%20(AER201)/MPLABXProjects/FastenerPacker.X/logMemory.c</file>
             <file>file:/C:/Users/salar/Dropbox/Salarios/EngSci%20Year%202/Semester%202/Engineering%20Design%20(AER201)/MPLABXProjects/FastenerPacker.X/I2C.c</file>
-            <file>file:/C:/Users/salar/Dropbox/Salarios/EngSci%20Year%202/Semester%202/Engineering%20Design%20(AER201)/MPLABXProjects/FastenerPacker.X/lcd.c</file>
-            <file>file:/C:/Users/salar/Dropbox/Salarios/EngSci%20Year%202/Semester%202/Engineering%20Design%20(AER201)/MPLABXProjects/FastenerPacker.X/RTC.c</file>
-            <file>file:/C:/Users/salar/Dropbox/Salarios/EngSci%20Year%202/Semester%202/Engineering%20Design%20(AER201)/MPLABXProjects/FastenerPacker.X/configBits.h</file>
             <file>file:/C:/Users/salar/Dropbox/Salarios/EngSci%20Year%202/Semester%202/Engineering%20Design%20(AER201)/MPLABXProjects/FastenerPacker.X/lcd.h</file>
             <file>file:/C:/Users/salar/Dropbox/Salarios/EngSci%20Year%202/Semester%202/Engineering%20Design%20(AER201)/MPLABXProjects/FastenerPacker.X/standbyInterface.h</file>
+            <file>file:/C:/Users/salar/Dropbox/Salarios/EngSci%20Year%202/Semester%202/Engineering%20Design%20(AER201)/MPLABXProjects/FastenerPacker.X/standbyInterface.c</file>
+            <file>file:/C:/Users/salar/Dropbox/Salarios/EngSci%20Year%202/Semester%202/Engineering%20Design%20(AER201)/MPLABXProjects/FastenerPacker.X/RTC.c</file>
+            <file>file:/C:/Users/salar/Dropbox/Salarios/EngSci%20Year%202/Semester%202/Engineering%20Design%20(AER201)/MPLABXProjects/FastenerPacker.X/lcd.c</file>
+            <file>file:/C:/Users/salar/Dropbox/Salarios/EngSci%20Year%202/Semester%202/Engineering%20Design%20(AER201)/MPLABXProjects/FastenerPacker.X/main.c</file>
         </group>
     </open-files>
 </project-private>
