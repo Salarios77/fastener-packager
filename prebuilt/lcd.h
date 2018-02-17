@@ -12,7 +12,7 @@
 /********************************** Includes **********************************/
 #include <xc.h>
 #include <stdio.h>
-#include "configBits.h"
+#include "../configBits.h"
 
 /*********************************** Macros ***********************************/
 /* Sets cursor position to start of second line. */
