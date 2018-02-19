@@ -27,25 +27,23 @@ void initRTC (){
     //RTC_setTime();
 }
 
+/* Uncomment and call to set the RTC time for the first time
+ * Writes the firstTimeSet array to the RTC memory.
+ * Arguments: none
+ * Returns: none
 void RTC_setTime(){
-    /* Writes the happynewyear array to the RTC memory.
-     *
-     * Arguments: none
-     *
-     * Returns: none
-     */
-    
     I2C_Master_Start(); // Start condition
     I2C_Master_Write(0b11010000); //7 bit RTC address + Write
     I2C_Master_Write(0x00); // Set memory pointer to seconds
     
-    /* Write array. */
+    //Write array. 
     for(char i=0; i<7; i++){
         I2C_Master_Write(firstTimeSet[i]);
     }
     
     I2C_Master_Stop(); //Stop condition
 }
+*/
 
 /*
  * @param time: the time to be determined - {YY,MM,DD,WEEKDAY,HH,MM,SS}

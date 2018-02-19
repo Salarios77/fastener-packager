@@ -9,12 +9,11 @@
 #define STANDBY_INTERFACE_H
 
 /********************************** Includes **********************************/
-#include <xc.h>
 #include "configBits.h"
-#include "lcd.h"
-#include <string.h>
+#include "prebuilt/lcd.h"
 #include "RTC.h"
 #include "logMemory.h"
+#include <string.h>
 
 /********************************** Typedefs **********************************/
 typedef enum {false, true} boolean;

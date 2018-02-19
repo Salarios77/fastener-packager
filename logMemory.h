@@ -9,7 +9,6 @@
 #define LOG_MEMORY_H
 
 /********************************** Includes **********************************/
-#include <xc.h>
 #include "configBits.h"
 
 /****************************** Public Interfaces *****************************/

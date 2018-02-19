@@ -10,7 +10,6 @@
 #define	LCD_H
 
 /********************************** Includes **********************************/
-#include <xc.h>
 #include <stdio.h>
 #include "../configBits.h"
 

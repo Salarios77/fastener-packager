@@ -10,7 +10,6 @@
 
 /***** Constants *****/
 const unsigned char keys[] = "123A456B789C*0#D"; 
-const unsigned char setKeys[] = "BNSW";
 
 //Time arrays in form: {YY,MM,DD,WEEKDAY,HH,MM,SS}
 unsigned short int calcOperationTime (unsigned char * timeStart, unsigned char * timeEnd){
@@ -41,6 +40,7 @@ unsigned char getKeyPressed (boolean shouldDispTime){
     while(PORTBbits.RB1 == 0){
         if (shouldDispTime){
             getDateTime(currTimeTemp);
+            //Refresh RTC display time every 0.5s
             if (calcOperationTime(lastTimeRefresh, currTimeTemp) >=0.5){
                 dispRealTime();
                 lcd_set_cursor(15,2);
@@ -181,6 +181,7 @@ boolean checkValid (unsigned short int inputScreenPos, unsigned char * inputs){
  * @param inputs: char array with 6 indices
  */
 void getInputs (unsigned char * inputs){
+    const unsigned char setKeys[] = "BNSW";
     unsigned char keyPressed;
     unsigned short int keyCount, screenPos = 1;
     boolean userTyping;
@@ -361,6 +362,6 @@ void showLogs(){
         }
     }
     
-    retrieveResults (inputs, numRemaining, operationTime, timeEnd, keyPressed);
+    retrieveResults (inputs, numRemaining, &operationTime, timeEnd, keyPressed);
     showResults (inputs, numRemaining, operationTime); //CHANGE LATER TO INCLUDE REAL TIME END
 }
