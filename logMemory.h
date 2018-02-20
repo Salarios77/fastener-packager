@@ -12,7 +12,12 @@
 #include "configBits.h"
 
 /****************************** Public Interfaces *****************************/
-void saveResults (unsigned char * inputs, unsigned short int * numRemaining, unsigned short int operationTime, unsigned char timeEnd);
+char ReadEEByte (char address);
+unsigned char WriteEEByte (char address, char data);
+void writeAndInc (char * address, char data);
+char readAndInc (char * address);
+void writeEntry (unsigned char * inputs, unsigned short int * numRemaining, unsigned short int operationTime, unsigned char * timeEnd, char numStored);
+void saveResults (unsigned char * inputs, unsigned short int * numRemaining, unsigned short int operationTime, unsigned char * timeEnd);
 void retrieveResults (unsigned char * inputs, unsigned short int * numRemaining, unsigned short int * operationTime, unsigned char * timeEnd, unsigned char logOption);
 
 #endif /* LOG_MEMORY_H */

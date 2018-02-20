@@ -342,9 +342,9 @@ void showLogs(){
     unsigned char keyPressed;
     //To be retrieved from memory:
     unsigned char timeEnd [7];
-    unsigned char inputs [6] = {'0','0','0','0','0','0'};;
-    unsigned short int numRemaining [4] = {0,0,0,0}; //# remaining of each fastener type
-    unsigned short int operationTime = 0;
+    unsigned char inputs [6];
+    unsigned short int numRemaining [4]; //# remaining of each fastener type
+    unsigned short int operationTime;
     
     onOptionScreen = true;
     __lcd_clear();
@@ -362,6 +362,6 @@ void showLogs(){
         }
     }
     
-    retrieveResults (inputs, numRemaining, &operationTime, timeEnd, keyPressed);
+    retrieveResults (inputs, numRemaining, &operationTime, timeEnd, keyPressed-64);
     showResults (inputs, numRemaining, operationTime); //CHANGE LATER TO INCLUDE REAL TIME END
 }

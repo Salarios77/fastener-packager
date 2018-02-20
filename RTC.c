@@ -9,7 +9,7 @@
 
 /***** Constants *****/
 const char firstTimeSet[7] = {  0x00, // 30 Seconds 
-                                0x53, // 51 Minutes
+                                0x53, // 53 Minutes
                                 0x15, // 24 hour mode, set to 15:00
                                 0x01, // Monday
                                 0x05, // 5th

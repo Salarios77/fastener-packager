@@ -56,6 +56,21 @@ void initOperation(unsigned char * inputs){
     __delay_ms(3000);
 }
 
+void eepromTest (){
+    unsigned char timeStart [7], timeEnd [7];
+    unsigned char inputs [6] = {'A','0','1','2','3','4'};
+    unsigned short int numRemaining [4] = {24,5,3,15}; //# remaining of each fastener type
+    unsigned short int operationTime = 125;
+    
+    initRTC();
+    
+    getDateTime(timeEnd);
+    saveResults (inputs, numRemaining, operationTime, timeEnd);
+    
+    inputs[0] = 'B';
+    saveResults (inputs, numRemaining, operationTime, timeEnd);
+}
+
 void main(void) {
     unsigned char timeStart [7], timeEnd [7];
     unsigned char inputs [6] = {'0','0','0','0','0','0'};
@@ -84,6 +99,8 @@ void main(void) {
     ADCON1 = 0b00001111; // Set all A/D ports to digital (pg. 222)
     // </editor-fold>
     
+    //eepromTest();
+
     /* Main Operation */
     while(1){
         initStandby(inputs); //Initiate Standby Mode & get inputs
@@ -92,7 +109,7 @@ void main(void) {
         getDateTime(timeEnd);
         operationTime = calcOperationTime (timeStart, timeEnd);
         showResults(inputs, numRemaining, operationTime);
-        //saveResults(inputs, numRemaining, operationTime, timeEnd);
+        saveResults(inputs, numRemaining, operationTime, timeEnd);
     }
     
     /* Test microswitch */
