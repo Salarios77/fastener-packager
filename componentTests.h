@@ -15,5 +15,8 @@
 /****************************** Public Interfaces *****************************/
 void solenoidInterruptTest (void);
 void microswitchCountTest (void);
+unsigned short readADC(char channel);
+void ldrTest ();
+void dcMotorTest();
 
 #endif /* COMPONENT_TESTS_H */

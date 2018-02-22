@@ -88,23 +88,35 @@ void main(void) {
 
     /*After the states of LATx are known, the data direction registers, TRISx
      * are configured. Default is  1. */
-    TRISA = 0x00; 
-    TRISB = 0xFF; // All inputs
+    TRISA = 0x0F; 
+    TRISB = 0xF3; // All inputs
     TRISC = 0xE0; //RC5:7 - Microswitch
-    TRISD = 0x00; // All output mode on port D for the LCD
+    TRISD = 0x02; // All output mode on port D for the LCD
     TRISE = 0x00;
     
     /************************** A/D Converter Module **************************/
     ADCON0 = 0x00;  // Disable ADC
-    ADCON1 = 0b00001111; // Set all A/D ports to digital (pg. 222)
+    ADCON1 = 0x0D; // Set all A/D ports to digital (pg. 7-158)
+    ADCON2bits.ADFM = 1; // Right justify A/D result
+    
     // </editor-fold>
+    
+    INTCON3bits.INT1IE = 1; //enable INT1 external interrupt 
+    ei (); //INTCONbits.GIE = 1
     
     //eepromTest();
 
+    /* Test LDR */
+    //ldrTest();
+    
+    /* Test DC Motor */
+    dcMotorTest();
+    
     /* Main Operation */
     while(1){
         initStandby(inputs); //Initiate Standby Mode & get inputs
         getDateTime(timeStart);
+        //CHANGE RB1 to DC motor control pin
         initOperation(inputs);
         getDateTime(timeEnd);
         operationTime = calcOperationTime (timeStart, timeEnd);
@@ -121,7 +133,7 @@ void interrupt interruptHandler(void) {
     //check both the interrupt enable and interrupt flag for INT1 interrupt
     if (INT1IE && INT1IF){ 
         /* Solenoid test */
-        //solenoidInterruptTest();
+        solenoidInterruptTest();
         INT1IF = 0; //clear flag
     }
     else if (TMR0IE && TMR0IF){ //for timer interrupts
