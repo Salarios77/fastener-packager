@@ -73,4 +73,7 @@
 
 #define _XTAL_FREQ 40000000 // Define osc freq for use in delay macros 
 
+/********************************** Typedefs **********************************/
+typedef enum {false, true} boolean;
+
 #endif /* CONFIG_BITS_H */

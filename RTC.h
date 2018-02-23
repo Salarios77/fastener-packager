@@ -17,7 +17,7 @@
 
 /****************************** Public Interfaces *****************************/
 void initRTC (void);
-//void RTC_setTime(void);
+void RTC_setTime(void);
 void getDateTime (unsigned char time [7]);
 
 #endif /* RTC_H */

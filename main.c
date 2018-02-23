@@ -8,6 +8,7 @@
 /***** Includes *****/
 #include "standbyInterface.h"
 #include "componentTests.h"
+#include "prebuilt/glcd_pic.h"
 
 /***** Defines *****/
 #define VIB_TIMER_COUNT 3
@@ -44,10 +45,14 @@ void initVibTimer(){
  * For a 7 or 8-step assembly, compartments must be filled in consecutively, starting from C1.
  */
 void initOperation(unsigned char * inputs){
-    /* Enable Interrupts */
+    /* Enable Interrupts
+     * Timer - TMR0IE
+     */
     INTCONbits.TMR0IE = 1;
-    //INTCON3bits.INT1IE = 1; //enable INT1 external interrupt 
-    ei (); //INTCONbits.GIE = 1
+    //INTCONbits.INT0IE = 1; //default falling edge
+    ei (); //INTCONbits.GIE = 1 (global interrupt enable)
+    
+    
     
     /* Set up vibration motor timer */
     initVibTimer();
@@ -101,8 +106,8 @@ void main(void) {
     
     // </editor-fold>
     
-    INTCON3bits.INT1IE = 1; //enable INT1 external interrupt 
-    ei (); //INTCONbits.GIE = 1
+    //INTCON3bits.INT1IE = 1; //enable INT1 external interrupt 
+    //ei (); //INTCONbits.GIE = 1
     
     //eepromTest();
 
@@ -110,7 +115,12 @@ void main(void) {
     //ldrTest();
     
     /* Test DC Motor */
-    dcMotorTest();
+    //dcMotorTest();
+    
+    /* Initialize GLCD. */
+    initGLCD();
+    glcdDrawRectangle(0, GLCD_SIZE_HORZ, 0, GLCD_SIZE_VERT, WHITE);
+    draw();
     
     /* Main Operation */
     while(1){
@@ -120,6 +130,7 @@ void main(void) {
         initOperation(inputs);
         getDateTime(timeEnd);
         operationTime = calcOperationTime (timeStart, timeEnd);
+        doneScreen();
         showResults(inputs, numRemaining, operationTime);
         saveResults(inputs, numRemaining, operationTime, timeEnd);
     }

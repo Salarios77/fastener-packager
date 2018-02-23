@@ -18,7 +18,7 @@ void writeAndInc (char * address, char data);
 char readAndInc (char * address);
 void writeEntry (unsigned char * inputs, unsigned short int * numRemaining, unsigned short int operationTime, unsigned char * timeEnd, char numStored);
 void saveResults (unsigned char * inputs, unsigned short int * numRemaining, unsigned short int operationTime, unsigned char * timeEnd);
-void retrieveResults (unsigned char * inputs, unsigned short int * numRemaining, unsigned short int * operationTime, unsigned char * timeEnd, unsigned char logOption);
+boolean retrieveResults (unsigned char * inputs, unsigned short int * numRemaining, unsigned short int * operationTime, unsigned char * timeEnd, unsigned char logOption);
 
 #endif /* LOG_MEMORY_H */
 

@@ -8,11 +8,11 @@
 #include "RTC.h"
 
 /***** Constants *****/
-const char firstTimeSet[7] = {  0x00, // 30 Seconds 
-                                0x53, // 53 Minutes
+const char firstTimeSet[7] = {  0x00, // 0 Seconds 
+                                0x24, // 24 Minutes
                                 0x15, // 24 hour mode, set to 15:00
-                                0x01, // Monday
-                                0x05, // 5th
+                                0x04, // Thursday
+                                0x22, // 22nd
                                 0x02, // February
                                 0x18  // 2018
 };
@@ -31,6 +31,7 @@ void initRTC (){
  * Writes the firstTimeSet array to the RTC memory.
  * Arguments: none
  * Returns: none
+ * */
 void RTC_setTime(){
     I2C_Master_Start(); // Start condition
     I2C_Master_Write(0b11010000); //7 bit RTC address + Write
@@ -43,7 +44,7 @@ void RTC_setTime(){
     
     I2C_Master_Stop(); //Stop condition
 }
-*/
+
 
 /*
  * @param time: the time to be determined - {YY,MM,DD,WEEKDAY,HH,MM,SS}

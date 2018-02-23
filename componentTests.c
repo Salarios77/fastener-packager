@@ -8,9 +8,6 @@
 /***** Includes *****/
 #include "componentTests.h"
 
-/***** Typedefs *****/
-typedef enum {false, true} boolean;
-
 /***** Constants *****/
 const unsigned char keys[] = "123A456B789C*0#D";
 

@@ -13,8 +13,10 @@ public class GlcdPicToPix {
           if (bufferedImg.getRGB(i, j) != -1){
             int temp = bufferedImg.getRGB(i,j);
             temp = temp & 0xFFFFFF;
-            String colHex = Integer.toHexString(temp);
-            out.println ("    glcdDrawPixel(" + i + ", " + j + ", 0x" + colHex + ");");
+            if (temp != 0x00){
+              String colHex = Integer.toHexString(temp);
+              out.println ("    glcdDrawPixel(" + i + ", " + j + ", 0x" + colHex + ");");
+            }
           }
         }
       }

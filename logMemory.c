@@ -126,19 +126,25 @@ void saveResults (unsigned char * inputs, unsigned short int * numRemaining, uns
  * @param timeEnd - size 7 char array
  * @param logOption - 1,2,3,4
  */
-void retrieveResults (unsigned char * inputs, unsigned short int * numRemaining, unsigned short int * operationTime, unsigned char * timeEnd, unsigned char numStored){
+boolean retrieveResults (unsigned char * inputs, unsigned short int * numRemaining, unsigned short int * operationTime, unsigned char * timeEnd, unsigned char numStored){
     int i; //loop variable
-    char readAddr = 0x01 + (numStored-1)*16; //15 is number of bytes per entry
-
-    for (i = 0; i < 6; i++){
-        inputs [i] = (unsigned char)readAndInc (&readAddr);
+    char readAddr = 0x01 + (numStored-1)*16, temp; //15 is number of bytes per entry
+    
+    temp = readByteEE (0x00);
+    if (temp == 0xFF || temp < numStored)
+        return false;
+    else {
+        for (i = 0; i < 6; i++){
+            inputs [i] = (unsigned char)readAndInc (&readAddr);
+        }
+        for (i = 0; i < 4; i++){
+            numRemaining[i] = (unsigned short int)readAndInc (&readAddr);
+        }
+        *operationTime = (unsigned short int)readAndInc (&readAddr);
+        timeEnd[5] = (unsigned char)readAndInc(&readAddr);
+        timeEnd[4] = (unsigned char)readAndInc(&readAddr);
+        timeEnd[2] = (unsigned char)readAndInc(&readAddr);
+        timeEnd[1] = (unsigned char)readAndInc(&readAddr);
+        return true;
     }
-    for (i = 0; i < 4; i++){
-        numRemaining[i] = (unsigned short int)readAndInc (&readAddr);
-    }
-    *operationTime = (unsigned short int)readAndInc (&readAddr);
-    timeEnd[5] = (unsigned char)readAndInc(&readAddr);
-    timeEnd[4] = (unsigned char)readAndInc(&readAddr);
-    timeEnd[2] = (unsigned char)readAndInc(&readAddr);
-    timeEnd[1] = (unsigned char)readAndInc(&readAddr);
 }

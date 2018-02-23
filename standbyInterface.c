@@ -74,6 +74,13 @@ unsigned char getKeyPressed (boolean shouldDispTime){
     return keys[keypress];
 }
 
+void waitA(){
+    while(1){
+        if (getKeyPressed(false) == 'A')
+            break;
+    }
+}
+
 void dispRealTime (){
     unsigned char time [7];
     getDateTime(time);
@@ -89,10 +96,7 @@ void errScreen(){
     printf ("INVALID INPUT!");
     __lcd_newline();
     printf ("HIT A");
-    while(1){
-            if (getKeyPressed(false) == 'A')
-                break;
-    }
+    waitA();
 }
 
 /*
@@ -185,6 +189,7 @@ void getInputs (unsigned char * inputs){
     unsigned char keyPressed;
     unsigned short int keyCount, screenPos = 1;
     boolean userTyping;
+    unsigned int i; //loop variable
 
     while (screenPos < 4){
         userTyping = true;
@@ -196,19 +201,26 @@ void getInputs (unsigned char * inputs){
                 inputs[1] = '0';
                 inputs[2] = '0';
                 inputs[3] = '0';
-                printf ("SET? 1234={BNSW}");
+                printf ("SET? HIT 1,2,3,4");
+                __lcd_newline();
+                printf ("FOR BNSW: ");
+                //printf ("SET? 1234={BNSW}");
                 break;
             case 2:
-                printf ("NUM SETS/STEP?");
+                printf ("NUMBER OF SETS");
+                __lcd_newline();
+                printf ("PER STEP? ");
                 break;
             case 3:
-                printf ("NUM STEPS?");
+                printf ("NUMBER OF STEPS");
+                __lcd_newline();
+                printf ("IN ASSEMBLY? ");
                 break;
             default:
                 break;
         }
-        __lcd_newline();
-        printf ("#-CONFIRM ");
+        //__lcd_newline();
+        //printf ("#-CONFIRM ");
         while(userTyping){
             keyPressed = getKeyPressed(false);
             switch(keyPressed){
@@ -228,6 +240,34 @@ void getInputs (unsigned char * inputs){
                         keyCount++;
                     }
                     continue;
+                case 'D':
+                    if (keyCount > 0){
+                        __lcd_clear();
+                        keyCount--;
+                        switch (screenPos){
+                            case 1:
+                                printf ("SET? HIT 1,2,3,4");
+                                __lcd_newline();
+                                printf ("FOR BNSW: ");
+                                for (i = 0; i<keyCount; i++){
+                                    putch (inputs[i]);
+                                }
+                                break;
+                            case 2:
+                                printf ("NUMBER OF SETS");
+                                __lcd_newline();
+                                printf ("PER STEP? ");
+                                break;
+                            case 3:
+                                printf ("NUMBER OF STEPS");
+                                __lcd_newline();
+                                printf ("IN ASSEMBLY? ");
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    break;
                 default:
                     continue;  
             }
@@ -265,9 +305,9 @@ void initStandby(unsigned char * inputs){
         /***** Screen 2 *****/
         onOptionScreen = true;
         __lcd_clear();
-        printf ("HIT A-START,");
+        printf ("CHOOSE A-START,");
         __lcd_newline();
-        printf ("B-LOG,OR C-BACK");
+        printf ("B-LOGS, C-BACK");
         while(opNotStarted && onOptionScreen){
             keyPressed = getKeyPressed(false);
             switch(keyPressed){
@@ -288,18 +328,27 @@ void initStandby(unsigned char * inputs){
         }
     }
     
-    /***** Screens 3,4,5 *****/
+    /***** Screens 3,4,5,6 *****/
     getInputs(inputs);
+    __lcd_clear();
+    printf ("HIT A TO START");
+    __lcd_newline();
+    printf ("OPERATION!");
+    waitA();
     
-    /***** Screen 6 - Operation *****/
+    /***** Screen 7 - Operation *****/
     __lcd_clear();
     printf ("OPERATING...");
     __lcd_newline();
-    //Print inputs for debugging:
-    //int i;
-    //for (i = 0; i<6; i++){
-    //    putch (inputs[i]);
-    //}
+}
+
+void doneScreen(){
+    /***** Screen 8 *****/
+    __lcd_clear();
+    printf ("OPERATION DONE!");
+    __lcd_newline();
+    printf ("HIT A");
+    waitA();
 }
 
 /*
@@ -310,7 +359,7 @@ void initStandby(unsigned char * inputs){
 void showResults(unsigned char * inputs, unsigned short int * numRemaining, unsigned short int operationTime){
     int i; //loop variable
     
-    /***** Screen 7 *****/
+    /***** Screen 9 *****/
     __lcd_clear();
     printf ("DONE:%c[", inputs[5]);
     for (i = 0; i<4; i++){
@@ -321,24 +370,18 @@ void showResults(unsigned char * inputs, unsigned short int * numRemaining, unsi
     printf ("x%c]", inputs[4]);
     __lcd_newline();
     printf("TIME:%dS. HIT A", operationTime);
-    while(1){
-            if (getKeyPressed(false) == 'A')
-                break;
-    }
+    waitA();
     
-    /***** Screen 8 *****/
+    /***** Screen 10 *****/
     __lcd_clear();
     printf ("LEFT: %dB,%dN,", numRemaining[0], numRemaining[1]);
     __lcd_newline();
     printf ("%dS,%dW. HIT A", numRemaining[2], numRemaining[3]);
-    while(1){
-            if (getKeyPressed(false) == 'A')
-                break;
-    }
+    waitA();
 }
 
 void showLogs(){
-    boolean onOptionScreen;
+    boolean onOptionScreen, haveEntry;
     unsigned char keyPressed;
     //To be retrieved from memory:
     unsigned char timeEnd [7];
@@ -362,6 +405,12 @@ void showLogs(){
         }
     }
     
-    retrieveResults (inputs, numRemaining, &operationTime, timeEnd, keyPressed-64);
-    showResults (inputs, numRemaining, operationTime); //CHANGE LATER TO INCLUDE REAL TIME END
+    haveEntry = retrieveResults (inputs, numRemaining, &operationTime, timeEnd, keyPressed-64);
+    if (haveEntry)
+        showResults (inputs, numRemaining, operationTime); //CHANGE LATER TO INCLUDE REAL TIME END
+    else {
+        __lcd_clear();
+        printf ("NO ENTRY. HIT A");
+        waitA();
+    }
 }
