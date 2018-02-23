@@ -1,3 +1,10 @@
+/*
+ * File:   glcd.c
+ * Author: Salar Hosseini
+ *
+ * Created on February 22, 2018, 3:56 PM
+ */
+
 #include "prebuilt/glcd_pic.h"
 
 void draw (){

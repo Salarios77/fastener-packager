@@ -137,8 +137,8 @@ boolean checkValid (unsigned short int inputScreenPos, unsigned char * inputs){
             return false;
         case 2: //Sets per step selection
             //Count the fasteners in each compartment
+            numSetsPerStep = (unsigned int)inputs[4]-48;
             for (i = 0; i<4; i++){
-                numSetsPerStep = (unsigned int)inputs[4]-48;
                 switch (inputs[i]){
                     case '0':
                         break;
