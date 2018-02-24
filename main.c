@@ -11,27 +11,27 @@
 #include "prebuilt/glcd_pic.h"
 
 /***** Defines *****/
-#define VIB_TIMER_COUNT 3
+#define VIB_TIMER_COUNT 5
 
 /***** Global Variables *****/
 unsigned volatile char timerCounter = 0; //Timer overflow counter
-unsigned char currFastener = 0; //0-B, 1-W, 2-S, 3-N
+unsigned volatile char currFastener = 0; //0-B, 1-W, 2-S, 3-N
 
 /*
- * f_out = f_clk / (prescaler * (MAX_COUNT - TMR0_loadval))
+ * f_out = f_clk / (4 * prescaler * (MAX_COUNT - TMR0_loadval))
  * 
- * f_clk = FOSC1 = 10MHz (external oscillator)
+ * f_clk = FOSC1 = 32MHz (internal oscillator with PLL)
  * MAX_COUNT = 2^16 for 16-bit mode
  * TMR0_loadval = 0
- * Prescale value = 2^8 = 256 (see pg 123 of PIC18F4620 data sheet for assignment)
+ * Prescale value = 2^7 = 128 (see pg 123 of PIC18F4620 data sheet for assignment)
  *  
- * ==> f_out = 0.60 Hz ==> T_out = 1.68 s
+ * ==> f_out = 0.95 Hz ==> T_out = 1.05 s
  */
 void initVibTimer(){
     T0CONbits.T08BIT = 0;   // 16-bit mode selected
     T0CONbits.T0CS = 0;     // Internal clock selected (timer mode ON)
     T0CONbits.PSA = 0;      // Prescaler assigned
-    T0CONbits.T0PS0 = 1;    // Prescaler values
+    T0CONbits.T0PS0 = 0;    // Prescaler values
     T0CONbits.T0PS1 = 1;    // Prescaler values
     T0CONbits.T0PS2 = 1;    // Prescaler values
     
@@ -80,23 +80,63 @@ void setupAssemblyArrays (unsigned char * inputs, unsigned short int * fasteners
     }
 }
 
-void initOperation(unsigned char * inputs){
+boolean microswitchInput(){
+    int i;
+    for (i = 0; i<150; i++){
+        if (PORTCbits.RC5 == 0)
+            return true;
+        __delay_ms(1);
+    }
+    return false;
+}
+
+boolean dispense (unsigned short int currFastener){
+    boolean pressed = false;
+    switch (currFastener){
+        case 0:
+            LATAbits.LA4 = ~LATAbits.LA4;
+            pressed = microswitchInput();
+            LATAbits.LA4 = ~LATAbits.LA4;
+            break;
+        case 1:
+            LATAbits.LA5 = ~LATAbits.LA5;
+            pressed = microswitchInput();
+            LATAbits.LA5 = ~LATAbits.LA5;
+            break;
+        case 2:
+            LATAbits.LA6 = ~LATAbits.LA6;
+            pressed = microswitchInput();
+            LATAbits.LA6 = ~LATAbits.LA6;
+            break;
+        case 3:
+            LATAbits.LA7 = ~LATAbits.LA7;
+            pressed = microswitchInput();
+            LATAbits.LA7 = ~LATAbits.LA7;
+            break;
+        default:
+            break;
+    }
+    __delay_ms(2000);
+    return pressed;
+}
+
+void initOperation(unsigned char * inputs, unsigned short int * numRemaining){
     unsigned const short WHITE_THRESHOLD = 0x200;
     unsigned const char TAPE_LDR = 0, DEGREE_LDR = 1;
+    unsigned const short int TIME_OPEN_FLAP = 2000;
+    
     unsigned short int fasteners [4] = {0,0,0,0}; //0-B, 1-W, 2-S, 3-N 
     boolean compartments [8] = {0, 0, 0, 0, 0, 0, 0, 0};
-    unsigned short int i;
+    unsigned short int i, j, k; //loop variables
+    boolean detectedFastener;
     
     /* Rotate Box CW until white tape found */
     LATBbits.LB3 = 1;
-    while (readADC(TAPE_LDR) > WHITE_THRESHOLD){
-        continue;
-    }
+    while (readADC(TAPE_LDR) > WHITE_THRESHOLD){ continue; }
     /* Rotate another 360 degrees to ensure compartment open*/
     __delay_ms(500);
-    while (readADC(TAPE_LDR) > WHITE_THRESHOLD){
-        continue;
-    }
+    while (readADC(TAPE_LDR) > WHITE_THRESHOLD) { continue; }
+    LATBbits.LB3 = 0;
     
     /* Enable Timer Interrupt */
     INTCONbits.TMR0IE = 1;
@@ -107,35 +147,71 @@ void initOperation(unsigned char * inputs){
     
     ////////////////////////////////////////////////////////////////////////////
     setupAssemblyArrays(inputs, fasteners, compartments);
+    for (i = 0; i<8; i++){
+        if (i != 0){
+            //rotate box 45 degrees CW
+            LATBbits.LB3 = 1;
+            while (readADC(DEGREE_LDR) > WHITE_THRESHOLD){ continue; }
+            LATBbits.LB3 = 0;
+        }
+        //Check if current compartment needs to be dispensed to
+        if (!compartments[i])
+            continue;
+        //Cycle through every fastener type
+        for (j = 0; j < 4; j++){
+            currFastener = j;
+            for (k = 0; k < fasteners[j]; k++){
+                dispense(j);
+            }
+        }  
+    }
     
+    /* Open extra's flap */
+    LATEbits.LE0 = 1;
+    __delay_ms(TIME_OPEN_FLAP);
+    LATEbits.LE0 = 0;
     
+    /* dispense extras */
+    detectedFastener = true;
+    for (j = 0; j<4; j++){
+        currFastener = j;
+        while (detectedFastener){
+            detectedFastener = dispense(j);
+            if (detectedFastener){
+                //numRemaining was designed for BNSW but operation was designed for BWSN
+                if (j == 1)
+                    numRemaining[3]++;
+                else if (j == 3)
+                    numRemaining[1]++;
+                else
+                    numRemaining[j]++;
+            }
+        }
+    }
+    
+    /* Close extra's flap */
+    LATEbits.LE1 = 1;
+    __delay_ms(TIME_OPEN_FLAP);
+    LATEbits.LE1 = 0;
     ////////////////////////////////////////////////////////////////////////////
+    
+    /* Rotate box 405 degrees CCW */
+    LATBbits.LB2 = 1;
+    __delay_ms(500);
+    while (readADC(TAPE_LDR) > WHITE_THRESHOLD){ continue; }
+    /* Rotate another 45 degrees to ensure compartment closed*/
+    __delay_ms(500);
+    while (readADC(DEGREE_LDR) > WHITE_THRESHOLD) { continue; }
+    LATBbits.LB2 = 0;
     
     /* Disable Timer Interrupt */
     INTCONbits.TMR0IE = 0;
+    //Turn off any vibration motors that could be on
     LATCbits.LC0 = 0;
     LATCbits.LC1 = 0;
     LATCbits.LC2 = 0;
     LATDbits.LD0 = 0;
     di();
-    
-    //OPERATION
-    __delay_ms(3000);
-}
-
-void eepromTest (){
-    unsigned char timeStart [7], timeEnd [7];
-    unsigned char inputs [6] = {'A','0','1','2','3','4'};
-    unsigned short int numRemaining [4] = {24,5,3,15}; //# remaining of each fastener type
-    unsigned short int operationTime = 125;
-    
-    initRTC();
-    
-    getDateTime(timeEnd);
-    saveResults (inputs, numRemaining, operationTime, timeEnd);
-    
-    inputs[0] = 'B';
-    saveResults (inputs, numRemaining, operationTime, timeEnd);
 }
 
 void main(void) {
@@ -145,6 +221,14 @@ void main(void) {
     unsigned short int operationTime;
     
     // <editor-fold defaultstate="collapsed" desc="Machine Configuration">
+    
+    /******************************* OSCILLATOR *******************************/
+    /* Use 8 MHz internal oscillator block with PLL enabled --> 32 MHz */
+    OSCCONbits.IRCF2 = 1;
+    OSCCONbits.IRCF1 = 1;
+    OSCCONbits.IRCF0 = 1;
+    OSCTUNEbits.PLLEN = 1; //PLL enabled for INTOSC
+    
     /********************************* PIN I/O ********************************/
     /* Latches are being cleared to ensure a controlled start-up state. */  
     LATA = 0x00;
@@ -153,17 +237,17 @@ void main(void) {
     LATD = 0x00;
     LATE = 0x00;
 
-    /*After the states of LATx are known, the data direction registers, TRISx
+    /* After the states of LATx are known, the data direction registers, TRISx
      * are configured. Default is  1. */
-    TRISA = 0x0F; 
-    TRISB = 0xF3; // All inputs
-    TRISC = 0xE0; //RC5:7 - Microswitch
-    TRISD = 0x02; // All output mode on port D for the LCD
+    TRISA = 0x03; 
+    TRISB = 0xF3; 
+    TRISC = 0xE0; 
+    TRISD = 0x02; 
     TRISE = 0x00;
     
     /************************** A/D Converter Module **************************/
     ADCON0 = 0x00;  // Disable ADC
-    ADCON1 = 0x0D; // Set all A/D ports to digital (pg. 7-158)
+    ADCON1 = 0x0D; // (only A0, A1 analog - see pg. 7-158)
     ADCON2bits.ADFM = 1; // Right justify A/D result
     
     // </editor-fold>
@@ -178,6 +262,7 @@ void main(void) {
     
     /* Test DC Motor */
     //dcMotorTest();
+    //while(1);
 
     /* Test microswitch */
     //microswitchCountTest();
@@ -194,7 +279,8 @@ void main(void) {
         initStandby(inputs); //Initiate Standby Mode & get inputs
         getDateTime(timeStart);
         //CHANGE RB1 to DC motor control pin
-        initOperation(inputs);
+        //initOperation(inputs);
+        __delay_ms(5000);
         getDateTime(timeEnd);
         operationTime = calcOperationTime (timeStart, timeEnd);
         doneScreen();
@@ -212,6 +298,7 @@ void interrupt interruptHandler(void) {
         INT1IF = 0; //clear flag
     }
     else if (TMR0IE && TMR0IF){ //for timer interrupts
+        timerCounter++;
         if (timerCounter >= VIB_TIMER_COUNT){
             switch (currFastener){
                 case 0:
@@ -231,8 +318,6 @@ void interrupt interruptHandler(void) {
             }
             timerCounter = 0;
         }
-        else
-            timerCounter++;
         TMR0IF = 0; //clear flag
     }
 }

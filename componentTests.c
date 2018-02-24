@@ -27,14 +27,14 @@ void solenoidInterruptTest (){
             LATAbits.LA5 = ~LATAbits.LA5; 
             break;
         case '3':
-            LATEbits.LE0 = ~LATEbits.LE0; 
+            LATAbits.LA6 = ~LATAbits.LA6; 
             __delay_ms(150);
-            LATEbits.LE0 = ~LATEbits.LE0; 
+            LATAbits.LA6 = ~LATAbits.LA6; 
             break;
         case '4':
-            LATEbits.LE1 = ~LATEbits.LE1; 
+            LATAbits.LA7 = ~LATAbits.LA7; 
             __delay_ms(150);
-            LATEbits.LE1 = ~LATEbits.LE1; 
+            LATAbits.LA7 = ~LATAbits.LA7; 
             break;
         default:
             break;
@@ -65,6 +65,21 @@ void microswitchCountTest (){
             pressed = false;
         }
     }
+}
+
+void eepromTest(){
+    unsigned char timeStart [7], timeEnd [7];
+    unsigned char inputs [6] = {'A','0','1','2','3','4'};
+    unsigned short int numRemaining [4] = {24,5,3,15}; //# remaining of each fastener type
+    unsigned short int operationTime = 125;
+    
+    initRTC();
+    
+    getDateTime(timeEnd);
+    saveResults (inputs, numRemaining, operationTime, timeEnd);
+    
+    inputs[0] = 'B';
+    saveResults (inputs, numRemaining, operationTime, timeEnd);
 }
 
 /*
@@ -114,8 +129,8 @@ void ldrTest(){
 
 void dcMotorTest(){
     LATBbits.LB3 = ~LATBbits.LB3;
-    LATBbits.LB2 = ~LATBbits.LB2;
-    __delay_ms(5000);
-    LATBbits.LB3 = ~LATBbits.LB3;
-    LATBbits.LB2 = ~LATBbits.LB2;
+    //LATBbits.LB2 = ~LATBbits.LB2;
+    //__delay_ms(5000);
+    //LATBbits.LB3 = ~LATBbits.LB3;
+    //LATBbits.LB2 = ~LATBbits.LB2;
 }
