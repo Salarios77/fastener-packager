@@ -8,6 +8,7 @@
 #include "prebuilt/glcd_pic.h"
 
 void draw (){
+    // <editor-fold defaultstate="collapsed" desc="GLCD Pixels">
     glcdDrawPixel(5, 9, 0xb6903a);
     glcdDrawPixel(5, 20, 0x903a00);
     glcdDrawPixel(5, 35, 0xb66600);
@@ -1657,5 +1658,5 @@ void draw (){
     glcdDrawPixel(122, 70, 0x3a90);
     glcdDrawPixel(123, 59, 0xdbffff);
     glcdDrawPixel(123, 70, 0xdbffff);
-
+    // </editor-fold>
 }

@@ -138,6 +138,8 @@ boolean checkValid (unsigned short int inputScreenPos, unsigned char * inputs){
         case 2: //Sets per step selection
             //Count the fasteners in each compartment
             numSetsPerStep = (unsigned int)inputs[4]-48;
+            if (numSetsPerStep == 0)
+                return false;
             for (i = 0; i<4; i++){
                 switch (inputs[i]){
                     case '0':
@@ -246,6 +248,7 @@ void getInputs (unsigned char * inputs){
                         keyCount--;
                         switch (screenPos){
                             case 1:
+                                inputs[keyCount] = '0';
                                 printf ("SET? HIT 1,2,3,4");
                                 __lcd_newline();
                                 printf ("FOR BNSW: ");
@@ -254,11 +257,13 @@ void getInputs (unsigned char * inputs){
                                 }
                                 break;
                             case 2:
+                                inputs[4] = '0';
                                 printf ("NUMBER OF SETS");
                                 __lcd_newline();
                                 printf ("PER STEP? ");
                                 break;
                             case 3:
+                                inputs[5] = '0';
                                 printf ("NUMBER OF STEPS");
                                 __lcd_newline();
                                 printf ("IN ASSEMBLY? ");

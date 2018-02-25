@@ -49,7 +49,7 @@ void RTC_setTime(){
 /*
  * @param time: the time to be determined - {YY,MM,DD,WEEKDAY,HH,MM,SS}
  */
-void getDateTime (unsigned char time [7]){
+void getDateTime (unsigned char * time){
     unsigned char i; // Loop counter
 
     /* Reset RTC memory pointer. */

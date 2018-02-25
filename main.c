@@ -12,6 +12,10 @@
 
 /***** Defines *****/
 #define VIB_TIMER_COUNT 5
+#define WHITE_THRESHOLD 0x200
+#define TAPE_LDR 0
+#define DEGREE_LDR 1
+#define TIME_OPEN_FLAP 2000
 
 /***** Global Variables *****/
 unsigned volatile char timerCounter = 0; //Timer overflow counter
@@ -48,13 +52,12 @@ void initVibTimer(){
  * For a 7 or 8-step assembly, compartments must be filled in consecutively, starting from C1.
  */
 void setupAssemblyArrays (unsigned char * inputs, unsigned short int * fasteners, boolean * compartments){
-    unsigned short int i, numSetsPerStep = (unsigned int)inputs[4]-48;
+    unsigned short int i, numSetsPerStep = (unsigned short int)inputs[4]-48;
     const boolean CMPARTS [5][8] = {{1, 0, 1, 0, 1, 0, 1, 0},
                                     {1, 1, 0, 1, 1, 0, 1, 0},
                                     {1, 1, 1, 0, 1, 1, 1, 0},
                                     {1, 1, 1, 1, 1, 1, 1, 0},
-                                    {1, 1, 1, 1, 1, 1, 1, 1}};
-                                   
+                                    {1, 1, 1, 1, 1, 1, 1, 1}};                                
     for (i = 0; i<4; i++){
         switch (inputs[i]) {
             case '0':
@@ -76,15 +79,34 @@ void setupAssemblyArrays (unsigned char * inputs, unsigned short int * fasteners
         }
     }
     for (i = 0; i<7; i++){
-        compartments[i] = CMPARTS[(unsigned int)inputs[5]-48-1][i];
+        compartments[i] = CMPARTS[(unsigned int)inputs[5]-48-4][i];
     }
 }
 
-boolean microswitchInput(){
-    int i;
-    for (i = 0; i<150; i++){
-        if (PORTCbits.RC5 == 0)
-            return true;
+boolean microswitchInput(unsigned short int currFastener){
+    unsigned int DETECT_TIME = 150;
+    unsigned int i;
+    for (i = 0; i < DETECT_TIME; i++){
+        switch (currFastener){
+            case 0:
+                if (PORTCbits.RC5 == 0)
+                    return true;
+                break;
+            case 1:
+                if (PORTCbits.RC6 == 0)
+                    return true;
+                break;
+            case 2:
+                if (PORTCbits.RC7 == 0)
+                    return true;
+                break;
+            case 3:
+                if (PORTDbits.RD1 == 0)
+                    return true;
+                break;
+            default:
+                break;
+        }
         __delay_ms(1);
     }
     return false;
@@ -95,22 +117,22 @@ boolean dispense (unsigned short int currFastener){
     switch (currFastener){
         case 0:
             LATAbits.LA4 = ~LATAbits.LA4;
-            pressed = microswitchInput();
+            pressed = microswitchInput(currFastener);
             LATAbits.LA4 = ~LATAbits.LA4;
             break;
         case 1:
             LATAbits.LA5 = ~LATAbits.LA5;
-            pressed = microswitchInput();
+            pressed = microswitchInput(currFastener);
             LATAbits.LA5 = ~LATAbits.LA5;
             break;
         case 2:
             LATAbits.LA6 = ~LATAbits.LA6;
-            pressed = microswitchInput();
+            pressed = microswitchInput(currFastener);
             LATAbits.LA6 = ~LATAbits.LA6;
             break;
         case 3:
             LATAbits.LA7 = ~LATAbits.LA7;
-            pressed = microswitchInput();
+            pressed = microswitchInput(currFastener);
             LATAbits.LA7 = ~LATAbits.LA7;
             break;
         default:
@@ -120,11 +142,11 @@ boolean dispense (unsigned short int currFastener){
     return pressed;
 }
 
+/*
+ * @param inputs - char arr of inputs (size 6)
+ * @param numRemaining - int array of fasteners remaining (size 4)
+ */
 void initOperation(unsigned char * inputs, unsigned short int * numRemaining){
-    unsigned const short WHITE_THRESHOLD = 0x200;
-    unsigned const char TAPE_LDR = 0, DEGREE_LDR = 1;
-    unsigned const short int TIME_OPEN_FLAP = 2000;
-    
     unsigned short int fasteners [4] = {0,0,0,0}; //0-B, 1-W, 2-S, 3-N 
     boolean compartments [8] = {0, 0, 0, 0, 0, 0, 0, 0};
     unsigned short int i, j, k; //loop variables
@@ -147,6 +169,25 @@ void initOperation(unsigned char * inputs, unsigned short int * numRemaining){
     
     ////////////////////////////////////////////////////////////////////////////
     setupAssemblyArrays(inputs, fasteners, compartments);
+    
+    // <editor-fold defaultstate="collapsed" desc="For Debugging">
+    /*
+    __lcd_clear();
+    for (i = 0; i < 6; i++){
+        putch (inputs[i]);
+    }
+    putch (' ');
+    for (i = 0; i < 4; i++){
+        putch (fasteners[i]+48);
+    }
+    __lcd_newline();
+    for (i = 0; i < 8; i++){
+        putch (compartments[i]+48);
+    }    
+    while(1);
+    */
+    // </editor-fold>
+        
     for (i = 0; i<8; i++){
         if (i != 0){
             //rotate box 45 degrees CW
@@ -166,6 +207,7 @@ void initOperation(unsigned char * inputs, unsigned short int * numRemaining){
         }  
     }
     
+    ////////////////////////////////////////////////////////////////////////////
     /* Open extra's flap */
     LATEbits.LE0 = 1;
     __delay_ms(TIME_OPEN_FLAP);
@@ -252,6 +294,8 @@ void main(void) {
     
     // </editor-fold>
     
+    // <editor-fold defaultstate="collapsed" desc="Testing Block">
+    
     //INTCON3bits.INT1IE = 1; //enable INT1 external interrupt 
     //ei (); //INTCONbits.GIE = 1
     
@@ -266,6 +310,7 @@ void main(void) {
 
     /* Test microswitch */
     //microswitchCountTest();
+    // </editor-fold>
     
     ////////////////////////////////////////////////////////////////////////////
     
@@ -278,9 +323,8 @@ void main(void) {
     while(1){
         initStandby(inputs); //Initiate Standby Mode & get inputs
         getDateTime(timeStart);
-        //CHANGE RB1 to DC motor control pin
-        //initOperation(inputs);
-        __delay_ms(5000);
+        //initOperation(inputs, numRemaining);
+        __delay_ms(3000);
         getDateTime(timeEnd);
         operationTime = calcOperationTime (timeStart, timeEnd);
         doneScreen();
