@@ -11,7 +11,7 @@
 #include "prebuilt/glcd_pic.h"
 
 /***** Defines *****/
-#define VIB_TIMER_COUNT 5
+#define VIB_TIMER_COUNT 1
 #define WHITE_THRESHOLD 0x200
 #define TAPE_LDR 0
 #define DEGREE_LDR 1
@@ -27,16 +27,16 @@ unsigned volatile char currFastener = 0; //0-B, 1-W, 2-S, 3-N
  * f_clk = FOSC1 = 32MHz (internal oscillator with PLL)
  * MAX_COUNT = 2^16 for 16-bit mode
  * TMR0_loadval = 0
- * Prescale value = 2^7 = 128 (see pg 123 of PIC18F4620 data sheet for assignment)
+ * Prescale value = 2^6 = 64 (see pg 123 of PIC18F4620 data sheet for assignment)
  *  
- * ==> f_out = 0.95 Hz ==> T_out = 1.05 s
+ * ==> f_out = 1.9 Hz ==> T_out = 0.55 s
  */
 void initVibTimer(){
     T0CONbits.T08BIT = 0;   // 16-bit mode selected
     T0CONbits.T0CS = 0;     // Internal clock selected (timer mode ON)
     T0CONbits.PSA = 0;      // Prescaler assigned
-    T0CONbits.T0PS0 = 0;    // Prescaler values
-    T0CONbits.T0PS1 = 1;    // Prescaler values
+    T0CONbits.T0PS0 = 1;    // Prescaler values
+    T0CONbits.T0PS1 = 0;    // Prescaler values
     T0CONbits.T0PS2 = 1;    // Prescaler values
     
     T0CONbits.TMR0ON = 1;   // Turn ON the timer
@@ -296,8 +296,8 @@ void main(void) {
     
     // <editor-fold defaultstate="collapsed" desc="Testing Block">
     
-    //INTCON3bits.INT1IE = 1; //enable INT1 external interrupt 
-    //ei (); //INTCONbits.GIE = 1
+    INTCON3bits.INT1IE = 1; //enable INT1 external interrupt 
+    ei (); //INTCONbits.GIE = 1
     
     //eepromTest();
 
@@ -315,22 +315,29 @@ void main(void) {
     ////////////////////////////////////////////////////////////////////////////
     
     /* Initialize GLCD. */
-    initGLCD();
-    glcdDrawRectangle(0, GLCD_SIZE_HORZ, 0, GLCD_SIZE_VERT, WHITE);
-    draw();
+    //initGLCD();
+    //glcdDrawRectangle(0, GLCD_SIZE_HORZ, 0, GLCD_SIZE_VERT, WHITE);
+    //draw();
+    
+    //rotateTest();
+    initLCD();
+    printf ("Ready for test");
+    while(1);
     
     /* Main Operation */
+    /*
     while(1){
         initStandby(inputs); //Initiate Standby Mode & get inputs
         getDateTime(timeStart);
-        //initOperation(inputs, numRemaining);
-        __delay_ms(3000);
+        initOperation(inputs, numRemaining);
+        //__delay_ms(3000);
         getDateTime(timeEnd);
         operationTime = calcOperationTime (timeStart, timeEnd);
         doneScreen();
         showResults(inputs, numRemaining, operationTime);
         saveResults(inputs, numRemaining, operationTime, timeEnd);
     }
+    */
 }
 
 //GLOBAL VARIABLES MODIFIED IN ANY ISR should be declared volatile 
@@ -338,7 +345,9 @@ void interrupt interruptHandler(void) {
     //check both the interrupt enable and interrupt flag for INT1 interrupt
     if (INT1IE && INT1IF){ 
         /* Solenoid test */
-        solenoidInterruptTest();
+        //solenoidInterruptTest();
+        week8Test();
+        //rotateTest();
         INT1IF = 0; //clear flag
     }
     else if (TMR0IE && TMR0IF){ //for timer interrupts

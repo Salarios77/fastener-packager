@@ -21,5 +21,7 @@ void eepromTest(void);
 unsigned short readADC(char channel);
 void ldrTest (void);
 void dcMotorTest(void);
+void rotateTest(void);
+void week8Test (void);
 
 #endif /* COMPONENT_TESTS_H */
