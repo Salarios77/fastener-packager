@@ -57,10 +57,17 @@ void microswitchCountTest (){
     printf ("counter: %d", counter);
     
     while(1){
-        if (!pressed && PORTCbits.RC7 == 0){
+        if (!pressed && (PORTCbits.RC5 == 0 || PORTCbits.RC6 == 0 || PORTCbits.RC7 == 0 || PORTDbits.RD1 == 0)){
             pressed = true;
             //LATAbits.LA1 = ~LATAbits.LA1;
-            counter ++;
+            if (PORTCbits.RC5 == 0)
+                counter ++;
+            else if (PORTCbits.RC6 == 0)
+                counter += 2;
+            else if (PORTCbits.RC7 == 0)
+                counter += 3;
+            else if (PORTDbits.RD1 == 0)
+                counter += 4;
             __lcd_clear();
             printf ("counter: %d", counter);
         }
@@ -122,9 +129,11 @@ void ldrTest(){
         * registers will be easily visible; ADRESL corresponds to the two least
         * significant digits, while ADRESH corresponds to the most significant 
         * bit. */
-       printf("RA0: %.3x", readADC(0));
+       //printf("RA0: %.3x", readADC(0));
+       printf("RA0: %d", readADC(0));
        __lcd_newline();
-       printf("RA1: %.3x", readADC(1));
+       printf("RA1: %d", readADC(1));
+       //printf("RA1: %.3x", readADC(1));
        
        __delay_ms(100);
     }
@@ -155,7 +164,7 @@ void initVibTimerTest(){
     T0CONbits.T0PS1 = 1;    // Prescaler values
     T0CONbits.T0PS2 = 1;    // Prescaler values
     
-    T0CONbits.TMR0ON = 1;   // Turn ON the timer
+    T0CONbits.TMR0ON = 1;   // Turn ON the timer 
 }
 
 void rotateTest(){
@@ -164,14 +173,38 @@ void rotateTest(){
     LATAbits.LA2 = 1; //enable
     LATBbits.LB3 = 1;
     //while (readADC(0) > WHITE_THRESHOLD){ continue; }
-    __delay_ms(3000);
+    __delay_ms(2500);
+    LATBbits.LB2 = 1;
     LATBbits.LB3 = 0;
+    __delay_ms(2500);
+    LATBbits.LB2 = 0;
     LATAbits.LA2 = 0; //disable
+}
+
+void rotateTest2(){
+    LATAbits.LA3 = 1; //enable
+    LATEbits.LE1 = 0;
+    LATEbits.LE0 = 1;
+    __delay_ms(22);
+    LATEbits.LE0 = 0;
+    __delay_ms(22);
+    LATAbits.LA3 = 0; //disable
+}
+
+void rotateTest3(){
+    LATAbits.LA3 = 1; //enable
+    LATEbits.LE0 = 0;
+    LATEbits.LE1 = 1;
+    __delay_ms(20);
+    LATEbits.LE1 = 0;
+    __delay_ms(20);
+    LATAbits.LA3 = 0; //disable
 }
 
 void week8Test (){
     unsigned char keypress = (PORTB & 0xF0) >> 4;
     switch (keys[keypress]){
+        /*
         case 'A':
             LATAbits.LA4 = ~LATAbits.LA4;
             __delay_ms(150);
@@ -189,16 +222,20 @@ void week8Test (){
             break;
         case 'D':
             LATAbits.LA7 = ~LATAbits.LA7;
-            //__delay_ms(150);
-            //LATAbits.LA7 = ~LATAbits.LA7;
+            __delay_ms(150);
+            LATAbits.LA7 = ~LATAbits.LA7;
             break;
+        */
         case '1':
-            //solenoidInterruptTest();
+            rotateTest2();
             break;
-        case '2':
-            //dcMotorTest();
-            rotateTest();
+        case '#':
+            rotateTest3();
             break;
+        //case '2':
+        //    //dcMotorTest();
+        //    rotateTest();
+        //    break;
         case '3':
             ldrTest();
             break;
@@ -210,12 +247,15 @@ void week8Test (){
             /* Set up vibration motor timer */
             initVibTimerTest();
             break;
-        case '5':
+        case '5': 
+            microswitchCountTest();
+        case '6':
+            /*
             __lcd_newline();
             printf ("Operation");
-            /* Enable Timer Interrupt */
+            // Enable Timer Interrupt 
             INTCONbits.TMR0IE = 1;
-            /* Set up vibration motor timer */
+            // Set up vibration motor timer 
             initVibTimerTest();
             
             __delay_ms (5000);
@@ -225,7 +265,7 @@ void week8Test (){
             __delay_ms(150);
             LATAbits.LA5 = ~LATAbits.LA5;
             
-            __delay_ms (3000); //wait fall
+            __delay_ms (1000); //wait fall
             
             rotateTest();
             
@@ -247,7 +287,7 @@ void week8Test (){
             __delay_ms(150);
             LATAbits.LA5 = ~LATAbits.LA5;
             
-            
+            */
             break;
         default:
             break;

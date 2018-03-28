@@ -12,14 +12,16 @@
 
 /***** Defines *****/
 #define VIB_TIMER_COUNT 1
-#define WHITE_THRESHOLD 0x200
+#define WHITE_THRESHOLD 410
 #define TAPE_LDR 0
 #define DEGREE_LDR 1
-#define TIME_OPEN_FLAP 2000
+#define TIME_OPEN_FLAP 50
 
 /***** Global Variables *****/
 unsigned volatile char timerCounter = 0; //Timer overflow counter
 unsigned volatile char currFastener = 0; //0-B, 1-W, 2-S, 3-N
+
+volatile int counter = 0;
 
 /*
  * f_out = f_clk / (4 * prescaler * (MAX_COUNT - TMR0_loadval))
@@ -40,6 +42,29 @@ void initVibTimer(){
     T0CONbits.T0PS2 = 1;    // Prescaler values
     
     T0CONbits.TMR0ON = 1;   // Turn ON the timer
+}
+
+void rotate45(){
+    //rotate box 45 degrees CW
+    LATAbits.LA2 = 1; //enable
+    LATBbits.LB3 = 1;
+    __delay_ms(750);
+    boolean found = false;
+    while (!found){
+                    
+        __lcd_clear();
+        while (readADC(DEGREE_LDR) > WHITE_THRESHOLD){ continue; }
+        __delay_ms(1);
+                    
+        if (readADC(DEGREE_LDR) < WHITE_THRESHOLD){
+            found = true;
+            __lcd_clear();
+            printf ("found");
+        }
+    }
+    LATBbits.LB3 = 0;
+    __delay_ms (150);
+    LATAbits.LA2 = 0; //disable
 }
 
 /*
@@ -84,25 +109,41 @@ void setupAssemblyArrays (unsigned char * inputs, unsigned short int * fasteners
 }
 
 boolean microswitchInput(unsigned short int currFastener){
-    unsigned int DETECT_TIME = 150;
+    unsigned int DETECT_TIME = 75;
     unsigned int i;
     for (i = 0; i < DETECT_TIME; i++){
         switch (currFastener){
             case 0:
-                if (PORTCbits.RC5 == 0)
-                    return true;
+                if (PORTCbits.RC5 == 0){
+                    __delay_ms(1);
+                    if (PORTCbits.RC5 == 0){
+                        return true;
+                    }
+                }
                 break;
             case 1:
-                if (PORTCbits.RC6 == 0)
-                    return true;
+                if (PORTCbits.RC6 == 0){
+                    __delay_ms(1);
+                    if (PORTCbits.RC6 == 0){
+                        return true;
+                    }
+                }
                 break;
             case 2:
-                if (PORTCbits.RC7 == 0)
-                    return true;
+                if (PORTDbits.RD1 == 0){
+                    __delay_ms(1);
+                    if (PORTDbits.RD1 == 0){
+                        return true;
+                    }
+                }
                 break;
             case 3:
-                if (PORTDbits.RD1 == 0)
-                    return true;
+                if (PORTCbits.RC7 == 0){
+                    __delay_ms(1);
+                    if (PORTCbits.RC7 == 0){
+                        return true;
+                    }
+                }
                 break;
             default:
                 break;
@@ -152,14 +193,19 @@ void initOperation(unsigned char * inputs, unsigned short int * numRemaining){
     unsigned short int i, j, k; //loop variables
     boolean detectedFastener;
     
-    /* Rotate Box CW until white tape found */
+    // Rotate Box CW until white tape found 
+    /*
+    LATAbits.LA2 = 1; //enable
     LATBbits.LB3 = 1;
     while (readADC(TAPE_LDR) > WHITE_THRESHOLD){ continue; }
-    /* Rotate another 360 degrees to ensure compartment open*/
-    __delay_ms(500);
+    // Rotate another 360 degrees to ensure compartment open
+    __delay_ms(250);
     while (readADC(TAPE_LDR) > WHITE_THRESHOLD) { continue; }
     LATBbits.LB3 = 0;
-    
+    __delay_ms(150);
+    LATAbits.LA2 = 0; //disable
+    */
+            
     /* Enable Timer Interrupt */
     INTCONbits.TMR0IE = 1;
     //INTCONbits.INT0IE = 1; //default falling edge
@@ -191,16 +237,21 @@ void initOperation(unsigned char * inputs, unsigned short int * numRemaining){
     for (i = 0; i<8; i++){
         if (i != 0){
             //rotate box 45 degrees CW
-            LATBbits.LB3 = 1;
-            while (readADC(DEGREE_LDR) > WHITE_THRESHOLD){ continue; }
-            LATBbits.LB3 = 0;
+            rotate45();
         }
         //Check if current compartment needs to be dispensed to
         if (!compartments[i])
             continue;
         //Cycle through every fastener type
         for (j = 0; j < 4; j++){
-            currFastener = j;
+            if (fasteners[j] > 0){
+                LATCbits.LC0 = 0;
+                LATCbits.LC1 = 0;
+                LATCbits.LC2 = 0;
+                LATDbits.LD0 = 0;
+                currFastener = j;
+                __delay_ms (3000);
+            }
             for (k = 0; k < fasteners[j]; k++){
                 dispense(j);
             }
@@ -208,12 +259,16 @@ void initOperation(unsigned char * inputs, unsigned short int * numRemaining){
     }
     
     ////////////////////////////////////////////////////////////////////////////
-    /* Open extra's flap */
+    /*
+    // Open extra's flap 
+    LATAbits.LA3 = 1; //enable
     LATEbits.LE0 = 1;
     __delay_ms(TIME_OPEN_FLAP);
     LATEbits.LE0 = 0;
+    __delay_ms(150);
+    LATAbits.LA3 = 0; //disable
     
-    /* dispense extras */
+    // dispense extras
     detectedFastener = true;
     for (j = 0; j<4; j++){
         currFastener = j;
@@ -231,20 +286,28 @@ void initOperation(unsigned char * inputs, unsigned short int * numRemaining){
         }
     }
     
-    /* Close extra's flap */
+    // Close extra's flap 
+    LATAbits.LA3 = 1; //enable
     LATEbits.LE1 = 1;
     __delay_ms(TIME_OPEN_FLAP);
     LATEbits.LE1 = 0;
+    __delay_ms(150);
+    LATAbits.LA3 = 0; //disable
     ////////////////////////////////////////////////////////////////////////////
     
-    /* Rotate box 405 degrees CCW */
+    // Rotate box 405 degrees CCW 
+    LATAbits.LA2 = 1; //enable
     LATBbits.LB2 = 1;
-    __delay_ms(500);
+    __delay_ms(250);
     while (readADC(TAPE_LDR) > WHITE_THRESHOLD){ continue; }
-    /* Rotate another 45 degrees to ensure compartment closed*/
-    __delay_ms(500);
+    // Rotate another 45 degrees to ensure compartment closed
+    __delay_ms(250);
     while (readADC(DEGREE_LDR) > WHITE_THRESHOLD) { continue; }
     LATBbits.LB2 = 0;
+    __delay_ms(150);
+    LATAbits.LA2 = 0; //disable
+    
+    */
     
     /* Disable Timer Interrupt */
     INTCONbits.TMR0IE = 0;
@@ -296,9 +359,9 @@ void main(void) {
     
     // <editor-fold defaultstate="collapsed" desc="Testing Block">
     
-    INTCON3bits.INT1IE = 1; //enable INT1 external interrupt 
-    ei (); //INTCONbits.GIE = 1
-    
+    //INTCON3bits.INT1IE = 1; //enable INT1 external interrupt 
+    //ei (); //INTCONbits.GIE = 1
+    di();
     //eepromTest();
 
     /* Test LDR */
@@ -315,17 +378,21 @@ void main(void) {
     ////////////////////////////////////////////////////////////////////////////
     
     /* Initialize GLCD. */
-    //initGLCD();
-    //glcdDrawRectangle(0, GLCD_SIZE_HORZ, 0, GLCD_SIZE_VERT, WHITE);
-    //draw();
+    initGLCD();
+    glcdDrawRectangle(0, GLCD_SIZE_HORZ, 0, GLCD_SIZE_VERT, WHITE);
+    draw();
     
-    //rotateTest();
+    LATD = 0x00;
+    
+    INTCON3bits.INT1IE = 1; //enable INT1 external interrupt 
+    ei (); //INTCONbits.GIE = 1
     initLCD();
     printf ("Ready for test");
+    
     while(1);
     
     /* Main Operation */
-    /*
+    
     while(1){
         initStandby(inputs); //Initiate Standby Mode & get inputs
         getDateTime(timeStart);
@@ -337,20 +404,124 @@ void main(void) {
         showResults(inputs, numRemaining, operationTime);
         saveResults(inputs, numRemaining, operationTime, timeEnd);
     }
-    */
+    
 }
 
 //GLOBAL VARIABLES MODIFIED IN ANY ISR should be declared volatile 
 void interrupt interruptHandler(void) {
     //check both the interrupt enable and interrupt flag for INT1 interrupt
+    
     if (INT1IE && INT1IF){ 
-        /* Solenoid test */
+        // Solenoid test 
         //solenoidInterruptTest();
-        week8Test();
+        
+        const unsigned char keys[] = "123A456B789C*0#D";
+        unsigned char keypress = (PORTB & 0xF0) >> 4;
+        int i;
+        boolean pressed;
+        switch (keys[keypress]){
+            /*
+            case 'A':
+                pressed = dispense(0);
+                __lcd_clear();
+                if (pressed)
+                    counter ++;
+                printf ("Pressed A: %d", counter);
+                break;
+            case 'B':
+                pressed = dispense(1);
+                __lcd_clear();
+                if (pressed)
+                    counter ++;
+                printf ("Pressed B: %d", counter);
+                break;
+            case 'C':
+                pressed = dispense(2);
+                __lcd_clear();
+                if (pressed)
+                    counter ++;
+                printf ("Pressed C: %d", counter);
+                break;
+            case 'D':
+                pressed = dispense(3);
+                __lcd_clear();
+                if (pressed)
+                    counter ++;
+                printf ("Pressed D: %d", counter);
+                break;
+            
+            case '1':
+                rotateTest2();
+                break;
+            case '#':
+                rotateTest3();
+                break;
+            */
+            case '2':
+                rotate45();
+                break;
+            
+            case '6':                
+                __lcd_newline();
+                printf ("Operation");
+                // Enable Timer Interrupt 
+                INTCONbits.TMR0IE = 1;
+                // Set up vibration motor timer 
+                initVibTimerTest();
+                ei();
+                
+                //SPACERS
+                currFastener = 2;
+                __delay_ms (5000);
+
+                //push
+                for (i = 0; i<3; i++) {
+                    dispense(3);
+                    __delay_ms(1000);
+                }
+
+                //WASHERS
+                currFastener = 1;
+                __delay_ms (5000);
+
+                //push
+                for (i = 0; i<3; i++) {
+                    dispense(1);
+                    __delay_ms(1000);
+                }
+                rotate45();
+                
+                //reset
+                LATA = 0x00;
+                LATB = 0x00; 
+                LATC = 0x00;
+                LATD = 0x00;
+                LATE = 0x00;
+                break;
+            /*
+            case '7':
+                currFastener = 0;
+                break;
+            case '8':
+                currFastener = 1;
+                break;
+            case '9':
+                currFastener = 2;
+                break;
+            case '0':
+                currFastener = 3;
+                break;
+            default:
+                break;
+            */
+        }
+        
+        //week8Test();
         //rotateTest();
         INT1IF = 0; //clear flag
     }
-    else if (TMR0IE && TMR0IF){ //for timer interrupts
+    
+    if (TMR0IE && TMR0IF){ //for timer interrupts
         timerCounter++;
         if (timerCounter >= VIB_TIMER_COUNT){
             switch (currFastener){
@@ -358,13 +529,15 @@ void interrupt interruptHandler(void) {
                     LATCbits.LC0 = ~LATCbits.LC0;
                     break;
                 case 1:
-                    LATCbits.LC1 = ~LATCbits.LC1;
+                    //LATCbits.LC1 = ~LATCbits.LC1;
+                    LATDbits.LD0 = ~LATDbits.LD0;
                     break;
                 case 2:
-                    LATCbits.LC2 = ~LATCbits.LC2;
+                    LATCbits.LC1 = ~LATCbits.LC1;
+                    
                     break;
                 case 3:
-                    LATDbits.LD0 = ~LATDbits.LD0;
+                    LATCbits.LC2 = ~LATCbits.LC2;
                     break;
                 default:
                     break;
