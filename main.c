@@ -44,6 +44,29 @@ void initVibTimer(){
     T0CONbits.TMR0ON = 1;   // Turn ON the timer
 }
 
+void rotateTillTape(){
+    //rotate box CW
+    LATAbits.LA2 = 1; //enable
+    LATBbits.LB3 = 1;
+    __delay_ms(750);
+    boolean found = false;
+    while (!found){
+                    
+        __lcd_clear();
+        while (readADC(TAPE_LDR) > WHITE_THRESHOLD + 20){ continue; }
+        __delay_ms(1);
+                    
+        if (readADC(TAPE_LDR) < WHITE_THRESHOLD + 20){
+            found = true;
+            __lcd_clear();
+            printf ("found");
+        }
+    }
+    LATBbits.LB3 = 0;
+    __delay_ms (150);
+    LATAbits.LA2 = 0; //disable
+}
+
 void rotate45(){
     //rotate box 45 degrees CW
     LATAbits.LA2 = 1; //enable
@@ -136,6 +159,7 @@ boolean microswitchInput(unsigned short int currFastener){
                         return true;
                     }
                 }
+                __delay_ms(1);
                 break;
             case 3:
                 if (PORTCbits.RC7 == 0){
@@ -168,6 +192,7 @@ boolean dispense (unsigned short int currFastener){
             break;
         case 2:
             LATAbits.LA6 = ~LATAbits.LA6;
+            //__delay_ms(500);
             pressed = microswitchInput(currFastener);
             LATAbits.LA6 = ~LATAbits.LA6;
             break;
@@ -319,22 +344,7 @@ void initOperation(unsigned char * inputs, unsigned short int * numRemaining){
     di();
 }
 
-void main(void) {
-    unsigned char timeStart [7], timeEnd [7];
-    unsigned char inputs [6] = {'0','0','0','0','0','0'};
-    unsigned short int numRemaining [4] = {0,0,0,0}; //# remaining of each fastener type
-    unsigned short int operationTime;
-    
-    // <editor-fold defaultstate="collapsed" desc="Machine Configuration">
-    
-    /******************************* OSCILLATOR *******************************/
-    /* Use 8 MHz internal oscillator block with PLL enabled --> 32 MHz */
-    OSCCONbits.IRCF2 = 1;
-    OSCCONbits.IRCF1 = 1;
-    OSCCONbits.IRCF0 = 1;
-    OSCTUNEbits.PLLEN = 1; //PLL enabled for INTOSC
-    
-    /********************************* PIN I/O ********************************/
+void pinConfig (){
     /* Latches are being cleared to ensure a controlled start-up state. */  
     LATA = 0x00;
     LATB = 0x00; 
@@ -349,6 +359,27 @@ void main(void) {
     TRISC = 0xE0; 
     TRISD = 0x02; 
     TRISE = 0x00;
+}
+
+void main(void) {
+    unsigned char timeStart [7], timeEnd [7];
+    unsigned char inputs [6] = {'0','0','0','0','0','0'};
+    unsigned short int numRemaining [4] = {0,0,0,0}; //# remaining of each fastener type
+    unsigned short int operationTime;
+    
+    // <editor-fold defaultstate="collapsed" desc="Machine Configuration">
+    
+    /******************************* OSCILLATOR *******************************/
+    //OSCCON = 0xF2;
+    
+    /* Use 8 MHz internal oscillator block with PLL enabled --> 32 MHz */
+    OSCCONbits.IRCF2 = 1;
+    OSCCONbits.IRCF1 = 1;
+    OSCCONbits.IRCF0 = 1;
+    OSCTUNEbits.PLLEN = 1; //PLL enabled for INTOSC
+    
+    /********************************* PIN I/O ********************************/
+    pinConfig();
     
     /************************** A/D Converter Module **************************/
     ADCON0 = 0x00;  // Disable ADC
@@ -378,21 +409,24 @@ void main(void) {
     ////////////////////////////////////////////////////////////////////////////
     
     /* Initialize GLCD. */
+    
     initGLCD();
     glcdDrawRectangle(0, GLCD_SIZE_HORZ, 0, GLCD_SIZE_VERT, WHITE);
     draw();
     
-    LATD = 0x00;
+    //fix pins after using GLCD
+    //pinConfig();
     
+    /*
     INTCON3bits.INT1IE = 1; //enable INT1 external interrupt 
     ei (); //INTCONbits.GIE = 1
     initLCD();
     printf ("Ready for test");
     
     while(1);
-    
+    */
     /* Main Operation */
-    
+    /*
     while(1){
         initStandby(inputs); //Initiate Standby Mode & get inputs
         getDateTime(timeStart);
@@ -404,7 +438,7 @@ void main(void) {
         showResults(inputs, numRemaining, operationTime);
         saveResults(inputs, numRemaining, operationTime, timeEnd);
     }
-    
+    */
 }
 
 //GLOBAL VARIABLES MODIFIED IN ANY ISR should be declared volatile 
@@ -420,7 +454,7 @@ void interrupt interruptHandler(void) {
         int i;
         boolean pressed;
         switch (keys[keypress]){
-            /*
+            
             case 'A':
                 pressed = dispense(0);
                 __lcd_clear();
@@ -453,10 +487,13 @@ void interrupt interruptHandler(void) {
             case '1':
                 rotateTest2();
                 break;
+            case '*':
+                rotateTillTape();
+                break;
             case '#':
                 rotateTest3();
                 break;
-            */
+            
             case '2':
                 rotate45();
                 break;
@@ -498,7 +535,7 @@ void interrupt interruptHandler(void) {
                 LATD = 0x00;
                 LATE = 0x00;
                 break;
-            /*
+            
             case '7':
                 currFastener = 0;
                 break;
@@ -513,10 +550,10 @@ void interrupt interruptHandler(void) {
                 break;
             default:
                 break;
-            */
+            
         }
         
-        //week8Test();
+        week8Test();
         //rotateTest();
         INT1IF = 0; //clear flag
     }

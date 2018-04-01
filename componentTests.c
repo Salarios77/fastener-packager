@@ -132,7 +132,7 @@ void ldrTest(){
        //printf("RA0: %.3x", readADC(0));
        printf("RA0: %d", readADC(0));
        __lcd_newline();
-       printf("RA1: %d", readADC(1));
+       //printf("RA1: %d", readADC(1));
        //printf("RA1: %.3x", readADC(1));
        
        __delay_ms(100);
@@ -226,12 +226,14 @@ void week8Test (){
             LATAbits.LA7 = ~LATAbits.LA7;
             break;
         */
+        /*
         case '1':
             rotateTest2();
             break;
         case '#':
             rotateTest3();
             break;
+        */
         //case '2':
         //    //dcMotorTest();
         //    rotateTest();
