@@ -18,7 +18,7 @@ public class GlcdPicToPix {
             String colHex = Integer.toHexString(temp);
             if (!colHex.equals (prev) || (sameCount == 0 && j != jPrev + 1)){
               if (sameCount > 0 && !colHex.equals (prev))
-                out.println ("    glcdDrawRectangle(" + i + ", " + i + ", " + jPrev + ", " + (j-1) + ", 0x" + prev + ");");
+                out.println ("    glcdDrawRectangle(" + i + ", " + (i+1) + ", " + jPrev + ", " + (j-1) + ", 0x" + prev + ");");
               else if (prev != "")
                 out.println ("    glcdDrawPixel(" + i + ", " + jPrev + ", 0x" + prev + ");");
               prev = colHex;

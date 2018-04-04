@@ -16,9 +16,9 @@ char ReadEEByte (char address);
 unsigned char WriteEEByte (char address, char data);
 void writeAndInc (char * address, char data);
 char readAndInc (char * address);
-void writeEntry (unsigned char * inputs, unsigned short int * numRemaining, unsigned short int operationTime, unsigned char * timeEnd, char numStored);
-void saveResults (unsigned char * inputs, unsigned short int * numRemaining, unsigned short int operationTime, unsigned char * timeEnd);
-boolean retrieveResults (unsigned char * inputs, unsigned short int * numRemaining, unsigned short int * operationTime, unsigned char * timeEnd, unsigned char logOption);
+void writeEntry (unsigned char * quantityInputs, unsigned char setInputs [8][4], unsigned short int * numRemaining, unsigned short int operationTime, unsigned char * timeEnd, char numStored);
+void saveResults (unsigned char * quantityInputs, unsigned char setInputs [8][4], unsigned short int * numRemaining, unsigned short int operationTime, unsigned char * timeEnd);
+boolean retrieveResults (unsigned char * quantityInputs, unsigned char setInputs [8][4], unsigned short int * numRemaining, unsigned short int * operationTime, unsigned char * timeEnd, unsigned char logOption);
 
 #endif /* LOG_MEMORY_H */
 

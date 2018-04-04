@@ -79,17 +79,25 @@ void microswitchCountTest (){
 
 void eepromTest(){
     unsigned char timeStart [7], timeEnd [7];
-    unsigned char inputs [6] = {'A','0','1','2','3','4'};
+    unsigned char quantityInputs [9] = {'0','1','2','0','0','0','0','0','0'};
+    unsigned char setInputs[8][4] = {'A', 'B', 'C', 'D', 
+                                      '0', '0', '0', '0', 
+                                      '0', '0', '0', '0', 
+                                      '0', '0', '0', '0', 
+                                      '0', '0', '0', '0', 
+                                      '0', '0', '0', '0', 
+                                      '0', '0', '0', '0', 
+                                      '0', '0', '0', '0'}; 
     unsigned short int numRemaining [4] = {24,5,3,15}; //# remaining of each fastener type
     unsigned short int operationTime = 125;
     
     initRTC();
     
     getDateTime(timeEnd);
-    saveResults (inputs, numRemaining, operationTime, timeEnd);
+    saveResults (quantityInputs, setInputs, numRemaining, operationTime, timeEnd);
     
-    inputs[0] = 'B';
-    saveResults (inputs, numRemaining, operationTime, timeEnd);
+    quantityInputs[0] = '4';
+    saveResults (quantityInputs, setInputs, numRemaining, operationTime, timeEnd);
 }
 
 /*
@@ -106,6 +114,7 @@ unsigned short readADC(char channel){
     
     ADCON0 = (channel & 0x0F) << 2; // Select ADC channel (i.e. pin)
     ADON = 1; // Enable module
+    __delay_us(3);
     ADCON0bits.GO = 1; // Initiate sampling
     while(ADCON0bits.GO_NOT_DONE){  continue;   } // Poll for acquisition completion
     return (ADRESH << 8) | ADRESL; // Return result as a 16-bit value
@@ -130,12 +139,17 @@ void ldrTest(){
         * significant digits, while ADRESH corresponds to the most significant 
         * bit. */
        //printf("RA0: %.3x", readADC(0));
-       printf("RA0: %d", readADC(0));
+       //printf("RA0: %d", readADC(0));
+       //__lcd_newline();
+       if (readADC(1) > 9000)
+           printf ("black");
+       else
+           printf ("white");
        __lcd_newline();
-       //printf("RA1: %d", readADC(1));
+       printf("RA1: %d", readADC(1));
        //printf("RA1: %.3x", readADC(1));
        
-       __delay_ms(100);
+       __delay_ms(50);
     }
 }
 

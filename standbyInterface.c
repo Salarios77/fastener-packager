@@ -125,7 +125,7 @@ boolean checkValid (unsigned short int inputScreenPos, unsigned char * inputs){
     const unsigned int MAX_FASTENERS [4] = {2,3,2,4};
     
     switch (inputScreenPos) {
-        case 1: //Fastener set selection
+        case 2: //Fastener set selection
             for (i = 0; i<4; i++){ //make copy of fastener set inputs
                 fastenerSet[i] = inputs[i];
             }
@@ -135,7 +135,7 @@ boolean checkValid (unsigned short int inputScreenPos, unsigned char * inputs){
                     return true;
             }
             return false;
-        case 2: //Sets per step selection
+        case 3: //Sets per step selection
             //Count the fasteners in each compartment
             numSetsPerStep = (unsigned int)inputs[4]-48;
             if (numSetsPerStep == 0)
@@ -171,7 +171,7 @@ boolean checkValid (unsigned short int inputScreenPos, unsigned char * inputs){
             if (numFasteners[0] + numFasteners[1] + numFasteners[2] + numFasteners[3] <= 4)
                 return true;
             return false;
-        case 3: //Number of steps selection
+        case 1: //Number of steps selection
             switch (inputs[5]){
                 case '4': case '5': case '6': case '7': case '8':
                     return true;
@@ -184,9 +184,129 @@ boolean checkValid (unsigned short int inputScreenPos, unsigned char * inputs){
 }
 
 /*
- * @param inputs: char array with 6 indices
+ * @param quantity_inputs: 1x9 array of # assembly steps, and 8 x (number of sets/compartment)
+ * @param set_inputs: 8x4 2d array of the fasteners sets in the 8 compartments, with 0s as terminations
  */
-void getInputs (unsigned char * inputs){
+void getInputs (unsigned char * quantityInputs, unsigned char setInputs [8][4]){
+    const unsigned char setKeys[] = "BNSW";
+    unsigned char keyPressed;
+    unsigned short int keyCount, screenPos = 1, i;
+    boolean userTyping;
+    unsigned short int setNum = 1; 
+    unsigned char tempInputs [6];
+    
+    while (screenPos <= 3){
+        userTyping = true;
+        __lcd_clear();
+        keyCount = 0;
+        switch (screenPos){
+            case 1:
+                printf ("NUMBER OF STEPS");
+                __lcd_newline();
+                printf ("IN ASSEMBLY? ");
+                break;
+            case 2:
+                setInputs[setNum-1][0] = '0';
+                setInputs[setNum-1][1] = '0';
+                setInputs[setNum-1][2] = '0';
+                setInputs[setNum-1][3] = '0';
+                printf ("SET %d? HIT 1,2,", setNum);
+                __lcd_newline();
+                printf ("3,4 [BNSW]: ");
+                break;
+            case 3:
+                printf ("NUMBER OF SETS");
+                __lcd_newline();
+                printf ("IN STEP %d? ", setNum);
+                break;
+            default:
+                break;
+        }
+        while(userTyping){
+            keyPressed = getKeyPressed(false);
+            switch(keyPressed){
+                case '#':
+                    if (keyCount > 0)
+                        userTyping = false;
+                    continue;
+                case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9': case '0':
+                    if ((keyPressed == '1' || keyPressed == '2' || keyPressed == '3' || keyPressed == '4') && screenPos == 2 && keyCount < 4){
+                        putch (setKeys[(unsigned int)keyPressed-49]);
+                        setInputs[setNum-1][keyCount] = setKeys[(unsigned int)keyPressed-49];
+                        keyCount++;
+                    }
+                    else if ((screenPos == 1 || screenPos == 3) && keyCount < 1){
+                        putch (keyPressed);
+                        if (screenPos == 1)
+                            quantityInputs[0] = keyPressed;
+                        else if (screenPos == 3)
+                            quantityInputs[setNum] = keyPressed;
+                        keyCount++;
+                    }
+                    continue;
+                case 'D':
+                    if (keyCount > 0){
+                        __lcd_clear();
+                        keyCount--;
+                        switch (screenPos){
+                            case 1:
+                                quantityInputs[0] = '0';
+                                printf ("NUMBER OF STEPS");
+                                __lcd_newline();
+                                printf ("IN ASSEMBLY? ");
+                                break;
+                            case 2:
+                                setInputs[setNum-1][keyCount] = '0';
+                                printf ("SET %d? HIT 1,2,", setNum);
+                                __lcd_newline();
+                                printf ("3,4 [BNSW]: ");
+                                for (i = 0; i<keyCount; i++){
+                                    putch (setInputs[setNum-1][i]);
+                                }
+                                break;
+                            case 3:
+                                quantityInputs[setNum] = '0';
+                                printf ("NUMBER OF SETS");
+                                __lcd_newline();
+                                printf ("IN STEP %d? ", setNum);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    break;
+                default:
+                    continue;  
+            }
+        }
+        tempInputs[5] = quantityInputs[0];
+        tempInputs[4] = quantityInputs[setNum];
+        for (i = 0; i<4; i++){
+            tempInputs[i] = setInputs[setNum-1][i];
+        }
+
+        if (checkValid (screenPos, tempInputs)){ //if no bad input
+            if (screenPos == 1 || screenPos == 2)
+                screenPos++;
+            else if (screenPos == 3){
+                setNum++;
+                if (setNum <= quantityInputs[0]-48)
+                    screenPos = 2;
+                else
+                    break;
+            }       
+        }
+        else
+            errScreen();
+    }
+}
+
+/*
+ * @param quantity_inputs: 1x9 array of # assembly steps, and 8 x (number of sets/compartment)
+ * @param set_inputs: 8x4 2d array of the fasteners sets in the 8 compartments, with 0s as terminations
+ */
+/*
+void getInputs (unsigned char * quantity_inputs, unsigned char ** set_inputs){
     const unsigned char setKeys[] = "BNSW";
     unsigned char keyPressed;
     unsigned short int keyCount, screenPos = 1;
@@ -283,11 +403,13 @@ void getInputs (unsigned char * inputs){
             errScreen();
     }
 }
+*/
 
 /*
- * @param inputs: the 6 inputted characters to be determined, with 0s as terminations for the fastener set
+ * @param quantity_inputs: 1x9 array of # assembly steps, and 8 x (number of sets/compartment)
+ * @param set_inputs: 8x4 2d array of the fasteners sets in the 8 compartments, with 0s as terminations
  */
-void initStandby(unsigned char * inputs){
+void initStandby(unsigned char * quantityInputs, unsigned char setInputs [8][4]){
     unsigned char keyPressed;
     boolean opNotStarted = true, onOptionScreen;
     
@@ -303,7 +425,7 @@ void initStandby(unsigned char * inputs){
         __lcd_newline(); //remove later and add real time instead
         printf ("CONTINUE? HIT A");
         while(1){
-            if (getKeyPressed(true) == 'A')
+            if (getKeyPressed(false) == 'A')
                 break;
         }
 
@@ -334,7 +456,7 @@ void initStandby(unsigned char * inputs){
     }
     
     /***** Screens 3,4,5,6 *****/
-    getInputs(inputs);
+    getInputs(quantityInputs, setInputs);
     __lcd_clear();
     printf ("HIT A TO START");
     __lcd_newline();
@@ -356,24 +478,59 @@ void doneScreen(){
     waitA();
 }
 
+void printSet (unsigned char * quantityInputs, unsigned char setInputs [8][4], unsigned short int setNum){
+    int i;
+    printf ("[");
+    for (i = 0; i<4; i++){
+        if (setInputs[setNum-1][i] == '0')
+            break;
+        putch (setInputs[setNum-1][i]);
+    }
+    printf ("x%c]", quantityInputs[setNum]);
+}
+
 /*
  * @param inputs - char array of user inputs (size 6)
  * @param numRemaining - int array containing # of remaining fasteners of each type
  * @param operationTime - int which stores the total operation time
  */
-void showResults(unsigned char * inputs, unsigned short int * numRemaining, unsigned short int operationTime){
+void showResults(unsigned char * quantityInputs, unsigned char setInputs [8][4], unsigned short int * numRemaining, unsigned short int operationTime){
     int i; //loop variable
+    
+    //UPDATE GLCD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     
     /***** Screen 9 *****/
     __lcd_clear();
-    printf ("DONE:%c[", inputs[5]);
-    for (i = 0; i<4; i++){
-        if (inputs[i] == '0')
-            break;
-        putch (inputs[i]);
-    }
-    printf ("x%c]", inputs[4]);
+    printf ("DONE %c STEPS:", quantityInputs[0]);
     __lcd_newline();
+    printSet (quantityInputs, setInputs, 1);
+    printSet (quantityInputs, setInputs, 2);
+    waitA();
+    //next screen
+    __lcd_clear();
+    printSet (quantityInputs, setInputs, 3);
+    printSet (quantityInputs, setInputs, 4);
+    __lcd_newline();
+    if (quantityInputs[0]-48 > 4){
+        printSet (quantityInputs, setInputs, 5);
+        if (quantityInputs[0]-48 > 5){
+            printSet (quantityInputs, setInputs, 6);
+            waitA();
+            //next screen
+            __lcd_clear();
+            if (quantityInputs[0]-48 > 6){
+                printSet (quantityInputs, setInputs, 7);
+                if (quantityInputs[0]-48 > 7){
+                    printSet (quantityInputs, setInputs, 8);
+                    __lcd_newline();
+                }
+            }
+        }
+        else{
+            waitA();
+            __lcd_clear(0);
+        }
+    }
     printf("TIME:%dS. HIT A", operationTime);
     waitA();
     
@@ -390,7 +547,8 @@ void showLogs(){
     unsigned char keyPressed;
     //To be retrieved from memory:
     unsigned char timeEnd [7];
-    unsigned char inputs [6];
+    unsigned char quantityInputs [9];
+    unsigned char setInputs [8][4];
     unsigned short int numRemaining [4]; //# remaining of each fastener type
     unsigned short int operationTime;
     
@@ -410,9 +568,9 @@ void showLogs(){
         }
     }
     
-    haveEntry = retrieveResults (inputs, numRemaining, &operationTime, timeEnd, keyPressed-64);
+    haveEntry = retrieveResults (quantityInputs, setInputs, numRemaining, &operationTime, timeEnd, keyPressed-64);
     if (haveEntry)
-        showResults (inputs, numRemaining, operationTime); //CHANGE LATER TO INCLUDE REAL TIME END
+        showResults (quantityInputs, setInputs, numRemaining, operationTime); //CHANGE LATER TO INCLUDE REAL TIME END
     else {
         __lcd_clear();
         printf ("NO ENTRY. HIT A");

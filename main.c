@@ -12,7 +12,7 @@
 
 /***** Defines *****/
 #define VIB_TIMER_COUNT 1
-#define WHITE_THRESHOLD 410
+#define WHITE_THRESHOLD 13000
 #define TAPE_LDR 0
 #define DEGREE_LDR 1
 #define TIME_OPEN_FLAP 50
@@ -45,6 +45,7 @@ void initVibTimer(){
 }
 
 void rotateTillTape(){
+    /*
     //rotate box CW
     LATAbits.LA2 = 1; //enable
     LATBbits.LB3 = 1;
@@ -65,29 +66,112 @@ void rotateTillTape(){
     LATBbits.LB3 = 0;
     __delay_ms (150);
     LATAbits.LA2 = 0; //disable
-}
-
-void rotate45(){
-    //rotate box 45 degrees CW
+    */
     LATAbits.LA2 = 1; //enable
     LATBbits.LB3 = 1;
-    __delay_ms(750);
-    boolean found = false;
-    while (!found){
-                    
-        __lcd_clear();
-        while (readADC(DEGREE_LDR) > WHITE_THRESHOLD){ continue; }
-        __delay_ms(1);
-                    
-        if (readADC(DEGREE_LDR) < WHITE_THRESHOLD){
-            found = true;
-            __lcd_clear();
-            printf ("found");
+    boolean found = true;
+    __lcd_clear();
+    __delay_ms(800);
+    while (1){
+        if (readADC(TAPE_LDR) < WHITE_THRESHOLD) //WHITE
+        {
+            if (!found){
+                __lcd_clear();
+                printf("found");
+                break;
+            }
+            else
+                found = true;
+        }
+        else if (readADC(TAPE_LDR < WHITE_THRESHOLD)){ //BLACK
+            found = false;
         }
     }
     LATBbits.LB3 = 0;
     __delay_ms (150);
     LATAbits.LA2 = 0; //disable
+}
+
+void rotate45Fancy(){
+    /*
+    int i;
+    boolean passedCheck = true;
+    //rotate box 45 degrees CW
+    LATAbits.LA2 = 1; //enable
+    LATBbits.LB3 = 1;
+    //__delay_ms(1100);
+    boolean found = true;
+    __lcd_clear();
+    while (1){
+        i = 0;
+        passedCheck = true;
+        if (readADC(DEGREE_LDR) < WHITE_THRESHOLD) //WHITE
+        {
+            //check if stays
+            while (i < 2){
+                if (readADC(DEGREE_LDR) > WHITE_THRESHOLD){
+                    passedCheck = false;
+                    break;
+                }
+                __delay_ms(1);
+                i++;
+            }
+            if (passedCheck){
+                if (!found){
+                    __lcd_clear();
+                    printf("found");
+                    break;
+                }
+                else
+                    found = true;
+            }
+        }
+        else if (readADC(DEGREE_LDR < WHITE_THRESHOLD)){ //BLACK
+            //check if stays
+            while (i < 15){
+                if (readADC(DEGREE_LDR) > WHITE_THRESHOLD){
+                    passedCheck = false;
+                    break;
+                }
+                __delay_ms(1);
+                i++;
+            }
+            if (passedCheck)
+                found = false;
+        }
+    }
+    LATBbits.LB3 = 0;
+    __delay_ms (150);
+    LATAbits.LA2 = 0; //disable
+    */
+}
+
+//rotate box 45 degrees CW
+void rotate45(){
+    LATAbits.LA2 = 1; //enable
+    LATBbits.LB3 = 1;
+    boolean found = true;
+    __lcd_clear();
+    __delay_ms(500);
+    while (1){
+        if (readADC(DEGREE_LDR) < WHITE_THRESHOLD) //WHITE
+        {
+            if (!found){
+                __lcd_clear();
+                printf("found");
+                break;
+            }
+            else
+                found = true;
+        }
+        else if (readADC(DEGREE_LDR < WHITE_THRESHOLD)){ //BLACK
+            found = false;
+        }
+    }
+    LATBbits.LB3 = 0;
+    __delay_ms (150);
+    LATAbits.LA2 = 0; //disable
+    
 }
 
 /*
@@ -99,13 +183,8 @@ void rotate45(){
  * For a 6-step assembly, compartments 1, 2, 3, 5, 6, and 7 must be filled in.
  * For a 7 or 8-step assembly, compartments must be filled in consecutively, starting from C1.
  */
-void setupAssemblyArrays (unsigned char * inputs, unsigned short int * fasteners, boolean * compartments){
-    unsigned short int i, numSetsPerStep = (unsigned short int)inputs[4]-48;
-    const boolean CMPARTS [5][8] = {{1, 0, 1, 0, 1, 0, 1, 0},
-                                    {1, 1, 0, 1, 1, 0, 1, 0},
-                                    {1, 1, 1, 0, 1, 1, 1, 0},
-                                    {1, 1, 1, 1, 1, 1, 1, 0},
-                                    {1, 1, 1, 1, 1, 1, 1, 1}};                                
+void setupAssemblyArrays (unsigned char * inputs, unsigned short int * fasteners){
+    unsigned short int i, numSetsPerStep = (unsigned short int)inputs[4]-48;                          
     for (i = 0; i<4; i++){
         switch (inputs[i]) {
             case '0':
@@ -126,6 +205,15 @@ void setupAssemblyArrays (unsigned char * inputs, unsigned short int * fasteners
                 break;
         }
     }
+}
+
+void setupCompartmentsArray (unsigned char * inputs, boolean * compartments){
+    unsigned short int i;
+    const boolean CMPARTS [5][8] = {{1, 0, 1, 0, 1, 0, 1, 0},
+                                    {1, 1, 0, 1, 1, 0, 1, 0},
+                                    {1, 1, 1, 0, 1, 1, 1, 0},
+                                    {1, 1, 1, 1, 1, 1, 1, 0},
+                                    {1, 1, 1, 1, 1, 1, 1, 1}};      
     for (i = 0; i<7; i++){
         compartments[i] = CMPARTS[(unsigned int)inputs[5]-48-4][i];
     }
@@ -209,14 +297,17 @@ boolean dispense (unsigned short int currFastener){
 }
 
 /*
- * @param inputs - char arr of inputs (size 6)
+ * @param quantity_inputs: 1x9 array of # assembly steps, and 8 x (number of sets/compartment)
+ * @param set_inputs: 8x4 2d array of the fasteners sets in the 8 compartments, with 0s as terminations
  * @param numRemaining - int array of fasteners remaining (size 4)
  */
-void initOperation(unsigned char * inputs, unsigned short int * numRemaining){
+
+void initOperation(unsigned char * quantityInputs, unsigned char setInputs [8][4], unsigned short int * numRemaining){
     unsigned short int fasteners [4] = {0,0,0,0}; //0-B, 1-W, 2-S, 3-N 
     boolean compartments [8] = {0, 0, 0, 0, 0, 0, 0, 0};
-    unsigned short int i, j, k; //loop variables
+    unsigned short int i, j, k, setNum = 0; //loop variables
     boolean detectedFastener;
+    unsigned char tempInputs [6];
     
     // Rotate Box CW until white tape found 
     /*
@@ -239,7 +330,8 @@ void initOperation(unsigned char * inputs, unsigned short int * numRemaining){
     initVibTimer();
     
     ////////////////////////////////////////////////////////////////////////////
-    setupAssemblyArrays(inputs, fasteners, compartments);
+    tempInputs[5] = quantityInputs[0];
+    setupCompartmentsArray (tempInputs, compartments);
     
     // <editor-fold defaultstate="collapsed" desc="For Debugging">
     /*
@@ -267,6 +359,15 @@ void initOperation(unsigned char * inputs, unsigned short int * numRemaining){
         //Check if current compartment needs to be dispensed to
         if (!compartments[i])
             continue;
+        
+        //Setup assembly arrays
+        tempInputs[4] = quantityInputs[setNum+1];
+        for (j = 0; j < 4; j++){
+            tempInputs[j] = setInputs[setNum][j];
+        }
+        setupAssemblyArrays(tempInputs, fasteners);
+        setNum ++;
+        
         //Cycle through every fastener type
         for (j = 0; j < 4; j++){
             if (fasteners[j] > 0){
@@ -335,6 +436,7 @@ void initOperation(unsigned char * inputs, unsigned short int * numRemaining){
     */
     
     /* Disable Timer Interrupt */
+    
     INTCONbits.TMR0IE = 0;
     //Turn off any vibration motors that could be on
     LATCbits.LC0 = 0;
@@ -363,7 +465,15 @@ void pinConfig (){
 
 void main(void) {
     unsigned char timeStart [7], timeEnd [7];
-    unsigned char inputs [6] = {'0','0','0','0','0','0'};
+    unsigned char quantityInputs [9] = {'0','0','0','0','0','0','0','0','0'};
+    unsigned char setInputs[8][4] = {'0', '0', '0', '0', 
+                                      '0', '0', '0', '0', 
+                                      '0', '0', '0', '0', 
+                                      '0', '0', '0', '0', 
+                                      '0', '0', '0', '0', 
+                                      '0', '0', '0', '0', 
+                                      '0', '0', '0', '0', 
+                                      '0', '0', '0', '0'}; 
     unsigned short int numRemaining [4] = {0,0,0,0}; //# remaining of each fastener type
     unsigned short int operationTime;
     
@@ -384,7 +494,8 @@ void main(void) {
     /************************** A/D Converter Module **************************/
     ADCON0 = 0x00;  // Disable ADC
     ADCON1 = 0x0D; // (only A0, A1 analog - see pg. 7-158)
-    ADCON2bits.ADFM = 1; // Right justify A/D result
+    ADCON2 = 0b100001010;
+    //ADCON2bits.ADFM = 1; // Right justify A/D result
     
     // </editor-fold>
     
@@ -406,37 +517,37 @@ void main(void) {
     //microswitchCountTest();
     // </editor-fold>
     
+    //while(1);
+    
     ////////////////////////////////////////////////////////////////////////////
     
     /* Initialize GLCD. */
-    
     initGLCD();
     glcdDrawRectangle(0, GLCD_SIZE_HORZ, 0, GLCD_SIZE_VERT, WHITE);
     draw();
+    pinConfig(); //fix pins after using GLCD
     
-    //fix pins after using GLCD
-    //pinConfig();
     
-    /*
     INTCON3bits.INT1IE = 1; //enable INT1 external interrupt 
     ei (); //INTCONbits.GIE = 1
     initLCD();
     printf ("Ready for test");
-    
     while(1);
-    */
+    
+    
     /* Main Operation */
+    
     /*
     while(1){
-        initStandby(inputs); //Initiate Standby Mode & get inputs
-        getDateTime(timeStart);
-        initOperation(inputs, numRemaining);
-        //__delay_ms(3000);
-        getDateTime(timeEnd);
-        operationTime = calcOperationTime (timeStart, timeEnd);
+        initStandby(quantityInputs, setInputs); //Initiate Standby Mode & get inputs
+        //getDateTime(timeStart);
+        //initOperation(quantityInputs, setInputs, numRemaining);
+        __delay_ms(3000);
+        //getDateTime(timeEnd);
+        //operationTime = calcOperationTime (timeStart, timeEnd);
         doneScreen();
-        showResults(inputs, numRemaining, operationTime);
-        saveResults(inputs, numRemaining, operationTime, timeEnd);
+        showResults(quantityInputs, setInputs, numRemaining, operationTime);
+        saveResults(quantityInputs, setInputs, numRemaining, operationTime, timeEnd);
     }
     */
 }

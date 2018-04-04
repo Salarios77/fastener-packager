@@ -17,14 +17,14 @@
 
 /****************************** Public Interfaces *****************************/
 unsigned short int calcOperationTime (unsigned char * timeStart, unsigned char * timeEnd);
-void initStandby(unsigned char inputs[6]);
+void initStandby(unsigned char * quantityInputs, unsigned char setInputs [8][4]);
 char getKeyPressed (boolean shouldDispTime);
 void showLogs(void);
 void errScreen(void);
 boolean checkValid (unsigned short int currSelection, char *);
-void getInputs (char * inputs);
+void getInputs (unsigned char * quantityInputs, unsigned char setInputs [8][4]);
 void dispRealTime (void);
 void doneScreen(void);
-void showResults(unsigned char inputs [6], unsigned short int numRemaining [4], unsigned short int operationTime);
+void showResults(unsigned char * quantityInputs, unsigned char setInputs [8][4], unsigned short int numRemaining [4], unsigned short int operationTime);
 
 #endif /* STANDBY_INTERFACE_H */
