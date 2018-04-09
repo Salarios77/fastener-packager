@@ -425,7 +425,7 @@ void initStandby(unsigned char * quantityInputs, unsigned char setInputs [8][4])
         __lcd_newline(); //remove later and add real time instead
         printf ("CONTINUE? HIT A");
         while(1){
-            if (getKeyPressed(false) == 'A')
+            if (getKeyPressed(true) == 'A')
                 break;
         }
 

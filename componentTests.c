@@ -141,13 +141,13 @@ void ldrTest(){
        //printf("RA0: %.3x", readADC(0));
        //printf("RA0: %d", readADC(0));
        //__lcd_newline();
-       if (readADC(1) > 9000)
-           printf ("black");
-       else
-           printf ("white");
-       __lcd_newline();
-       printf("RA1: %d", readADC(1));
-       //printf("RA1: %.3x", readADC(1));
+       //if (readADC(1) > 9000)
+       //    printf ("black");
+       //else
+       //    printf ("white");
+       //__lcd_newline();
+       printf("TAPE_IR: %d", readADC(0));
+       //printf("DEGREE_IR: %d", readADC(1));
        
        __delay_ms(50);
     }
@@ -155,10 +155,10 @@ void ldrTest(){
 
 void dcMotorTest(){
     //LATBbits.LB3 = ~LATBbits.LB3;
-    //LATBbits.LB2 = ~LATBbits.LB2;
+    //LATEbits.LE2 = ~LATBbits.LE2;
     //__delay_ms(5000);
     //LATBbits.LB3 = ~LATBbits.LB3;
-    //LATBbits.LB2 = ~LATBbits.LB2;
+    //LATEbits.LE2 = ~LATEbits.LE2;
     
     LATAbits.LA2 = ~LATAbits.LA2; //enable
     LATEbits.LE0 = ~LATEbits.LE0;
@@ -188,31 +188,69 @@ void rotateTest(){
     LATBbits.LB3 = 1;
     //while (readADC(0) > WHITE_THRESHOLD){ continue; }
     __delay_ms(2500);
-    LATBbits.LB2 = 1;
+    LATEbits.LE2 = 1;
     LATBbits.LB3 = 0;
     __delay_ms(2500);
-    LATBbits.LB2 = 0;
+    LATEbits.LE2 = 0;
     LATAbits.LA2 = 0; //disable
 }
 
-void rotateTest2(){
-    LATAbits.LA3 = 1; //enable
+void calibrateFlapStart (){
+    int i;
+    for (i = 0; i < 30; i++){
+        LATAbits.LA3 = 1; //enable
+        LATEbits.LE0 = 0;
+        LATEbits.LE1 = 1;
+        __delay_ms(3);
+        LATEbits.LE1 = 0;
+        __delay_ms(3);
+        LATAbits.LA3 = 0; //disable
+        __delay_ms(100);
+    }
     LATEbits.LE1 = 0;
-    LATEbits.LE0 = 1;
-    __delay_ms(22);
-    LATEbits.LE0 = 0;
-    __delay_ms(22);
+    __delay_ms(3);
     LATAbits.LA3 = 0; //disable
 }
 
+//1 - back
+void rotateTest2(){
+    /*
+    LATAbits.LA3 = 1; //enable
+    LATEbits.LE1 = 0;
+    LATEbits.LE0 = 1;
+    __delay_ms(25);
+    LATEbits.LE0 = 0;
+    __delay_ms(25);
+    LATAbits.LA3 = 0; //disable
+    */
+    
+    int i;
+   
+    for (i = 0; i < 45; i++){
+        LATAbits.LA3 = 1; //enable
+        LATEbits.LE0 = 1;
+        LATEbits.LE1 = 0;
+        __delay_ms(3);
+        LATEbits.LE0 = 0;
+        __delay_ms(3);
+        LATAbits.LA3 = 0; //disable
+        __delay_ms(100);
+    }
+    LATEbits.LE0 = 0;
+    __delay_ms(3);
+    LATAbits.LA3 = 0; //disable
+}
+
+//# - forward
 void rotateTest3(){
     LATAbits.LA3 = 1; //enable
     LATEbits.LE0 = 0;
     LATEbits.LE1 = 1;
-    __delay_ms(20);
+    __delay_ms(25);
     LATEbits.LE1 = 0;
-    __delay_ms(20);
+    __delay_ms(25);
     LATAbits.LA3 = 0; //disable
+    
 }
 
 void week8Test (){
@@ -256,12 +294,15 @@ void week8Test (){
             ldrTest();
             break;
         case '4':
+            /*
             __lcd_newline();
             printf ("timer");
-            /* Enable Timer Interrupt */
+            // Enable Timer Interrupt 
             INTCONbits.TMR0IE = 1;
-            /* Set up vibration motor timer */
+            // Set up vibration motor timer 
             initVibTimerTest();
+            */
+            LATBbits.LB0 = ~LATBbits.LB0;
             break;
         case '5': 
             microswitchCountTest();
