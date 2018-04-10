@@ -197,7 +197,7 @@ void rotateTest(){
 
 void calibrateFlapStart (){
     int i;
-    for (i = 0; i < 30; i++){
+    for (i = 0; i < 40; i++){
         LATAbits.LA3 = 1; //enable
         LATEbits.LE0 = 0;
         LATEbits.LE1 = 1;
@@ -209,6 +209,26 @@ void calibrateFlapStart (){
     }
     LATEbits.LE1 = 0;
     __delay_ms(3);
+    LATAbits.LA3 = 0; //disable
+}
+
+void flapUpLittle(){
+    LATAbits.LA3 = 1; //enable
+    LATEbits.LE1 = 0;
+    LATEbits.LE0 = 1;
+    __delay_ms(5);
+    LATEbits.LE0 = 0;
+    __delay_ms(5);
+    LATAbits.LA3 = 0; //disable
+}
+
+void flapDownLittle(){
+    LATAbits.LA3 = 1; //enable
+    LATEbits.LE0 = 0;
+    LATEbits.LE1 = 1;
+    __delay_ms(10);
+    LATEbits.LE1 = 0;
+    __delay_ms(10);
     LATAbits.LA3 = 0; //disable
 }
 
@@ -226,7 +246,7 @@ void rotateTest2(){
     
     int i;
    
-    for (i = 0; i < 45; i++){
+    for (i = 0; i < 40; i++){
         LATAbits.LA3 = 1; //enable
         LATEbits.LE0 = 1;
         LATEbits.LE1 = 0;

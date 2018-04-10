@@ -27,5 +27,7 @@ void rotateTest2(void);
 void rotateTest3(void);
 void week8Test (void);
 void calibrateFlapStart();
+void flapUpLittle();
+void flapDownLittle();
 
 #endif /* COMPONENT_TESTS_H */

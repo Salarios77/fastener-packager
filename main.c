@@ -90,6 +90,7 @@ void rotateTillTape(boolean isCW){
         LATBbits.LB3 = 1;
     else
         LATEbits.LE2 = 1;
+    
     boolean found = true;
     __delay_ms(800);
     while (1){
@@ -171,23 +172,28 @@ void rotate45Fancy(){
 
 //rotate box 45 degrees CW
 void rotate45(){
+    boolean found;
+    int i;
+    
     LATAbits.LA2 = 1; //enable
     LATBbits.LB3 = 1;
-    boolean found = true;
-    __delay_ms(500);
-    while (1){
-        if (readADC(DEGREE_LDR) < WHITE_THRESHOLD_DEG) //WHITE
-        {
-            if (!found){
-                __lcd_clear();
-                printf("found deg");
-                break;
+    for (i = 0; i < 2; i++){
+        found = true;
+        __delay_ms(500);
+        while (1){
+            if (readADC(DEGREE_LDR) < WHITE_THRESHOLD_DEG) //WHITE
+            {
+                if (!found){
+                    __lcd_clear();
+                    printf("found deg");
+                    break;
+                }
+                else
+                    found = true;
             }
-            else
-                found = true;
-        }
-        else if (readADC(DEGREE_LDR < WHITE_THRESHOLD_DEG)){ //BLACK
-            found = false;
+            else if (readADC(DEGREE_LDR < WHITE_THRESHOLD_DEG)){ //BLACK
+                found = false;
+            }
         }
     }
     LATBbits.LB3 = 0;
@@ -198,8 +204,41 @@ void rotate45(){
 
 //rotate box 45 degrees CW
 void rotate45CCW(){
+    int i;
+    boolean found;
+    
     LATAbits.LA2 = 1; //enable
     LATEbits.LE2 = 1;
+    for (i = 0; i<2; i++){
+        found = true;
+        __delay_ms(500);
+        while (1){
+            if (readADC(DEGREE_LDR) < WHITE_THRESHOLD_DEG) //WHITE
+            {
+                if (!found){
+                    __lcd_clear();
+                    printf("found deg");
+                    break;
+                }
+                else
+                    found = true;
+            }
+            else if (readADC(DEGREE_LDR < WHITE_THRESHOLD_DEG)){ //BLACK
+                found = false;
+            }
+        }
+    }
+    LATEbits.LE2 = 0;
+    __delay_ms (150);
+    LATAbits.LA2 = 0; //disable
+}
+
+void rotatehalf45(boolean isCW){
+    LATAbits.LA2 = 1; //enable
+    if (isCW)
+        LATBbits.LB3 = 1;
+    else
+        LATEbits.LE2 = 1;
     boolean found = true;
     __delay_ms(500);
     while (1){
@@ -217,16 +256,25 @@ void rotate45CCW(){
             found = false;
         }
     }
-    LATEbits.LE2 = 0;
+    if (isCW)
+        LATBbits.LB3 = 0;
+    else
+        LATEbits.LE2 = 0;
     __delay_ms (150);
     LATAbits.LA2 = 0; //disable
 }
 
-void rotatehalf45CCW(){
+void rotateBit(boolean isCW){
     LATAbits.LA2 = 1; //enable
-    LATEbits.LE2 = 1;
-    __delay_ms(1400);
-    LATEbits.LE2 = 0;
+    if (isCW)
+        LATBbits.LB3 = 1;
+    else
+        LATEbits.LE2 = 1;
+    __delay_ms(300);
+    if (isCW)
+        LATBbits.LB3 = 0;
+    else
+        LATEbits.LE2 = 0;
     __delay_ms (150);
     LATAbits.LA2 = 0; //disable
 }
@@ -451,7 +499,7 @@ void initOperation(unsigned char * quantityInputs, unsigned char setInputs [8][4
         setNum++;
         
         rotate45CCW(); //go to flap
-        rotatehalf45CCW();
+        rotatehalf45(false);
         LATBbits.LB0 = 1; //enable flap vibration
         for (j = 0; j < 4; j++){
             if (fasteners[j] > 0){
@@ -468,7 +516,9 @@ void initOperation(unsigned char * quantityInputs, unsigned char setInputs [8][4
         }
         __delay_ms(3000);
         LATBbits.LB0 = 0; //disable flap vibration
-        rotateTillTape(true);
+        //rotateTillTape(true);
+        rotate45();
+        rotatehalf45(true);
     }
     
     rotateTest2(); //flap up
@@ -722,10 +772,15 @@ void operationTest(){
     for (i = 7; i >= 0; i--){
         if (i != 7)
             rotate45(); //open next compartment
+        else
+            flapUpLittle();
         if (!compartments[i])
             continue;
         rotate45CCW(); //go to flap
-        rotatehalf45CCW();
+        rotatehalf45(false);
+        
+        flapDownLittle();
+        
         LATBbits.LB0 = 1; //enable flap vibration
         for (j = 0; j < 4; j++){
             if (fasteners[j] > 0){
@@ -742,7 +797,11 @@ void operationTest(){
         }
         __delay_ms(3000);
         LATBbits.LB0 = 0; //disable flap vibration
-        rotateTillTape(true);
+        //rotateTillTape(true);
+        
+        flapUpLittle();
+        rotate45();
+        rotatehalf45(true);
     }
     
     rotateTest2(); //flap up
@@ -782,6 +841,45 @@ void operationTest(){
     // </editor-fold>
 }
 
+void openWaitClose (){
+    rotate45CCW();
+    rotatehalf45(false);
+    rotateBit(true);
+    flapDownLittle();
+    __delay_ms(2000);
+    //rotateTillTape(true);
+    flapUpLittle();
+    rotateBit(false);
+    rotate45();
+    rotatehalf45(true);
+}
+
+void testCompartmentRotations(){
+    boolean compartments [8] = {0, 0, 0, 0, 0, 0, 0, 1};
+    int i;
+    boolean openedPrev = false;
+    
+    rotateTillTape(true);
+    rotateTillTape(true);
+    calibrateFlapStart(); //flap down
+    
+    for (i = 7; i >= 7; i--){
+        if (i != 7)
+            rotate45(); //open next compartment
+        else
+            flapUpLittle();
+        //if (openedPrev)
+        //    rotateBit();
+        if (!compartments[i]){
+        //    openedPrev = false;
+            continue;
+        }
+        //openedPrev = true;
+        openWaitClose();
+    }
+}
+
+
 // <editor-fold defaultstate="collapsed" desc="Interrupt Handler">
 
 //GLOBAL VARIABLES MODIFIED IN ANY ISR should be declared volatile 
@@ -797,30 +895,28 @@ void interrupt interruptHandler(void) {
         int i;
         boolean pressed;
         switch (keys[keypress]){
-            case '1':
+            case '5':
                 rotateTest2();
                 break;
             case '6':  
                 //calibrateFlapStart();
                 operationTest();
                 break;
+            /*
             case '0':
                 rotate45CCW();
                 break;
             case '2':
                 rotate45();
+                break;
+            */
+            
             case '3':
-                rotateTillTape(true);
-                rotateTillTape(true);
-                rotate45CCW();
-                rotate45CCW();
-                //rotatehalf45CCW();
-                __delay_ms(2000);
-                rotateTillTape(true);
-                rotate45();
-                rotate45CCW();
-                rotate45CCW();
-                //rotatehalf45CCW();
+                testCompartmentRotations();
+                break;
+            
+            case '4':
+                LATBbits.LB0 = ~LATBbits.LB0;
                 break;
             case 'A':
                 pressed = dispense(0);
