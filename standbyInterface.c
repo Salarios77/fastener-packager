@@ -433,7 +433,6 @@ void initStandby(unsigned char * quantityInputs, unsigned char setInputs [8][4])
     
     /* Initialize LCD. */
     initLCD();
-    
     /* Initialize I2C Master. */
     initRTC();
 
@@ -447,10 +446,10 @@ void initStandby(unsigned char * quantityInputs, unsigned char setInputs [8][4])
                 break;
         }
         
-        //initGLCD();
-        //glcdDrawRectangle(0, GLCD_SIZE_HORZ, 0, GLCD_SIZE_VERT, WHITE);
-        //draw();
-        //pinConfig2(); //fix pins after using GLCD
+        /* For quick flap up testing
+        INTCON3bits.INT1IE = 0; 
+        di (); 
+        */
 
         /***** Screen 2 *****/
         onOptionScreen = true;

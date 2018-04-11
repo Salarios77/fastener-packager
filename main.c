@@ -35,7 +35,6 @@ unsigned volatile char currFastener = 0; //0-B, 1-W, 2-S, 3-N
 volatile boolean vibOn = true;
 volatile boolean shouldVibrate = false;
 volatile boolean shouldStop = false;
-volatile boolean flapTurning = false;
 unsigned volatile long time = 0;
 volatile int counter = 0;
 
@@ -62,31 +61,6 @@ void initVibTimer(){
 }
 
 void rotateTillTape(boolean isCW){
-    // <editor-fold defaultstate="collapsed" desc="Old rotate till tape">
-    /*
-    //rotate box CW
-    LATAbits.LA2 = 1; //enable
-    LATBbits.LB3 = 1;
-    __delay_ms(750);
-    boolean found = false;
-    while (!found){
-                    
-        __lcd_clear();
-        while (readADC(TAPE_LDR) > WHITE_THRESHOLD_TAPE + 20){ continue; }
-        __delay_ms(1);
-                    
-        if (readADC(TAPE_LDR) < WHITE_THRESHOLD_TAPE + 20){
-            found = true;
-            __lcd_clear();
-            printf ("found");
-        }
-    }
-    LATBbits.LB3 = 0;
-    __delay_ms (150);
-    LATAbits.LA2 = 0; //disable
-    */
-    // </editor-fold>
-    
     LATAbits.LA2 = 1; //enable
     if (isCW)
         LATBbits.LB3 = 1;
@@ -415,24 +389,6 @@ void initOperation(unsigned char * quantityInputs, unsigned char setInputs [8][4
         //printf("%d", compartments[i-1]);
     }
     __lcd_newline();
-    
-    // <editor-fold defaultstate="collapsed" desc="For Debugging">
-    /*
-    __lcd_clear();
-    for (i = 0; i < 4; i++){
-        putch (tempInputs[i]);
-    }
-    putch (' ');
-    for (i = 0; i < 4; i++){
-        putch (fasteners[i]+48);
-    }
-    __lcd_newline();
-    for (i = 0; i < 8; i++){
-        putch (compartments[i]+48);
-    }    
-    while(1);
-    */
-    // </editor-fold>
 
     //Cycle through every fastener type
     for (i = 7; i >= 0; i--){
@@ -654,6 +610,11 @@ void main(void) {
     draw();
     pinConfig(); //fix pins after using GLCD
     
+    /* For quick flap up testing
+    INTCON3bits.INT1IE = 1; //enable INT1 external interrupt 
+    ei (); //INTCONbits.GIE = 1
+    */
+    
     /* For component testing:
     INTCON3bits.INT1IE = 1; //enable INT1 external interrupt 
     ei (); //INTCONbits.GIE = 1
@@ -817,25 +778,16 @@ void testCompartmentRotations(){
     }
 }
 
-
 // <editor-fold defaultstate="collapsed" desc="Interrupt Handler">
 //GLOBAL VARIABLES MODIFIED IN ANY ISR should be declared volatile 
 void interrupt interruptHandler(void) {
     //check both the interrupt enable and interrupt flag for INT1 interrupt
-    
     if (INT1IE && INT1IF){ 
         const unsigned char keys[] = "123A456B789C*0#D";
         unsigned char keypress = (PORTB & 0xF0) >> 4;
         int i;
         boolean pressed;
-        switch (keys[keypress]){
-            case '5':
-                rotateTest2();
-                break;
-        //    case 'B':  
-        //        //calibrateFlapStart();
-        //        operationTest();
-        //        break;
+        switch (keys[keypress]){  
             /*
             case '1':
                 rotate45CCW();
@@ -846,13 +798,37 @@ void interrupt interruptHandler(void) {
             case '3':
                 testCompartmentRotations();
                 break;
-            */
-            /*
             case '4':
                 LATBbits.LB0 = ~LATBbits.LB0;
                 break;
             */
+            case '5':
+                rotateTest2();
+                break;
             /*
+            case '6':  
+                operationTest();
+                break;
+            case '7':
+                currFastener = 0;
+                if (!TMR0IE)
+                    vibrate();
+                break;
+            case '8':
+                currFastener = 1;
+                if (!TMR0IE)
+                    vibrate();
+                break;
+            case '9':
+                currFastener = 2;
+                if (!TMR0IE)
+                    vibrate();
+                break;
+            case '0':
+                currFastener = 3;
+                if (!TMR0IE)
+                    vibrate();
+                break;
             case 'A':
                 pressed = dispense(0);
                 __lcd_clear();
@@ -881,46 +857,12 @@ void interrupt interruptHandler(void) {
                     counter ++;
                 printf ("Pressed D: %d", counter);
                 break;
-            */
-            /*
-            case '1': 
-                rotateTest2(); //up
-                //calibrateFlapStart();
-                break;
-            */
-            /*
             case '*':
                 rotateTillTape(true);
                 break;
-            */
-            //case '#': 
-            //    //rotateTest3(); 
-            //    calibrateFlapStart(); //down
-            //    break;
-            /*
-            case '2':
-                rotate45();
-                break;
-            
-            case '7':
-                currFastener = 0;
-                if (!TMR0IE)
-                    vibrate();
-                break;
-            case '8':
-                currFastener = 1;
-                if (!TMR0IE)
-                    vibrate();
-                break;
-            case '9':
-                currFastener = 2;
-                if (!TMR0IE)
-                    vibrate();
-                break;
-            case '0':
-                currFastener = 3;
-                if (!TMR0IE)
-                    vibrate();
+            case '#': 
+                //rotateTest3(); 
+                calibrateFlapStart(); //down
                 break;
             */
             default:
