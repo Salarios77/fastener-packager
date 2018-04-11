@@ -9,16 +9,16 @@
 
 /***** Constants *****/
 const char firstTimeSet[7] = {  0x00, // 0 Seconds 
-                                0x24, // 24 Minutes
-                                0x15, // 24 hour mode, set to 15:00
-                                0x04, // Thursday
-                                0x22, // 22nd
-                                0x02, // February
+                                0x06, // 24 Minutes
+                                0x18, // 24 hour mode, set to 15:00
+                                0x02, // Thursday
+                                0x10, // 22nd
+                                0x04, // February
                                 0x18  // 2018
 };
 
 void initRTC (){
-    I2C_Master_Init(100000); //Initialize I2C Master with 100 kHz clock
+    I2C_Master_Init(4*100000); //Initialize I2C Master with 100 kHz clock
     
     /* Set the time in the RTC.
      * 

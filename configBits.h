@@ -71,7 +71,7 @@
 
 #include <xc.h>
 
-#define _XTAL_FREQ 32000000 // Define osc freq for use in delay macros 
+#define _XTAL_FREQ 8000000 // Define osc freq for use in delay macros 
 
 /********************************** Typedefs **********************************/
 typedef enum {false, true} boolean;

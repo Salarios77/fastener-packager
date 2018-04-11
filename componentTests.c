@@ -170,6 +170,7 @@ void dcMotorTest(){
     LATAbits.LA2 = ~LATAbits.LA2; //enable
 }
 
+/*
 void initVibTimerTest(){
     T0CONbits.T08BIT = 0;   // 16-bit mode selected
     T0CONbits.T0CS = 0;     // Internal clock selected (timer mode ON)
@@ -180,7 +181,8 @@ void initVibTimerTest(){
     
     T0CONbits.TMR0ON = 1;   // Turn ON the timer 
 }
-
+*/
+ 
 void rotateTest(){
     unsigned const short WHITE_THRESHOLD = 0x1ff;
     /* Rotate Box CW until white tape found */
@@ -197,7 +199,7 @@ void rotateTest(){
 
 void calibrateFlapStart (){
     int i;
-    for (i = 0; i < 40; i++){
+    for (i = 0; i < 53; i++){
         LATAbits.LA3 = 1; //enable
         LATEbits.LE0 = 0;
         LATEbits.LE1 = 1;
@@ -226,9 +228,9 @@ void flapDownLittle(){
     LATAbits.LA3 = 1; //enable
     LATEbits.LE0 = 0;
     LATEbits.LE1 = 1;
-    __delay_ms(10);
+    __delay_ms(12);
     LATEbits.LE1 = 0;
-    __delay_ms(10);
+    __delay_ms(12);
     LATAbits.LA3 = 0; //disable
 }
 

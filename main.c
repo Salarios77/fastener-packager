@@ -17,11 +17,11 @@
 #define S_VIB_ON_TIME  4 // 1s
 #define S_VIB_OFF_TIME 17 // 4s 
 
-#define W_VIB_ON_TIME  16 // 2s
-#define W_VIB_OFF_TIME 17 // 4s 
+#define W_VIB_ON_TIME  43 // 10s
+#define W_VIB_OFF_TIME 13 // 3s 
 
-#define B_VIB_ON_TIME  3 // 0.75s
-#define B_VIB_OFF_TIME 17 // 4s 
+#define B_VIB_ON_TIME  43 // 10s
+#define B_VIB_OFF_TIME 13 // 3s 
 
 #define WHITE_THRESHOLD_DEG 12500
 #define WHITE_THRESHOLD_TAPE 6500
@@ -33,8 +33,11 @@
 unsigned volatile char timerCounter = 0; //Timer overflow counter
 unsigned volatile char currFastener = 0; //0-B, 1-W, 2-S, 3-N
 volatile boolean vibOn = true;
+volatile boolean shouldVibrate = false;
+volatile boolean shouldStop = false;
 
 volatile boolean flapTurning = false;
+unsigned volatile long time = 0;
 
 volatile int counter = 0;
 
@@ -53,8 +56,9 @@ void initVibTimer(){
     T0CONbits.T0CS = 0;     // Internal clock selected (timer mode ON)
     T0CONbits.PSA = 0;      // Prescaler assigned
     T0CONbits.T0PS0 = 0;    // Prescaler values
-    T0CONbits.T0PS1 = 0;    // Prescaler values
-    T0CONbits.T0PS2 = 1;    // Prescaler values
+    T0CONbits.T0PS1 = 1;    // Prescaler values
+    T0CONbits.T0PS2 = 0;    // Prescaler values
+    //100
     
     T0CONbits.TMR0ON = 1;   // Turn ON the timer
 }
@@ -98,7 +102,7 @@ void rotateTillTape(boolean isCW){
         {
             if (!found){
                 __lcd_clear();
-                printf("found tape");
+                printf("Found C1");
                 break;
             }
             else
@@ -281,8 +285,17 @@ void rotateBit(boolean isCW){
 
 //rotate box (find white tape), position flap down, initialize vibration
 void setupDispensing (){
-    __lcd_newline();
-    printf ("Operation Test");
+    //__lcd_newline();
+    //printf ("Operation Test");
+    
+    //INTCONbits.TMR0IE = 1;
+    //// Set up vibration motor timer 
+    //initVibTimer();
+    //ei();
+    
+    //turn on bolts and washers vibrations
+    //LATDbits.LD0 = 1;
+    //LATCbits.LC0 = 1;
     
     rotateTillTape(true);
     rotateTillTape(true); //2nd time to ensure compartment open
@@ -290,11 +303,13 @@ void setupDispensing (){
     calibrateFlapStart(); //flap down
     
     // Enable Timer Interrupt
+    shouldVibrate = true;
     vibOn = true;
     LATCbits.LC0 = 1;
+    
     INTCONbits.TMR0IE = 1;
     // Set up vibration motor timer 
-    initVibTimerTest();
+    initVibTimer();
     ei();
     
     LATAbits.LA3 = 0;
@@ -313,7 +328,10 @@ void setupDispensing (){
  * For a 7 or 8-step assembly, compartments must be filled in consecutively, starting from C1.
  */
 void setupAssemblyArrays (unsigned char * inputs, unsigned short int * fasteners){
-    unsigned short int i, numSetsPerStep = (unsigned short int)inputs[4]-48;                          
+    unsigned short int i, numSetsPerStep = (unsigned short int)inputs[4]-48;          
+    for (i = 0; i < 4; i++){
+        fasteners[i] = 0;
+    }
     for (i = 0; i<4; i++){
         switch (inputs[i]) {
             case '0':
@@ -355,18 +373,20 @@ boolean microswitchInput(unsigned short int currFastener){
         switch (currFastener){
             case 0:
                 if (PORTCbits.RC5 == 0){
-                    __delay_ms(1);
-                    if (PORTCbits.RC5 == 0){
-                        return true;
-                    }
+                    //__delay_ms(1);
+                    //if (PORTCbits.RC5 == 0){
+                    //    return true;
+                    //}
+                    return true;
                 }
                 break;
             case 1:
                 if (PORTCbits.RC6 == 0){
-                    __delay_ms(1);
-                    if (PORTCbits.RC6 == 0){
-                        return true;
-                    }
+                    //__delay_ms(1);
+                    //if (PORTCbits.RC6 == 0){
+                    //    return true;
+                    //}
+                    return true;
                 }
                 break;
             case 2:
@@ -381,10 +401,11 @@ boolean microswitchInput(unsigned short int currFastener){
                 break;
             case 3:
                 if (PORTDbits.RD1 == 0){
-                    __delay_ms(1);
-                    if (PORTDbits.RD1 == 0){
-                        return true;
-                    }
+                    //__delay_ms(1);
+                    //if (PORTDbits.RD1 == 0){
+                    //    return true;
+                    //}
+                    return true;
                 }
                 break;
             default:
@@ -422,8 +443,35 @@ boolean dispense (unsigned short int currFastener){
         default:
             break;
     }
-    __delay_ms(2000);
+    __delay_ms(500);
     return pressed;
+}
+
+void updateVibration(int j){
+    switch (j){
+        case 0:
+            LATCbits.LC0 = 1;
+            break;
+        case 1:
+            LATCbits.LC1 = 1;
+            break;
+        case 2:
+            LATCbits.LC2 = 1;
+            break;
+        case 3:
+            LATDbits.LD0 = 1;
+            break;
+    }
+    vibOn = true;
+    currFastener = j;
+    if (j != 0)
+        LATCbits.LC0 = 0;
+    if (j != 1)
+        LATCbits.LC1 = 0;
+    if (j != 2)
+        LATCbits.LC2 = 0;
+    if (j != 3)
+        LATDbits.LD0 = 0;
 }
 
 /*
@@ -434,9 +482,10 @@ boolean dispense (unsigned short int currFastener){
 void initOperation(unsigned char * quantityInputs, unsigned char setInputs [8][4], unsigned short int * numRemaining){
     unsigned short int fasteners [4] = {0,0,0,0}; //0-B, 1-W, 2-S, 3-N 
     boolean compartments [8] = {0, 0, 0, 0, 0, 0, 0, 0};
-    unsigned short int i, j, k, setNum = 0; //loop variables
+    unsigned short int j, k, l, setNum = 0, setMax = 0; //loop variables
     boolean detectedFastener;
     unsigned char tempInputs [6];
+    short int i;
     
     // <editor-fold defaultstate="collapsed" desc="Old Dispensing Setup">
     // Rotate Box CW until white tape found 
@@ -465,11 +514,22 @@ void initOperation(unsigned char * quantityInputs, unsigned char setInputs [8][4
     ////////////////////////////////////////////////////////////////////////////
     tempInputs[5] = quantityInputs[0];
     setupCompartmentsArray (tempInputs, compartments);
+    __lcd_clear();
+    for (i = 1; i <= 8; i++){
+        if (compartments[i-1]){
+            printf ("%d",i);
+            if (i != 8)
+                printf (",");
+        }
+        //printf("%d", compartments[i-1]);
+    }
+    __lcd_newline();
+    
     // <editor-fold defaultstate="collapsed" desc="For Debugging">
     /*
     __lcd_clear();
-    for (i = 0; i < 6; i++){
-        putch (inputs[i]);
+    for (i = 0; i < 4; i++){
+        putch (tempInputs[i]);
     }
     putch (' ');
     for (i = 0; i < 4; i++){
@@ -482,48 +542,126 @@ void initOperation(unsigned char * quantityInputs, unsigned char setInputs [8][4
     while(1);
     */
     // </editor-fold>
+    
+    /*
+    for (j = 1; j < 9; j++){
+        putch (quantityInputs[j]);
+        if (quantityInputs[j] == '0')
+            setMax = j;
+    }
+    __delay_ms(2000);
+    __lcd_clear();
+    printf ("%d", setMax);
+    __delay_ms(2000);
+    */
         
     //Cycle through every fastener type
     for (i = 7; i >= 0; i--){
+        if (shouldStop)
+            return;
         if (i != 7)
             rotate45(); //open next compartment
+        else
+            flapUpLittle();
         if (!compartments[i])
             continue;
+        if (shouldStop)
+            return;
+        rotate45CCW(); //go to flap
+        rotatehalf45(false);
+        //rotateBit(true);
+        flapDownLittle();
+        
+        for (j = 1; j < 9; j++){
+            if (quantityInputs[j] == '0'){
+                setMax = j;
+                break;
+            }
+        }
         
         //Setup assembly arrays
-        tempInputs[4] = quantityInputs[setNum+1];
+        tempInputs[4] = quantityInputs[setMax-1-setNum];
         for (j = 0; j < 4; j++){
-            tempInputs[j] = setInputs[setNum][j];
+            tempInputs[j] = setInputs[setMax-2-setNum][j];
         }
         setupAssemblyArrays(tempInputs, fasteners);
         setNum++;
         
-        rotate45CCW(); //go to flap
-        rotatehalf45(false);
+        __lcd_clear();
+        printf ("C%d: ", i+1);
+        for (l = 0; l < 4; l++){
+            if (tempInputs[l] != '0')
+                putch(tempInputs[l]);
+        }
+        __lcd_newline();
+        for (l = 0; l < 4; l++){
+            if (fasteners[l]+48 != 0){
+                putch(fasteners[l]+48);
+                if (l != 3)
+                    putch (' ');
+            }
+        }
+        
+        if (shouldStop)
+            return;
+        
         LATBbits.LB0 = 1; //enable flap vibration
         for (j = 0; j < 4; j++){
+            if (shouldStop)
+                return;
             if (fasteners[j] > 0){
-                LATCbits.LC0 = 0;
-                LATCbits.LC1 = 0;
-                LATCbits.LC2 = 0;
-                LATDbits.LD0 = 0;
-                currFastener = j;
-                //__delay_ms (3000);
+                updateVibration(j);
+                __delay_ms (4000);
             }
             for (k = 0; k < fasteners[j]; k++){
-                dispense(j);
+                if (shouldStop)
+                    return;
+                //dispense(j);
+                switch (currFastener){
+                    case 0:
+                        LATAbits.LA4 = ~LATAbits.LA4;
+                        __delay_ms(150);
+                        LATAbits.LA4 = ~LATAbits.LA4;
+                        break;
+                    case 1:
+                        LATAbits.LA5 = ~LATAbits.LA5;
+                        __delay_ms(150);
+                        LATAbits.LA5 = ~LATAbits.LA5;
+                        break;
+                    case 2:
+                        LATAbits.LA6 = ~LATAbits.LA6;
+                        __delay_ms(150);
+                        LATAbits.LA6 = ~LATAbits.LA6;
+                        break;
+                    case 3:
+                        LATAbits.LA7 = ~LATAbits.LA7;
+                        __delay_ms(150);
+                        LATAbits.LA7 = ~LATAbits.LA7;
+                        break;
+                    default:
+                        break;
+                }
+                __delay_ms(1500);
             }
         }
         __delay_ms(3000);
+        if (shouldStop)
+            return;
+        __delay_ms(3000);
+        if (shouldStop)
+            return;
         LATBbits.LB0 = 0; //disable flap vibration
         //rotateTillTape(true);
+        
+        flapUpLittle();
+        //rotateBit(false);
         rotate45();
         rotatehalf45(true);
     }
     
-    rotateTest2(); //flap up
     
     // <editor-fold defaultstate="collapsed" desc="Old Dispensing">
+    /*
     for (i = 0; i<8; i++){
         if (i != 0){
             //rotate box 45 degrees CW
@@ -556,6 +694,7 @@ void initOperation(unsigned char * quantityInputs, unsigned char setInputs [8][4
             }
         }  
     }
+    */
     // </editor-fold>
     ////////////////////////////////////////////////////////////////////////////
     
@@ -571,12 +710,27 @@ void initOperation(unsigned char * quantityInputs, unsigned char setInputs [8][4
     */
     // </editor-fold>
     
+    if (shouldStop)
+        return;
+    
+    rotateTest2(); //flap up
+    
     //Dispense extras
     detectedFastener = true;
     for (j = 0; j<4; j++){
-        currFastener = j;
+        if (shouldStop)
+            return;
+        updateVibration(j);
         while (detectedFastener){
+            if (shouldStop)
+                return;
             detectedFastener = dispense(j);
+            
+            __lcd_clear();
+            if (detectedFastener)
+                counter ++;
+            printf ("Pressed C: %d", counter);
+                
             if (detectedFastener){
                 //numRemaining was designed for BNSW but operation was designed for BWNS
                 switch (j){
@@ -602,6 +756,7 @@ void initOperation(unsigned char * quantityInputs, unsigned char setInputs [8][4
     ////////////////////////////////////////////////////////////////////////////
     
     rotateTillTape(false);
+    rotate45CCW();
     rotate45CCW();
     // <editor-fold defaultstate="collapsed" desc="Old Close Box">
     /*
@@ -663,12 +818,12 @@ void main(void) {
     // <editor-fold defaultstate="collapsed" desc="Machine Configuration">
     
     /******************************* OSCILLATOR *******************************/
-    //OSCCON = 0xF2;
+    OSCCON = 0xF2;
     
     /* Use 8 MHz internal oscillator block with PLL enabled --> 32 MHz */
-    OSCCONbits.IRCF2 = 1;
-    OSCCONbits.IRCF1 = 1;
-    OSCCONbits.IRCF0 = 1;
+    //OSCCONbits.IRCF2 = 1;
+    //OSCCONbits.IRCF1 = 1;
+    //OSCCONbits.IRCF0 = 1;
     OSCTUNEbits.PLLEN = 1; //PLL enabled for INTOSC
     
     /********************************* PIN I/O ********************************/
@@ -699,7 +854,7 @@ void main(void) {
     /* Test microswitch */
     //microswitchCountTest();
     // </editor-fold>
-    
+
     ////////////////////////////////////////////////////////////////////////////
     
     /* Initialize GLCD. */
@@ -708,29 +863,43 @@ void main(void) {
     draw();
     pinConfig(); //fix pins after using GLCD
     
-    
-    INTCON3bits.INT1IE = 1; //enable INT1 external interrupt 
-    ei (); //INTCONbits.GIE = 1
+    /*
     initLCD();
-    printf ("Ready for test");
+    printf ("start");
+    __delay_ms(2000);
+    __lcd_clear();
+    printf ("start + 2");
+    __delay_ms(2000);
+    __lcd_clear();
+    printf ("start + 4");
     while(1);
+    */
+    
+    //INTCON3bits.INT1IE = 1; //enable INT1 external interrupt 
+    //ei (); //INTCONbits.GIE = 1
+    
+    //pinConfig();
+    //INTCON3bits.INT1IE = 1; //enable INT1 external interrupt 
+    //ei (); //INTCONbits.GIE = 1
+    //initLCD();
+    //printf ("Ready for test");
+    //while(1);
     
     
     /* Main Operation */
     
-    /*
     while(1){
         initStandby(quantityInputs, setInputs); //Initiate Standby Mode & get inputs
-        //getDateTime(timeStart);
-        //initOperation(quantityInputs, setInputs, numRemaining);
-        __delay_ms(3000);
-        //getDateTime(timeEnd);
-        //operationTime = calcOperationTime (timeStart, timeEnd);
+        getDateTime(timeStart);
+        initOperation(quantityInputs, setInputs, numRemaining);
+        //__delay_ms(3000);
+        getDateTime(timeEnd);
+        operationTime = calcOperationTime (timeStart, timeEnd);
         doneScreen();
         showResults(quantityInputs, setInputs, numRemaining, operationTime);
         saveResults(quantityInputs, setInputs, numRemaining, operationTime, timeEnd);
     }
-    *
+    
 }
 
 void vibrate (){
@@ -778,28 +947,76 @@ void operationTest(){
             continue;
         rotate45CCW(); //go to flap
         rotatehalf45(false);
+        //rotateBit(true);
         
         flapDownLittle();
+        
+        __delay_ms(1000);
         
         LATBbits.LB0 = 1; //enable flap vibration
         for (j = 0; j < 4; j++){
             if (fasteners[j] > 0){
-                LATCbits.LC0 = 0;
-                LATCbits.LC1 = 0;
-                LATCbits.LC2 = 0;
-                LATDbits.LD0 = 0;
+                switch (j){
+                    case 0:
+                        LATCbits.LC0 = 1;
+                        break;
+                    case 1:
+                        LATCbits.LC1 = 1;
+                        break;
+                    case 2:
+                        LATCbits.LC2 = 1;
+                        break;
+                    case 3:
+                        LATDbits.LD0 = 1;
+                        break;
+                }
+                vibOn = true;
                 currFastener = j;
-                //__delay_ms (3000);
+                if (j != 0)
+                    LATCbits.LC0 = 0;
+                if (j != 1)
+                    LATCbits.LC1 = 0;
+                if (j != 2)
+                    LATCbits.LC2 = 0;
+                if (j != 3)
+                    LATDbits.LD0 = 0;
+                __delay_ms (2500);
             }
             for (k = 0; k < fasteners[j]; k++){
-                dispense(j);
+                //dispense(j);
+                switch (currFastener){
+                    case 0:
+                        LATAbits.LA4 = ~LATAbits.LA4;
+                        __delay_ms(150);
+                        LATAbits.LA4 = ~LATAbits.LA4;
+                        break;
+                    case 1:
+                        LATAbits.LA5 = ~LATAbits.LA5;
+                        __delay_ms(150);
+                        LATAbits.LA5 = ~LATAbits.LA5;
+                        break;
+                    case 2:
+                        LATAbits.LA6 = ~LATAbits.LA6;
+                        __delay_ms(150);
+                        LATAbits.LA6 = ~LATAbits.LA6;
+                        break;
+                    case 3:
+                        LATAbits.LA7 = ~LATAbits.LA7;
+                        __delay_ms(150);
+                        LATAbits.LA7 = ~LATAbits.LA7;
+                        break;
+                    default:
+                        break;
+                }
+                __delay_ms(1000);
             }
         }
-        __delay_ms(3000);
+        __delay_ms(4000);
         LATBbits.LB0 = 0; //disable flap vibration
         //rotateTillTape(true);
         
         flapUpLittle();
+        //rotateBit(false);
         rotate45();
         rotatehalf45(true);
     }
@@ -898,26 +1115,27 @@ void interrupt interruptHandler(void) {
             case '5':
                 rotateTest2();
                 break;
-            case '6':  
-                //calibrateFlapStart();
-                operationTest();
-                break;
+        //    case 'B':  
+        //        //calibrateFlapStart();
+        //        operationTest();
+        //        break;
             /*
-            case '0':
+            case '1':
                 rotate45CCW();
                 break;
             case '2':
                 rotate45();
                 break;
-            */
-            
             case '3':
                 testCompartmentRotations();
                 break;
-            
+            */
+            /*
             case '4':
                 LATBbits.LB0 = ~LATBbits.LB0;
                 break;
+            */
+            /*
             case 'A':
                 pressed = dispense(0);
                 __lcd_clear();
@@ -946,25 +1164,27 @@ void interrupt interruptHandler(void) {
                     counter ++;
                 printf ("Pressed D: %d", counter);
                 break;
+            */
             /*
             case '1': 
                 rotateTest2(); //up
                 //calibrateFlapStart();
                 break;
+            */
+            /*
             case '*':
                 rotateTillTape(true);
                 break;
             */
-            case '#': 
-                //rotateTest3(); 
-                calibrateFlapStart(); //down
-                break;
+            //case '#': 
+            //    //rotateTest3(); 
+            //    calibrateFlapStart(); //down
+            //    break;
             /*
             case '2':
                 //calibrateDegreeIR();
                 rotate45();
                 break;
-            
             
             case '7':
                 currFastener = 0;
@@ -986,9 +1206,9 @@ void interrupt interruptHandler(void) {
                 if (!TMR0IE)
                     vibrate();
                 break;
+            */
             default:
                 break;
-            */
         }
         
         //week8Test();
@@ -997,41 +1217,48 @@ void interrupt interruptHandler(void) {
     }
     
     if (TMR0IE && TMR0IF){ //for timer interrupts
-        timerCounter++;
-        switch (currFastener){
-            case 0:
-                if (timerCounter >= B_VIB_ON_TIME && vibOn || timerCounter >= B_VIB_OFF_TIME && !vibOn){
-                    vibOn = ~vibOn;
-                    LATCbits.LC0 = ~LATCbits.LC0;
-                    timerCounter = 0;
-                }
-                break;
-            case 1:
-                if (timerCounter >= W_VIB_ON_TIME && vibOn || timerCounter >= W_VIB_OFF_TIME && !vibOn){
-                    vibOn = ~vibOn;
-                    //LATCbits.LC1 = ~LATCbits.LC1;
-                    LATDbits.LD0 = ~LATDbits.LD0;
-                    timerCounter = 0;
-                }
-                break;
-            case 2:
-                if (timerCounter >= S_VIB_ON_TIME && vibOn || timerCounter >= S_VIB_OFF_TIME && !vibOn){
-                    vibOn = ~vibOn;
-                    LATCbits.LC1 = ~LATCbits.LC1;
-                    timerCounter = 0;
-                }
-                break;
-            case 3:
-                if (timerCounter >= N_VIB_ON_TIME && vibOn || timerCounter >= N_VIB_OFF_TIME && !vibOn){
-                    vibOn = ~vibOn;
-                    LATCbits.LC2 = ~LATCbits.LC2;
-                    timerCounter = 0;
-                }
-                break;
-            default:
-                break;
+        time+=0.23;
+        if (time >= 150)
+            shouldStop = true;
+        if (shouldVibrate){
+            timerCounter++;
+            //__lcd_clear();
+            //printf ("%d", timerCounter);
+            switch (currFastener){
+                case 0:
+                    if (timerCounter >= B_VIB_ON_TIME && vibOn || timerCounter >= B_VIB_OFF_TIME && !vibOn){
+                        vibOn = ~vibOn;
+                       LATCbits.LC0 = ~LATCbits.LC0;
+                        timerCounter = 0;
+                    }
+                    break;
+                case 1:
+                    if (timerCounter >= W_VIB_ON_TIME && vibOn || timerCounter >= W_VIB_OFF_TIME && !vibOn){
+                        vibOn = ~vibOn;
+                        //LATCbits.LC1 = ~LATCbits.LC1;
+                        LATDbits.LD0 = ~LATDbits.LD0;
+                        timerCounter = 0;
+                    }
+                    break;
+                case 2:
+                    if (timerCounter >= S_VIB_ON_TIME && vibOn || timerCounter >= S_VIB_OFF_TIME && !vibOn){
+                        vibOn = ~vibOn;
+                        LATCbits.LC1 = ~LATCbits.LC1;
+                        timerCounter = 0;
+                    }
+                    break;
+                case 3:
+                    if (timerCounter >= N_VIB_ON_TIME && vibOn || timerCounter >= N_VIB_OFF_TIME && !vibOn){
+                        vibOn = ~vibOn;
+                        LATCbits.LC2 = ~LATCbits.LC2;
+                        timerCounter = 0;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            TMR0IF = 0; //clear flag
         }
-        TMR0IF = 0; //clear flag
     }
 }
 

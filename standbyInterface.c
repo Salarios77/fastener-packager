@@ -7,6 +7,7 @@
 
 /***** Includes *****/
 #include "standbyInterface.h"
+#include "prebuilt/glcd_pic.h"
 
 /***** Constants *****/
 const unsigned char keys[] = "123A456B789C*0#D"; 
@@ -405,6 +406,23 @@ void getInputs (unsigned char * quantity_inputs, unsigned char ** set_inputs){
 }
 */
 
+void pinConfig2 (){
+    /* Latches are being cleared to ensure a controlled start-up state. */  
+    LATA = 0x00;
+    LATB = 0x00; 
+    LATC = 0x00;
+    LATD = 0x00;
+    LATE = 0x00;
+
+    /* After the states of LATx are known, the data direction registers, TRISx
+     * are configured. Default is  1. */
+    TRISA = 0x03; 
+    TRISB = 0xF2; 
+    TRISC = 0xE0; 
+    TRISD = 0x02; 
+    TRISE = 0x00;
+}
+
 /*
  * @param quantity_inputs: 1x9 array of # assembly steps, and 8 x (number of sets/compartment)
  * @param set_inputs: 8x4 2d array of the fasteners sets in the 8 compartments, with 0s as terminations
@@ -428,6 +446,14 @@ void initStandby(unsigned char * quantityInputs, unsigned char setInputs [8][4])
             if (getKeyPressed(true) == 'A')
                 break;
         }
+        
+        INTCON3bits.INT1IE = 0; //enable INT1 external interrupt 
+        di (); //INTCONbits.GIE = 1
+        
+        //initGLCD();
+        //glcdDrawRectangle(0, GLCD_SIZE_HORZ, 0, GLCD_SIZE_VERT, WHITE);
+        //draw();
+        //pinConfig2(); //fix pins after using GLCD
 
         /***** Screen 2 *****/
         onOptionScreen = true;
