@@ -447,9 +447,6 @@ void initStandby(unsigned char * quantityInputs, unsigned char setInputs [8][4])
                 break;
         }
         
-        INTCON3bits.INT1IE = 0; //enable INT1 external interrupt 
-        di (); //INTCONbits.GIE = 1
-        
         //initGLCD();
         //glcdDrawRectangle(0, GLCD_SIZE_HORZ, 0, GLCD_SIZE_VERT, WHITE);
         //draw();

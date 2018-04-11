@@ -13,7 +13,6 @@ const unsigned char keys[] = "123A456B789C*0#D";
 
 //Interrupt Service Routine for testing solenoids
 void solenoidInterruptTest (){
-    
     /*
     unsigned char keypress = (PORTB & 0xF0) >> 4;
     switch (keys[keypress]){
@@ -41,11 +40,9 @@ void solenoidInterruptTest (){
             break;
     }
     */
-    
     LATAbits.LA4 = ~LATAbits.LA4;
     __delay_ms(150);
-    LATAbits.LA4 = ~LATAbits.LA4;
-    
+    LATAbits.LA4 = ~LATAbits.LA4; 
 }
 
 //Test microswitches and try counting number of presses
@@ -139,16 +136,9 @@ void ldrTest(){
         * significant digits, while ADRESH corresponds to the most significant 
         * bit. */
        //printf("RA0: %.3x", readADC(0));
-       //printf("RA0: %d", readADC(0));
-       //__lcd_newline();
-       //if (readADC(1) > 9000)
-       //    printf ("black");
-       //else
-       //    printf ("white");
-       //__lcd_newline();
        printf("TAPE_IR: %d", readADC(0));
+       //__lcd_newline();
        //printf("DEGREE_IR: %d", readADC(1));
-       
        __delay_ms(50);
     }
 }
@@ -170,19 +160,6 @@ void dcMotorTest(){
     LATAbits.LA2 = ~LATAbits.LA2; //enable
 }
 
-/*
-void initVibTimerTest(){
-    T0CONbits.T08BIT = 0;   // 16-bit mode selected
-    T0CONbits.T0CS = 0;     // Internal clock selected (timer mode ON)
-    T0CONbits.PSA = 0;      // Prescaler assigned
-    T0CONbits.T0PS0 = 0;    // Prescaler values
-    T0CONbits.T0PS1 = 1;    // Prescaler values
-    T0CONbits.T0PS2 = 1;    // Prescaler values
-    
-    T0CONbits.TMR0ON = 1;   // Turn ON the timer 
-}
-*/
- 
 void rotateTest(){
     unsigned const short WHITE_THRESHOLD = 0x1ff;
     /* Rotate Box CW until white tape found */
@@ -236,18 +213,7 @@ void flapDownLittle(){
 
 //1 - back
 void rotateTest2(){
-    /*
-    LATAbits.LA3 = 1; //enable
-    LATEbits.LE1 = 0;
-    LATEbits.LE0 = 1;
-    __delay_ms(25);
-    LATEbits.LE0 = 0;
-    __delay_ms(25);
-    LATAbits.LA3 = 0; //disable
-    */
-    
     int i;
-   
     for (i = 0; i < 40; i++){
         LATAbits.LA3 = 1; //enable
         LATEbits.LE0 = 1;
@@ -272,7 +238,6 @@ void rotateTest3(){
     LATEbits.LE1 = 0;
     __delay_ms(25);
     LATAbits.LA3 = 0; //disable
-    
 }
 
 void week8Test (){
@@ -299,76 +264,26 @@ void week8Test (){
             __delay_ms(150);
             LATAbits.LA7 = ~LATAbits.LA7;
             break;
-        */
-        /*
         case '1':
             rotateTest2();
             break;
         case '#':
             rotateTest3();
             break;
-        */
-        //case '2':
-        //    //dcMotorTest();
-        //    rotateTest();
-        //    break;
+        case '2':
+            //dcMotorTest();
+            rotateTest();
+            break;
         case '3':
             ldrTest();
             break;
         case '4':
-            /*
-            __lcd_newline();
-            printf ("timer");
-            // Enable Timer Interrupt 
-            INTCONbits.TMR0IE = 1;
-            // Set up vibration motor timer 
-            initVibTimerTest();
-            */
             LATBbits.LB0 = ~LATBbits.LB0;
             break;
         case '5': 
             microswitchCountTest();
-        case '6':
-            /*
-            __lcd_newline();
-            printf ("Operation");
-            // Enable Timer Interrupt 
-            INTCONbits.TMR0IE = 1;
-            // Set up vibration motor timer 
-            initVibTimerTest();
-            
-            __delay_ms (5000);
-            
-            //push
-            LATAbits.LA5 = ~LATAbits.LA5;
-            __delay_ms(150);
-            LATAbits.LA5 = ~LATAbits.LA5;
-            
-            __delay_ms (1000); //wait fall
-            
-            rotateTest();
-            
-            __delay_ms (1000); //wait fall
-            
-            //push
-            LATAbits.LA5 = ~LATAbits.LA5;
-            __delay_ms(150);
-            LATAbits.LA5 = ~LATAbits.LA5;
-            
-            __delay_ms (3000);
-            
-            rotateTest();
-            
-            __delay_ms (1000); //wait fall
-            
-            //push
-            LATAbits.LA5 = ~LATAbits.LA5;
-            __delay_ms(150);
-            LATAbits.LA5 = ~LATAbits.LA5;
-            
-            */
-            break;
         default:
             break;
+        */
     }
 }

@@ -21,7 +21,6 @@ void eepromTest(void);
 unsigned short readADC(char channel);
 void ldrTest (void);
 void dcMotorTest(void);
-//void initVibTimerTest(void);
 void rotateTest(void);
 void rotateTest2(void);
 void rotateTest3(void);
